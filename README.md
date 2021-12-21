@@ -4,8 +4,21 @@ Arithmos is an algorithmic library which makes use of java and native bindings t
 
 To use the library, download the jar from the releases or add jitpack dependency if using gradle :
 
+### Inside your root project `gradle.build` : 
 ```gradle
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
 
+### Inside your module `gradle.build` :
+```gradle
+dependencies {
+	        implementation 'com.github.Scrappers-glitch:Arithmos:v0.0.1-alpha'
+	}
 ```
 
 References : 
