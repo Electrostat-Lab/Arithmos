@@ -7,18 +7,18 @@ To use the library, download the jar from the releases or add jitpack dependency
 ### Inside your root project `gradle.build` : 
 ```gradle
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 
 ### Inside your module `gradle.build` :
 ```gradle
 dependencies {
-	        implementation 'com.github.Scrappers-glitch:Arithmos:v0.0.1-alpha'
-	}
+	implementation 'com.github.Scrappers-glitch:Arithmos:v0.0.1-alpha'
+}
 ```
 
 References : 
