@@ -29,6 +29,7 @@ References :
 - Kotlinc : https://kotlinlang.org/docs/command-line.html#manual-install
 - Scalac : https://docs.scala-lang.org/overviews/compiler-options/index.html
 - Git docs : https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository
+- Bash scripting : https://books.goalkicker.com/BashBook/ 
 - Check : https://github.com/Scrappers-glitch/NativeJmeTemplate
 
 WIKI is still a wip.
