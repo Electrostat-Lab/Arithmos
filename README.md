@@ -24,6 +24,9 @@ dependencies {
 References : 
 - Java : https://eg1lib.org/book/18151841/129bda
 - Java Algorithms : https://eg1lib.org/book/2734447/b41448
+- Design Patterns : - https://eg1lib.org/book/5065873/daeef3?dsource=recommend
+		    - https://eg1lib.org/book/11104607/61f4b3
+
 - Native Algorithms : https://eg1lib.org/book/1168423/d3e00f
 - Native JNI : https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html#wp16656
 - JNI Invocation API : https://www.ibm.com/docs/en/i/7.1?topic=api-example-java-invocation
