@@ -37,7 +37,11 @@
  $assertionsDisabled; 
  descriptor: 
  Z 
+<<<<<<< HEAD
  public 
+=======
+ private 
+>>>>>>> fabab26a520066474123d693c2f80561ff13237a
  patternMatching.PatternMatching(); 
  descriptor: 
  ()V 
@@ -133,7 +137,11 @@
  $assertionsDisabled; 
  descriptor: 
  Z 
+<<<<<<< HEAD
  public 
+=======
+ private 
+>>>>>>> fabab26a520066474123d693c2f80561ff13237a
  sorting.ItemsSorting(); 
  descriptor: 
  ()V 

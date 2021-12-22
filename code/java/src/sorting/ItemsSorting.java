@@ -17,7 +17,15 @@ public final class ItemsSorting {
     }
 
     private static final Logger logger = Logger.getLogger(ItemsSorting.class.getName());
+    
+    /**
+     * Private constructor to inhibit its intialization.
+     *
+     */
+    private ItemsSorting() {
 
+    }
+    
     /**
      * Sorts a list of strings by :
      * a) searching for the string owing the smallest ASCII.

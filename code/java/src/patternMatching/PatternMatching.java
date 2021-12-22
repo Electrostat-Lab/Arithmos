@@ -12,8 +12,15 @@ import java.util.logging.Logger;
  * @author pavl_g.
  */
 public final class PatternMatching {
+
     private static final Logger logger = Logger.getLogger(PatternMatching.class.getName());
 
+    /**
+     * Private constructor to inhibit its intialization.
+     */
+    private PatternMatching() {
+
+    }
     /**
      * Finds the first index of the pattern string inside the main text using brute force
      * <br>
