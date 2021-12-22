@@ -38,3 +38,10 @@ dependencies {
 - Check : https://github.com/Scrappers-glitch/NativeJmeTemplate
 
 WIKI is still a wip.
+
+### TODO : 
+- vector/Vector.java
+- calculus/FunctionUtils.java
+- calculus/AngleUtils.java
+- linearAlgebra/Matrix.java -- Uses vectors too.
+- time/Chronometer.java
