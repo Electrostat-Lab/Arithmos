@@ -6,4 +6,27 @@
 #* @author pavl_g.
 #*#
 
-source commands.sh
+echo "Compiling the project"
+
+source buildScala.sh
+source buildKotlin.sh
+source buildJava.sh
+source buildNatives.sh
+
+copyScSources
+
+compileScala
+
+copyKtSources
+
+compileKotlin
+
+copyJavaSources
+
+generateHeaders
+
+moveHeaders
+
+copyNativeSources
+
+compile
