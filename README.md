@@ -22,6 +22,7 @@ dependencies {
 ```
 
 References : 
+- Java : https://eg1lib.org/book/18151841/129bda
 - Java Algorithms : https://eg1lib.org/book/2734447/b41448
 - Native Algorithms : https://eg1lib.org/book/1168423/d3e00f
 - Native JNI : https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html#wp16656
@@ -29,7 +30,8 @@ References :
 - Kotlinc : https://kotlinlang.org/docs/command-line.html#manual-install
 - Scalac : https://docs.scala-lang.org/overviews/compiler-options/index.html
 - Git docs : https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository
-- Bash scripting : https://books.goalkicker.com/BashBook/ 
+- Bash scripting : - https://books.goalkicker.com/BashBook/ 
+		   - https://eg1lib.org/book/3707757/3869f3
 - Check : https://github.com/Scrappers-glitch/NativeJmeTemplate
 
 WIKI is still a wip.
