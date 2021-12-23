@@ -37,7 +37,7 @@
  $assertionsDisabled; 
  descriptor: 
  Z 
- public 
+ private 
  patternMatching.PatternMatching(); 
  descriptor: 
  ()V 
@@ -133,7 +133,7 @@
  $assertionsDisabled; 
  descriptor: 
  Z 
- public 
+ private 
  sorting.ItemsSorting(); 
  descriptor: 
  ()V 
