@@ -8,8 +8,18 @@
 
 echo "Compiling the project"
 
+source buildScala.sh
+source buildKotlin.sh
 source buildJava.sh
 source buildNatives.sh
+
+copyScSources
+
+compileScala
+
+copyKtSources
+
+compileKotlin
 
 copyJavaSources
 
