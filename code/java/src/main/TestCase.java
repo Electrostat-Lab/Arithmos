@@ -3,6 +3,7 @@ package main;
 import patternMatching.PatternMatching;
 import testKotlin.Test;
 import testScala.TestScala;
+import testGroovy.TestGroovy;
 import sorting.ItemsSorting;
 import number.*;
 import time.*;
@@ -16,6 +17,9 @@ public class TestCase {
         // test scala
         final TestScala test2 = new TestScala();
         test2.testMe();
+        // test groovy
+        final TestGroovy test3 = new TestGroovy();
+        test3.greet();
         testMath();
         testSort();
     }
