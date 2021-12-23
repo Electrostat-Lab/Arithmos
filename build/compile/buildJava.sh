@@ -22,7 +22,7 @@ function copyJavaSources() {
 # Generates C headers for the java native files and compiles java code inside the buildDir.
 ##
 function generateHeaders() {
-    buildDir=(${workDir}'/build/.buildJava/*/*.java')
+    buildDir=(${workDir}'/build/.buildJava/*/*')
     cd ${workDir}'/build/.buildJava'
     # creates C headers file for java natives.
     $command -cp '.:'${workDir}'/code/java/dependencies/*' -h . ${buildDir}
