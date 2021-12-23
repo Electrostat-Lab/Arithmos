@@ -11,5 +11,5 @@ source ${workingDir}'/build/assemble/variables.sh'
 
 function run() {
     cd ${workingDir}'/output/'${outputJAR}
-    $runCommand -cp scala-library-3.1.0.jar -jar -Djava.library.path=. 'Arithmos.jar'
+    $runCommand -jar -Djava.library.path=. 'Arithmos.jar'
 }
