@@ -40,7 +40,7 @@ dependencies {
 ### Dependencies : 
 - Groovy : https://mvnrepository.com/artifact/org.codehaus.groovy/groovy/3.0.9
 - Scala : https://mvnrepository.com/artifact/org.scala-lang/scala-library/2.13.7
-- Use SDKMAN on linux to install them : 
+- Use SDKMAN on linux to install their compilers : 
 
 ```bash
 sdk install scalac
