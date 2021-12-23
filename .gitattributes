@@ -1,4 +1,4 @@
 *.scala linguist-vendored=false
-*.kt linguist-vendored=true
-*.groovy linguist-detectable=false
+*.kt linguist-vendored=false
+*.groovy linguist-detectable=true
 
