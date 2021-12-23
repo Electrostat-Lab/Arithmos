@@ -10,6 +10,7 @@ echo "Compiling the project"
 
 source buildScala.sh
 source buildKotlin.sh
+source buildGroovy.sh
 source buildJava.sh
 source buildNatives.sh
 
@@ -20,6 +21,10 @@ compileScala
 copyKtSources
 
 compileKotlin
+
+copyGroovySources
+
+compileGroovy
 
 copyJavaSources
 
