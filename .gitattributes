@@ -1,0 +1,3 @@
+*.scala  diff=scala
+*.kt  diff=kotlin
+
