@@ -1,3 +1,7 @@
 *.scala  diff=scala
 *.kt  diff=kotlin
+*.scala linguist-vendored=false
+*.kt linguist-vendored=false
+
+
 
