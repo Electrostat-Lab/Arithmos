@@ -30,6 +30,5 @@ function compileGroovy() {
     # remove the assets folder
    rm -rf ${workDir}'/code/java/dependencies/groovy'
    ## remove sources after compilation is completed
-   rm -r $buildDir
+   rm -r $buildDir  
 }
-

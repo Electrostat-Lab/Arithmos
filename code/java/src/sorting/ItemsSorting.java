@@ -18,19 +18,21 @@ public final class ItemsSorting {
     }
 
     private static final Logger logger = Logger.getLogger(ItemsSorting.class.getName());
-    
+
     /**
      * Private constructor to inhibit its intialization.
      *
      */
     private ItemsSorting() {
     }
-    
+
     /**
      * Sorts a list of strings by :
      * a) searching for the string owing the smallest ASCII.
      * b) mark it down.
      * c) swap it to the top in exchange with the current item.
+     *
+     * Time Complexity =
      *
      * @param list the list used for sorting.
      * @param sortAlgorithm the type of the sort.
@@ -38,7 +40,7 @@ public final class ItemsSorting {
      */
     public static List<String> selectionSort(final String[] list, final SortAlgorithm sortAlgorithm) {
         // find time spent
-        double time = System.currentTimeMillis() / 1000d;
+        final double time = System.currentTimeMillis() / 1000d;
         logger.log(Level.INFO, String.valueOf(time));
 
         // sanity check the inputs.
@@ -63,9 +65,96 @@ public final class ItemsSorting {
             // in exchange with the current item
             list[smallestIndex] = (String) pointer[0];
         }
-        double _time = System.currentTimeMillis() / 1000d;
-        double __time = _time - time;
+        final double _time = System.currentTimeMillis() / 1000d;
+        final double __time = _time - time;
         logger.log(Level.INFO, "Spent : " + __time + " seconds");
+        return Arrays.asList(list);
+    }
+
+    /**
+    * Mirror Sort : Sorts a string array listerals.
+    * Using recursion in a 2d format, the outer loop loops over the main chunks in an incremental manner,
+    * while the inner loop loops over the main chunks in a decremental manner till reaching the current chunk (passed from the outer loop)
+    * comparing the outer index with the inner index.
+    *
+    * Time Complexity =
+    *
+    * @param list
+    * @param sortAlgorithm
+    * @return a new sorted list in the format {@link List<String>}.
+    */
+    public static List<String> mirrorSort(final String[] list, final SortAlgorithm sortAlgorithm) {
+        // find time spent
+        final double time = System.currentTimeMillis() / 1000d;
+        logger.log(Level.INFO, String.valueOf(time));
+
+        final SortUtils utils = SortUtils.getInstance();
+        utils.recursiveLoop(list, 0, SortUtils.Directionality.FORWARD, new SortUtils.ActionInjection<String>(){
+            @Override
+            public void inject(final String[] array, final int index) {
+                //inner-loop
+                  utils.customComparative(list, list.length - 1, index, SortUtils.Directionality.BACKWARD, new SortUtils.ActionInjection<String>(){
+                      @Override
+                      public void inject(final String[] _array, final int _index) {
+                          // comparison code
+                          // return the most least string
+                          final int __index = compare(list, index, _index, sortAlgorithm);
+                          // swap the pointers if the least item is one of the mirror indices.
+                          // otherwise keep everything as it is
+                          if (__index == index) {
+                              return;
+                          }
+                          String temp = list[index];
+                          // sprint the least String on the top
+                          list[index] = list[__index];
+                          list[_index] = temp;
+                          // nullyfying the pointers, helps GC to clear the object data
+                          temp = null;
+                      }
+                  });
+            }
+        });
+        final double _time = System.currentTimeMillis() / 1000d;
+        final double __time = _time - time;
+        logger.log(Level.INFO, "Spent : " + __time + " seconds");
+        return Arrays.asList(list);
+    }
+
+    public static List<String> bubbleSort(final String[] list, final SortAlgorithm sortAlgorithm) {
+        // find time spent
+        final double time = System.currentTimeMillis() / 1000d;
+        logger.log(Level.INFO, String.valueOf(time));
+
+        final SortUtils utils = SortUtils.getInstance();
+        utils.recursiveLoop(list, 0, SortUtils.Directionality.FORWARD, new SortUtils.ActionInjection<String>(){
+            @Override
+            public void inject(final String[] array, final int index) {
+                //inner-loop, loops over items beginning from the current item
+                  utils.customComparative(list, index + 1, list.length - 1, SortUtils.Directionality.FORWARD, new SortUtils.ActionInjection<String>(){
+                      @Override
+                      public void inject(final String[] _array, final int _index) {
+                          // comparison code
+                          // return the most least string
+                          final int __index = compare(list, index, _index, sortAlgorithm);
+                          // swap the pointers if the least item is one of the mirror indices.
+                          // otherwise keep everything as it is
+                          if (__index == index) {
+                              return;
+                          }
+                          String temp = list[index];
+                          // sprint the least String on the top
+                          list[index] = list[__index];
+                          list[_index] = temp;
+                          // nullyfying the pointers, helps GC to clear the object data
+                          temp = null;
+                      }
+                  });
+            }
+        });
+        final double _time = System.currentTimeMillis() / 1000d;
+        final double __time = _time - time;
+        logger.log(Level.INFO, "Spent : " + __time + " seconds");
+
         return Arrays.asList(list);
     }
 
@@ -80,23 +169,23 @@ public final class ItemsSorting {
      * @param firstString the first string index used for comparison.
      * @param secondString the second string index used for comparison.
      * @param sortAlgorithm sorting algorithm.
-     * @return the index of the least ASCII code characters.
+     * @return the index of the least ASCII code characters, default return value is the firstString index.
      */
     public static int compare(final String[] list, final int firstString, final int secondString, final SortAlgorithm sortAlgorithm) {
-        for (int x = 0; x < Math.min(list[firstString].length(), list[secondString].length()); x++) {
+        for (int i = 0; i < Math.min(list[firstString].length(), list[secondString].length()); i++) {
             // skip if the letters are equal
-            if (list[firstString].charAt(x) == list[secondString].charAt(x)) {
+            if (list[firstString].charAt(i) == list[secondString].charAt(i)) {
                 continue;
             }
             // return the String containing the smallest ASCII code characters if the sort algo is A-Z
             // return the String containing the greatest ASCII code characters if the sort algo is Z-A
-            if (list[firstString].charAt(x) < list[secondString].charAt(x)) {
+            if (list[firstString].charAt(i) < list[secondString].charAt(i)) {
                 // return the String containing the greatest ASCII code characters
                 if (sortAlgorithm == SortAlgorithm.Z_A) {
                     return secondString;
                 }
                 return firstString;
-            } else if (list[secondString].charAt(x) < list[firstString].charAt(x)) {
+            } else if (list[secondString].charAt(i) < list[firstString].charAt(i)) {
                 if (sortAlgorithm == SortAlgorithm.Z_A) {
                     return firstString;
                 }
