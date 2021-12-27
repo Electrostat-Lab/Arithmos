@@ -22,5 +22,3 @@ addDependencies
 addAssets
 
 createJar
-
-deleteResiduals

@@ -8,7 +8,7 @@
 
 source variables.sh
 
-outputJARDir=${workingDir}'/output/'
+outputJARDir=${workingDir}'/build/.buildJava/'
 
 function makeOutputDir() {
     cd ${outputJARDir}
@@ -46,26 +46,17 @@ function addAssets() {
 }
 
 function createJar() {
-    manifestFile=${outputJARDir}''${outputJAR}'/Manifest.mf'
-    javaClasses=${workingDir}'/build/.buildJava/*'
+    cd $outputJARDir
+    manifestFile=${outputJAR}'/Manifest.mf'
+    javaClasses='*/*.class'
     nativeLibs=${workingDir}'/shared/*.so'
-
-    cd ${outputJARDir}''${outputJAR}
-
-    cp ${manifest} ${outputJARDir}''${outputJAR}
-    cp -r ${javaClasses} ${outputJARDir}''${outputJAR}
-    cp ${nativeLibs} ${outputJARDir}''${outputJAR}
-
+    # copy the object file to the build dir
+    cp $nativeLibs $outputJARDir''${outputJAR}
     
-    classes='*/*.class'
-    libs='*.so'
+    $command cmf ${manifestFile} ${outputJAR}'.jar' ${javaClasses} ${nativeLibs}
     
-    $command cmf ${manifestFile} ${outputJAR}'.jar' ${classes} ${libs}
+    mv ${outputJAR}'.jar' $outputJARDir''${outputJAR}
+    
+    mv $outputJARDir''${outputJAR} $workingDir'/output'
 
-}
-
-function deleteResiduals() {
-    manifestFile=(${outputJARDir}''${outputJAR}'/*.mf')
-    classFiles=(${outputJARDir}''${outputJAR}'/*/*.class')
-    rm $manifestFile $classFiles
 }

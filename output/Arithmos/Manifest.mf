@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Main-Class: main.TestCase
+Class-Path: dependencies  dependencies/groovy-3.0.9.jar 
+ dependencies/groovy.jar 
+ dependencies/kotlin.jar 
+ dependencies/scala3-library_3-3.1.0.jar 
+ dependencies/scala.jar 
+ dependencies/scala-library-2.13.7.jar 
