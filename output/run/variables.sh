@@ -6,5 +6,12 @@
 #* @author pavl_g.
 #*#
 
-workingDir='/home/twisted/GradleProjects/Arithmos'
+# 1) print the current working directory to a string value
+pwd=`pwd`
+# cut the working directory from its end by a one '/' delimiter
+cut="${pwd%/*}"
+# cut the working directory from its end by a one '/' delimiter again
+cut2="${cut%/*}"
+# pass the value of the dire
+workingDir=$cut2
 runCommand=/home/twisted/jdk1.8.0_201/bin/java
