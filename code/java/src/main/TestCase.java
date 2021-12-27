@@ -1,5 +1,7 @@
 package main;
 
+import java.io.File;
+import java.nio.file.FileSystems;
 import patternMatching.PatternMatching;
 import testKotlin.Test;
 import testScala.TestScala;
@@ -11,7 +13,7 @@ import java.util.Arrays;
 
 public class TestCase {
     static {
-        System.loadLibrary("ArithmosNatives");
+        System.load(FileSystems.getDefault().getPath("libArithmosNatives.so").toAbsolutePath().toString());
     }
     public static void main(String[] args) {
         // test kotlin
