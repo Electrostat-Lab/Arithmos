@@ -14,24 +14,34 @@ source buildGroovy.sh
 source buildJava.sh
 source buildNatives.sh
 
-copyScSources
+if [[ $enable_scala_build == true ]]; then
+    copyScSources
 
-compileScala
+    compileScala
+fi
 
-copyKtSources
+if [[ $enable_kt_build == true ]]; then
+    copyKtSources
 
-compileKotlin
+    compileKotlin
+fi
 
-copyGroovySources
+if [[ $enable_groovy_build == true ]]; then
+    copyGroovySources
 
-compileGroovy
+    compileGroovy
+fi
 
-copyJavaSources
+if [[ $enable_java_build == true ]]; then
+    copyJavaSources
 
-generateHeaders
+    generateHeaders
 
-moveHeaders
+    moveHeaders
+fi
 
-copyNativeSources
+if [[ $enable_natives_build == true ]]; then
+    copyNativeSources
 
-compile
+    compile
+fi

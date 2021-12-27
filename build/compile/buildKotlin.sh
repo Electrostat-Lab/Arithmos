@@ -21,10 +21,10 @@ function copyKtSources() {
 # Compiles and package kotlin into a dependency jar file to be included inside the java module.
 ##
 function compileKotlin() {
-   buildDir=(${workDir}'/build/.buildKotlin/*/*.kt')
    cd ${workDir}'/build/.buildKotlin'
-   kotlinc ${buildDir} -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
+   ktFiles=`find -name '*.kt'`
+   kotlinc ${ktFiles} -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
    ## remove sources after compilation is completed
-   rm -r $buildDir
+   rm -r $ktFiles
 }
 

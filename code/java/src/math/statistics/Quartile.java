@@ -1,4 +1,4 @@
-package statistics;
+package math.statistics;
 
 public final class Quartile {
     private final double[] args;

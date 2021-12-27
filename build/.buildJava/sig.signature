@@ -1,105 +1,227 @@
  Compiled 
  from 
- "TestCase.java" 
- public 
- class 
- main.TestCase 
- { 
- public 
- main.TestCase(); 
- descriptor: 
- ()V 
- public 
- static 
- void 
- main(java.lang.String[]); 
- descriptor: 
- ([Ljava/lang/String;)V 
- public 
- static 
- void 
- testMath(); 
- descriptor: 
- ()V 
- public 
- static 
- void 
- testSort(); 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "NumberFormat.java" 
+ "Quartile.java" 
  public 
  final 
  class 
- number.NumberFormat 
+ math.statistics.Quartile 
  { 
  private 
- number.NumberFormat(); 
+ final 
+ double[] 
+ args; 
+ descriptor: 
+ [D 
+ private 
+ final 
+ double 
+ quartile; 
+ descriptor: 
+ D 
+ public 
+ math.statistics.Quartile(double[], 
+ double); 
+ descriptor: 
+ ([DD)V 
+ public 
+ double 
+ getLastIndexOf(int); 
+ descriptor: 
+ (I)D 
+ } 
+ Compiled 
+ from 
+ "Statistics.java" 
+ public 
+ final 
+ class 
+ math.statistics.Statistics 
+ { 
+ private 
+ static 
+ final 
+ java.util.logging.Logger 
+ logger; 
+ descriptor: 
+ Ljava/util/logging/Logger; 
+ private 
+ math.statistics.Statistics(); 
  descriptor: 
  ()V 
  public 
  static 
- int[] 
- convertToBinary(int); 
+ double 
+ mean(double...); 
  descriptor: 
- (I)[I 
+ ([D)D 
  public 
  static 
- int 
- convertToDecimal(java.lang.String); 
+ double 
+ median(double...); 
  descriptor: 
- (Ljava/lang/String;)I 
+ ([D)D 
  public 
  static 
- int 
- convertToDecimal(int...); 
+ java.util.ArrayList<java.lang.Double> 
+ mode(double...); 
  descriptor: 
- ([I)I 
+ ([D)Ljava/util/ArrayList; 
  public 
  static 
- java.lang.String[] 
- convertToBinary(java.lang.String); 
+ double 
+ variance(double...); 
  descriptor: 
- (Ljava/lang/String;)[Ljava/lang/String; 
+ ([D)D 
  public 
  static 
- int[] 
- reverse(int[]); 
+ double 
+ variance2(double...); 
  descriptor: 
- ([I)[I 
+ ([D)D 
  public 
  static 
- double[] 
- reverse(double[]); 
+ double 
+ standardDeviation(double...); 
  descriptor: 
- ([D)[D 
+ ([D)D 
  public 
  static 
- double[] 
- expand(double[], 
- int, 
- int); 
+ double 
+ coefficientVariation(double...); 
  descriptor: 
- ([DII)[D 
+ ([D)D 
  public 
  static 
- int[] 
- expand(int[], 
- int, 
- int); 
+ double 
+ coVariance(double[], 
+ double[]); 
  descriptor: 
- ([III)[I 
+ ([D[D)D 
+ public 
+ static 
+ double 
+ correlationCoefficient(double[], 
+ double[]); 
+ descriptor: 
+ ([D[D)D 
+ public 
+ static 
+ math.statistics.Quartile 
+ getQuartile(double[]); 
+ descriptor: 
+ ([D)Lmath/statistics/Quartile; 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
  } 
  Compiled 
  from 
- "PatternMatching.java" 
+ "ItemsSorting.java" 
+ final 
+ class 
+ sorting.ItemsSorting$1 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ sorting.SortUtils 
+ val$utils; 
+ descriptor: 
+ Lsorting/SortUtils; 
+ final 
+ java.lang.String[] 
+ val$list; 
+ descriptor: 
+ [Ljava/lang/String; 
+ final 
+ sorting.ItemsSorting$SortAlgorithm 
+ val$sortAlgorithm; 
+ descriptor: 
+ Lsorting/ItemsSorting$SortAlgorithm; 
+ sorting.ItemsSorting$1(sorting.SortUtils, 
+ java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ (Lsorting/SortUtils;[Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "SortUtils.java" 
  public 
  final 
  class 
- patternMatching.PatternMatching 
+ sorting.SortUtils$Directionality 
+ extends 
+ java.lang.Enum<sorting.SortUtils$Directionality> 
+ { 
+ public 
+ static 
+ final 
+ sorting.SortUtils$Directionality 
+ FORWARD; 
+ descriptor: 
+ Lsorting/SortUtils$Directionality; 
+ public 
+ static 
+ final 
+ sorting.SortUtils$Directionality 
+ BACKWARD; 
+ descriptor: 
+ Lsorting/SortUtils$Directionality; 
+ public 
+ final 
+ int 
+ ID; 
+ descriptor: 
+ I 
+ private 
+ static 
+ final 
+ sorting.SortUtils$Directionality[] 
+ $VALUES; 
+ descriptor: 
+ [Lsorting/SortUtils$Directionality; 
+ public 
+ static 
+ sorting.SortUtils$Directionality[] 
+ values(); 
+ descriptor: 
+ ()[Lsorting/SortUtils$Directionality; 
+ public 
+ static 
+ sorting.SortUtils$Directionality 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lsorting/SortUtils$Directionality; 
+ private 
+ sorting.SortUtils$Directionality(int); 
+ descriptor: 
+ (Ljava/lang/String;II)V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ public 
+ final 
+ class 
+ sorting.ItemsSorting 
  { 
  private 
  static 
@@ -115,27 +237,277 @@
  descriptor: 
  Z 
  private 
- patternMatching.PatternMatching(); 
+ sorting.ItemsSorting(); 
  descriptor: 
  ()V 
  public 
  static 
- int 
- findBrute(java.lang.String, 
- java.lang.String); 
+ java.util.List<java.lang.String> 
+ selectionSort(java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
  descriptor: 
- (Ljava/lang/String;Ljava/lang/String;)I 
+ ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
+ public 
+ static 
+ java.util.List<java.lang.String> 
+ mirrorSort(java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
+ public 
+ static 
+ java.util.List<java.lang.String> 
+ bubbleSort(java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
  public 
  static 
  int 
- findBoyerMoore(java.lang.String, 
- java.lang.String); 
+ compare(java.lang.String[], 
+ int, 
+ int, 
+ sorting.ItemsSorting$SortAlgorithm); 
  descriptor: 
- (Ljava/lang/String;Ljava/lang/String;)I 
+ ([Ljava/lang/String;IILsorting/ItemsSorting$SortAlgorithm;)I 
  static 
  {}; 
  descriptor: 
  ()V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ class 
+ sorting.ItemsSorting$2$1 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ int 
+ val$index; 
+ descriptor: 
+ I 
+ final 
+ sorting.ItemsSorting$2 
+ this$0; 
+ descriptor: 
+ Lsorting/ItemsSorting$2; 
+ sorting.ItemsSorting$2$1(sorting.ItemsSorting$2, 
+ int); 
+ descriptor: 
+ (Lsorting/ItemsSorting$2;I)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ final 
+ class 
+ sorting.ItemsSorting$2 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ sorting.SortUtils 
+ val$utils; 
+ descriptor: 
+ Lsorting/SortUtils; 
+ final 
+ java.lang.String[] 
+ val$list; 
+ descriptor: 
+ [Ljava/lang/String; 
+ final 
+ sorting.ItemsSorting$SortAlgorithm 
+ val$sortAlgorithm; 
+ descriptor: 
+ Lsorting/ItemsSorting$SortAlgorithm; 
+ sorting.ItemsSorting$2(sorting.SortUtils, 
+ java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ (Lsorting/SortUtils;[Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "SortUtils.java" 
+ public 
+ interface 
+ sorting.SortUtils$ActionInjection<T> 
+ { 
+ public 
+ abstract 
+ void 
+ inject(T[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "SortUtils.java" 
+ public 
+ final 
+ class 
+ sorting.SortUtils 
+ { 
+ private 
+ static 
+ sorting.SortUtils 
+ utils; 
+ descriptor: 
+ Lsorting/SortUtils; 
+ private 
+ static 
+ final 
+ java.lang.Object 
+ synchronizer; 
+ descriptor: 
+ Ljava/lang/Object; 
+ private 
+ sorting.SortUtils(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ sorting.SortUtils 
+ getInstance(); 
+ descriptor: 
+ ()Lsorting/SortUtils; 
+ public 
+ <T> 
+ void 
+ recursiveLoop(T[], 
+ int, 
+ sorting.SortUtils$Directionality, 
+ sorting.SortUtils$ActionInjection); 
+ descriptor: 
+ ([Ljava/lang/Object;ILsorting/SortUtils$Directionality;Lsorting/SortUtils$ActionInjection;)V 
+ public 
+ <T> 
+ void 
+ customComparative(T[], 
+ int, 
+ int, 
+ sorting.SortUtils$Directionality, 
+ sorting.SortUtils$ActionInjection); 
+ descriptor: 
+ ([Ljava/lang/Object;IILsorting/SortUtils$Directionality;Lsorting/SortUtils$ActionInjection;)V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ public 
+ final 
+ class 
+ sorting.ItemsSorting$SortAlgorithm 
+ extends 
+ java.lang.Enum<sorting.ItemsSorting$SortAlgorithm> 
+ { 
+ public 
+ static 
+ final 
+ sorting.ItemsSorting$SortAlgorithm 
+ A_Z; 
+ descriptor: 
+ Lsorting/ItemsSorting$SortAlgorithm; 
+ public 
+ static 
+ final 
+ sorting.ItemsSorting$SortAlgorithm 
+ Z_A; 
+ descriptor: 
+ Lsorting/ItemsSorting$SortAlgorithm; 
+ private 
+ static 
+ final 
+ sorting.ItemsSorting$SortAlgorithm[] 
+ $VALUES; 
+ descriptor: 
+ [Lsorting/ItemsSorting$SortAlgorithm; 
+ public 
+ static 
+ sorting.ItemsSorting$SortAlgorithm[] 
+ values(); 
+ descriptor: 
+ ()[Lsorting/ItemsSorting$SortAlgorithm; 
+ public 
+ static 
+ sorting.ItemsSorting$SortAlgorithm 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lsorting/ItemsSorting$SortAlgorithm; 
+ private 
+ sorting.ItemsSorting$SortAlgorithm(); 
+ descriptor: 
+ (Ljava/lang/String;I)V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ class 
+ sorting.ItemsSorting$1$1 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ int 
+ val$index; 
+ descriptor: 
+ I 
+ final 
+ sorting.ItemsSorting$1 
+ this$0; 
+ descriptor: 
+ Lsorting/ItemsSorting$1; 
+ sorting.ItemsSorting$1$1(sorting.ItemsSorting$1, 
+ int); 
+ descriptor: 
+ (Lsorting/ItemsSorting$1;I)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
  } 
  Compiled 
  from 
@@ -374,514 +746,68 @@
  } 
  Compiled 
  from 
- "ItemsSorting.java" 
- class 
- sorting.ItemsSorting$1$1 
- implements 
- sorting.SortUtils$ActionInjection<java.lang.String> 
- { 
+ "NumberFormat.java" 
+ public 
  final 
+ class 
+ number.NumberFormat 
+ { 
+ private 
+ number.NumberFormat(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ int[] 
+ convertToBinary(int); 
+ descriptor: 
+ (I)[I 
+ public 
+ static 
  int 
- val$index; 
+ convertToDecimal(java.lang.String); 
  descriptor: 
- I 
- final 
- sorting.ItemsSorting$1 
- this$0; 
- descriptor: 
- Lsorting/ItemsSorting$1; 
- sorting.ItemsSorting$1$1(sorting.ItemsSorting$1, 
- int); 
- descriptor: 
- (Lsorting/ItemsSorting$1;I)V 
+ (Ljava/lang/String;)I 
  public 
- void 
- inject(java.lang.String[], 
- int); 
+ static 
+ int 
+ convertToDecimal(int...); 
  descriptor: 
- ([Ljava/lang/String;I)V 
+ ([I)I 
  public 
- void 
- inject(java.lang.Object[], 
- int); 
- descriptor: 
- ([Ljava/lang/Object;I)V 
- } 
- Compiled 
- from 
- "ItemsSorting.java" 
- final 
- class 
- sorting.ItemsSorting$1 
- implements 
- sorting.SortUtils$ActionInjection<java.lang.String> 
- { 
- final 
- sorting.SortUtils 
- val$utils; 
- descriptor: 
- Lsorting/SortUtils; 
- final 
+ static 
  java.lang.String[] 
- val$list; 
+ convertToBinary(java.lang.String); 
  descriptor: 
- [Ljava/lang/String; 
- final 
- sorting.ItemsSorting$SortAlgorithm 
- val$sortAlgorithm; 
- descriptor: 
- Lsorting/ItemsSorting$SortAlgorithm; 
- sorting.ItemsSorting$1(sorting.SortUtils, 
- java.lang.String[], 
- sorting.ItemsSorting$SortAlgorithm); 
- descriptor: 
- (Lsorting/SortUtils;[Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)V 
- public 
- void 
- inject(java.lang.String[], 
- int); 
- descriptor: 
- ([Ljava/lang/String;I)V 
- public 
- void 
- inject(java.lang.Object[], 
- int); 
- descriptor: 
- ([Ljava/lang/Object;I)V 
- } 
- Compiled 
- from 
- "ItemsSorting.java" 
- class 
- sorting.ItemsSorting$2$1 
- implements 
- sorting.SortUtils$ActionInjection<java.lang.String> 
- { 
- final 
- int 
- val$index; 
- descriptor: 
- I 
- final 
- sorting.ItemsSorting$2 
- this$0; 
- descriptor: 
- Lsorting/ItemsSorting$2; 
- sorting.ItemsSorting$2$1(sorting.ItemsSorting$2, 
- int); 
- descriptor: 
- (Lsorting/ItemsSorting$2;I)V 
- public 
- void 
- inject(java.lang.String[], 
- int); 
- descriptor: 
- ([Ljava/lang/String;I)V 
- public 
- void 
- inject(java.lang.Object[], 
- int); 
- descriptor: 
- ([Ljava/lang/Object;I)V 
- } 
- Compiled 
- from 
- "ItemsSorting.java" 
- final 
- class 
- sorting.ItemsSorting$2 
- implements 
- sorting.SortUtils$ActionInjection<java.lang.String> 
- { 
- final 
- sorting.SortUtils 
- val$utils; 
- descriptor: 
- Lsorting/SortUtils; 
- final 
- java.lang.String[] 
- val$list; 
- descriptor: 
- [Ljava/lang/String; 
- final 
- sorting.ItemsSorting$SortAlgorithm 
- val$sortAlgorithm; 
- descriptor: 
- Lsorting/ItemsSorting$SortAlgorithm; 
- sorting.ItemsSorting$2(sorting.SortUtils, 
- java.lang.String[], 
- sorting.ItemsSorting$SortAlgorithm); 
- descriptor: 
- (Lsorting/SortUtils;[Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)V 
- public 
- void 
- inject(java.lang.String[], 
- int); 
- descriptor: 
- ([Ljava/lang/String;I)V 
- public 
- void 
- inject(java.lang.Object[], 
- int); 
- descriptor: 
- ([Ljava/lang/Object;I)V 
- } 
- Compiled 
- from 
- "ItemsSorting.java" 
- public 
- final 
- class 
- sorting.ItemsSorting$SortAlgorithm 
- extends 
- java.lang.Enum<sorting.ItemsSorting$SortAlgorithm> 
- { 
+ (Ljava/lang/String;)[Ljava/lang/String; 
  public 
  static 
- final 
- sorting.ItemsSorting$SortAlgorithm 
- A_Z; 
+ int[] 
+ reverse(int[]); 
  descriptor: 
- Lsorting/ItemsSorting$SortAlgorithm; 
+ ([I)[I 
  public 
  static 
- final 
- sorting.ItemsSorting$SortAlgorithm 
- Z_A; 
- descriptor: 
- Lsorting/ItemsSorting$SortAlgorithm; 
- private 
- static 
- final 
- sorting.ItemsSorting$SortAlgorithm[] 
- $VALUES; 
- descriptor: 
- [Lsorting/ItemsSorting$SortAlgorithm; 
- public 
- static 
- sorting.ItemsSorting$SortAlgorithm[] 
- values(); 
- descriptor: 
- ()[Lsorting/ItemsSorting$SortAlgorithm; 
- public 
- static 
- sorting.ItemsSorting$SortAlgorithm 
- valueOf(java.lang.String); 
- descriptor: 
- (Ljava/lang/String;)Lsorting/ItemsSorting$SortAlgorithm; 
- private 
- sorting.ItemsSorting$SortAlgorithm(); 
- descriptor: 
- (Ljava/lang/String;I)V 
- static 
- {}; 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "ItemsSorting.java" 
- public 
- final 
- class 
- sorting.ItemsSorting 
- { 
- private 
- static 
- final 
- java.util.logging.Logger 
- logger; 
- descriptor: 
- Ljava/util/logging/Logger; 
- static 
- final 
- boolean 
- $assertionsDisabled; 
- descriptor: 
- Z 
- private 
- sorting.ItemsSorting(); 
- descriptor: 
- ()V 
- public 
- static 
- java.util.List<java.lang.String> 
- selectionSort(java.lang.String[], 
- sorting.ItemsSorting$SortAlgorithm); 
- descriptor: 
- ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
- public 
- static 
- java.util.List<java.lang.String> 
- mirrorSort(java.lang.String[], 
- sorting.ItemsSorting$SortAlgorithm); 
- descriptor: 
- ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
- public 
- static 
- java.util.List<java.lang.String> 
- bubbleSort(java.lang.String[], 
- sorting.ItemsSorting$SortAlgorithm); 
- descriptor: 
- ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
- public 
- static 
- int 
- compare(java.lang.String[], 
- int, 
- int, 
- sorting.ItemsSorting$SortAlgorithm); 
- descriptor: 
- ([Ljava/lang/String;IILsorting/ItemsSorting$SortAlgorithm;)I 
- static 
- {}; 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "SortUtils.java" 
- public 
- interface 
- sorting.SortUtils$ActionInjection<T> 
- { 
- public 
- abstract 
- void 
- inject(T[], 
- int); 
- descriptor: 
- ([Ljava/lang/Object;I)V 
- } 
- Compiled 
- from 
- "SortUtils.java" 
- public 
- final 
- class 
- sorting.SortUtils$Directionality 
- extends 
- java.lang.Enum<sorting.SortUtils$Directionality> 
- { 
- public 
- static 
- final 
- sorting.SortUtils$Directionality 
- FORWARD; 
- descriptor: 
- Lsorting/SortUtils$Directionality; 
- public 
- static 
- final 
- sorting.SortUtils$Directionality 
- BACKWARD; 
- descriptor: 
- Lsorting/SortUtils$Directionality; 
- public 
- final 
- int 
- ID; 
- descriptor: 
- I 
- private 
- static 
- final 
- sorting.SortUtils$Directionality[] 
- $VALUES; 
- descriptor: 
- [Lsorting/SortUtils$Directionality; 
- public 
- static 
- sorting.SortUtils$Directionality[] 
- values(); 
- descriptor: 
- ()[Lsorting/SortUtils$Directionality; 
- public 
- static 
- sorting.SortUtils$Directionality 
- valueOf(java.lang.String); 
- descriptor: 
- (Ljava/lang/String;)Lsorting/SortUtils$Directionality; 
- private 
- sorting.SortUtils$Directionality(int); 
- descriptor: 
- (Ljava/lang/String;II)V 
- static 
- {}; 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "SortUtils.java" 
- public 
- final 
- class 
- sorting.SortUtils 
- { 
- private 
- static 
- sorting.SortUtils 
- utils; 
- descriptor: 
- Lsorting/SortUtils; 
- private 
- static 
- final 
- java.lang.Object 
- synchronizer; 
- descriptor: 
- Ljava/lang/Object; 
- private 
- sorting.SortUtils(); 
- descriptor: 
- ()V 
- public 
- static 
- sorting.SortUtils 
- getInstance(); 
- descriptor: 
- ()Lsorting/SortUtils; 
- public 
- <T> 
- void 
- recursiveLoop(T[], 
- int, 
- sorting.SortUtils$Directionality, 
- sorting.SortUtils$ActionInjection); 
- descriptor: 
- ([Ljava/lang/Object;ILsorting/SortUtils$Directionality;Lsorting/SortUtils$ActionInjection;)V 
- public 
- <T> 
- void 
- customComparative(T[], 
- int, 
- int, 
- sorting.SortUtils$Directionality, 
- sorting.SortUtils$ActionInjection); 
- descriptor: 
- ([Ljava/lang/Object;IILsorting/SortUtils$Directionality;Lsorting/SortUtils$ActionInjection;)V 
- static 
- {}; 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "Quartile.java" 
- public 
- final 
- class 
- statistics.Quartile 
- { 
- private 
- final 
  double[] 
- args; 
+ reverse(double[]); 
  descriptor: 
- [D 
- private 
- final 
- double 
- quartile; 
- descriptor: 
- D 
- public 
- statistics.Quartile(double[], 
- double); 
- descriptor: 
- ([DD)V 
- public 
- double 
- getLastIndexOf(int); 
- descriptor: 
- (I)D 
- } 
- Compiled 
- from 
- "Statistics.java" 
- public 
- final 
- class 
- statistics.Statistics 
- { 
- private 
- static 
- final 
- java.util.logging.Logger 
- logger; 
- descriptor: 
- Ljava/util/logging/Logger; 
- private 
- statistics.Statistics(); 
- descriptor: 
- ()V 
+ ([D)[D 
  public 
  static 
- double 
- mean(double...); 
+ double[] 
+ expand(double[], 
+ int, 
+ int); 
  descriptor: 
- ([D)D 
+ ([DII)[D 
  public 
  static 
- double 
- median(double...); 
+ int[] 
+ expand(int[], 
+ int, 
+ int); 
  descriptor: 
- ([D)D 
- public 
- static 
- java.util.ArrayList<java.lang.Double> 
- mode(double...); 
- descriptor: 
- ([D)Ljava/util/ArrayList; 
- public 
- static 
- double 
- variance(double...); 
- descriptor: 
- ([D)D 
- public 
- static 
- double 
- variance2(double...); 
- descriptor: 
- ([D)D 
- public 
- static 
- double 
- standardDeviation(double...); 
- descriptor: 
- ([D)D 
- public 
- static 
- double 
- coefficientVariation(double...); 
- descriptor: 
- ([D)D 
- public 
- static 
- double 
- coVariance(double[], 
- double[]); 
- descriptor: 
- ([D[D)D 
- public 
- static 
- double 
- correlationCoefficient(double[], 
- double[]); 
- descriptor: 
- ([D[D)D 
- public 
- static 
- statistics.Quartile 
- getQuartile(double[]); 
- descriptor: 
- ([D)Lstatistics/Quartile; 
- static 
- {}; 
- descriptor: 
- ()V 
+ ([III)[I 
  } 
  Compiled 
  from 
@@ -889,67 +815,53 @@
  public 
  final 
  class 
- time.TimeFormat$Time$InputType 
+ time.TimeFormat$TimeRepresentFormat$Format 
  extends 
- java.lang.Enum<time.TimeFormat$Time$InputType> 
+ java.lang.Enum<time.TimeFormat$TimeRepresentFormat$Format> 
  { 
  public 
  static 
  final 
- time.TimeFormat$Time$InputType 
- INPUT_TYPE_NANOS; 
+ time.TimeFormat$TimeRepresentFormat$Format 
+ HRS_MINS_SECS; 
  descriptor: 
- Ltime/TimeFormat$Time$InputType; 
+ Ltime/TimeFormat$TimeRepresentFormat$Format; 
  public 
  static 
  final 
- time.TimeFormat$Time$InputType 
- INPUT_TYPE_MICROS; 
+ time.TimeFormat$TimeRepresentFormat$Format 
+ HRS_COLON_MINS_COLON_SECS; 
  descriptor: 
- Ltime/TimeFormat$Time$InputType; 
- public 
- static 
- final 
- time.TimeFormat$Time$InputType 
- INPUT_TYPE_MILLIS; 
- descriptor: 
- Ltime/TimeFormat$Time$InputType; 
- public 
- static 
- final 
- time.TimeFormat$Time$InputType 
- INPUT_TYPE_SECS; 
- descriptor: 
- Ltime/TimeFormat$Time$InputType; 
+ Ltime/TimeFormat$TimeRepresentFormat$Format; 
  public 
  final 
- double 
- unit; 
+ int 
+ formatId; 
  descriptor: 
- D 
+ I 
  private 
  static 
  final 
- time.TimeFormat$Time$InputType[] 
+ time.TimeFormat$TimeRepresentFormat$Format[] 
  $VALUES; 
  descriptor: 
- [Ltime/TimeFormat$Time$InputType; 
+ [Ltime/TimeFormat$TimeRepresentFormat$Format; 
  public 
  static 
- time.TimeFormat$Time$InputType[] 
+ time.TimeFormat$TimeRepresentFormat$Format[] 
  values(); 
  descriptor: 
- ()[Ltime/TimeFormat$Time$InputType; 
+ ()[Ltime/TimeFormat$TimeRepresentFormat$Format; 
  public 
  static 
- time.TimeFormat$Time$InputType 
+ time.TimeFormat$TimeRepresentFormat$Format 
  valueOf(java.lang.String); 
  descriptor: 
- (Ljava/lang/String;)Ltime/TimeFormat$Time$InputType; 
+ (Ljava/lang/String;)Ltime/TimeFormat$TimeRepresentFormat$Format; 
  private 
- time.TimeFormat$Time$InputType(double); 
+ time.TimeFormat$TimeRepresentFormat$Format(int); 
  descriptor: 
- (Ljava/lang/String;ID)V 
+ (Ljava/lang/String;II)V 
  static 
  {}; 
  descriptor: 
@@ -1073,67 +985,33 @@
  from 
  "TimeFormat.java" 
  public 
+ final 
  class 
- time.TimeFormat$Time 
+ time.TimeFormat 
  { 
- public 
- time.TimeFormat$Time(); 
+ private 
+ static 
+ time.TimeFormat$Time$InputType 
+ inputType; 
+ descriptor: 
+ Ltime/TimeFormat$Time$InputType; 
+ private 
+ time.TimeFormat(); 
  descriptor: 
  ()V 
- } 
- Compiled 
- from 
- "TimeFormat.java" 
- public 
- final 
- class 
- time.TimeFormat$TimeRepresentFormat$Format 
- extends 
- java.lang.Enum<time.TimeFormat$TimeRepresentFormat$Format> 
- { 
  public 
  static 
- final 
- time.TimeFormat$TimeRepresentFormat$Format 
- HRS_MINS_SECS; 
+ java.lang.String 
+ getFormattedTime(time.TimeFormat$TimeRepresentFormat$Format, 
+ double, 
+ time.TimeFormat$Time$InputType); 
  descriptor: 
- Ltime/TimeFormat$TimeRepresentFormat$Format; 
- public 
+ (Ltime/TimeFormat$TimeRepresentFormat$Format;DLtime/TimeFormat$Time$InputType;)Ljava/lang/String; 
  static 
- final 
- time.TimeFormat$TimeRepresentFormat$Format 
- HRS_COLON_MINS_COLON_SECS; 
+ time.TimeFormat$Time$InputType 
+ access$000(); 
  descriptor: 
- Ltime/TimeFormat$TimeRepresentFormat$Format; 
- public 
- final 
- int 
- formatId; 
- descriptor: 
- I 
- private 
- static 
- final 
- time.TimeFormat$TimeRepresentFormat$Format[] 
- $VALUES; 
- descriptor: 
- [Ltime/TimeFormat$TimeRepresentFormat$Format; 
- public 
- static 
- time.TimeFormat$TimeRepresentFormat$Format[] 
- values(); 
- descriptor: 
- ()[Ltime/TimeFormat$TimeRepresentFormat$Format; 
- public 
- static 
- time.TimeFormat$TimeRepresentFormat$Format 
- valueOf(java.lang.String); 
- descriptor: 
- (Ljava/lang/String;)Ltime/TimeFormat$TimeRepresentFormat$Format; 
- private 
- time.TimeFormat$TimeRepresentFormat$Format(int); 
- descriptor: 
- (Ljava/lang/String;II)V 
+ ()Ltime/TimeFormat$Time$InputType; 
  static 
  {}; 
  descriptor: 
@@ -1199,31 +1077,153 @@
  public 
  final 
  class 
- time.TimeFormat 
- { 
- private 
- static 
  time.TimeFormat$Time$InputType 
- inputType; 
+ extends 
+ java.lang.Enum<time.TimeFormat$Time$InputType> 
+ { 
+ public 
+ static 
+ final 
+ time.TimeFormat$Time$InputType 
+ INPUT_TYPE_NANOS; 
  descriptor: 
  Ltime/TimeFormat$Time$InputType; 
+ public 
+ static 
+ final 
+ time.TimeFormat$Time$InputType 
+ INPUT_TYPE_MICROS; 
+ descriptor: 
+ Ltime/TimeFormat$Time$InputType; 
+ public 
+ static 
+ final 
+ time.TimeFormat$Time$InputType 
+ INPUT_TYPE_MILLIS; 
+ descriptor: 
+ Ltime/TimeFormat$Time$InputType; 
+ public 
+ static 
+ final 
+ time.TimeFormat$Time$InputType 
+ INPUT_TYPE_SECS; 
+ descriptor: 
+ Ltime/TimeFormat$Time$InputType; 
+ public 
+ final 
+ double 
+ unit; 
+ descriptor: 
+ D 
  private 
- time.TimeFormat(); 
+ static 
+ final 
+ time.TimeFormat$Time$InputType[] 
+ $VALUES; 
+ descriptor: 
+ [Ltime/TimeFormat$Time$InputType; 
+ public 
+ static 
+ time.TimeFormat$Time$InputType[] 
+ values(); 
+ descriptor: 
+ ()[Ltime/TimeFormat$Time$InputType; 
+ public 
+ static 
+ time.TimeFormat$Time$InputType 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Ltime/TimeFormat$Time$InputType; 
+ private 
+ time.TimeFormat$Time$InputType(double); 
+ descriptor: 
+ (Ljava/lang/String;ID)V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TimeFormat.java" 
+ public 
+ class 
+ time.TimeFormat$Time 
+ { 
+ public 
+ time.TimeFormat$Time(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestCase.java" 
+ public 
+ class 
+ main.TestCase 
+ { 
+ public 
+ main.TestCase(); 
  descriptor: 
  ()V 
  public 
  static 
- java.lang.String 
- getFormattedTime(time.TimeFormat$TimeRepresentFormat$Format, 
- double, 
- time.TimeFormat$Time$InputType); 
+ void 
+ main(java.lang.String[]); 
  descriptor: 
- (Ltime/TimeFormat$TimeRepresentFormat$Format;DLtime/TimeFormat$Time$InputType;)Ljava/lang/String; 
+ ([Ljava/lang/String;)V 
+ public 
  static 
- time.TimeFormat$Time$InputType 
- access$000(); 
+ void 
+ testMath(); 
  descriptor: 
- ()Ltime/TimeFormat$Time$InputType; 
+ ()V 
+ public 
+ static 
+ void 
+ testSort(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "PatternMatching.java" 
+ public 
+ final 
+ class 
+ patternMatching.PatternMatching 
+ { 
+ private 
+ static 
+ final 
+ java.util.logging.Logger 
+ logger; 
+ descriptor: 
+ Ljava/util/logging/Logger; 
+ static 
+ final 
+ boolean 
+ $assertionsDisabled; 
+ descriptor: 
+ Z 
+ private 
+ patternMatching.PatternMatching(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ int 
+ findBrute(java.lang.String, 
+ java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;Ljava/lang/String;)I 
+ public 
+ static 
+ int 
+ findBoyerMoore(java.lang.String, 
+ java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;Ljava/lang/String;)I 
  static 
  {}; 
  descriptor: 
