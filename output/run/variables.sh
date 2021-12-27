@@ -14,4 +14,6 @@ cut="${pwd%/*}"
 cut2="${cut%/*}"
 # pass the value of the dire
 workingDir=$cut2
-runCommand=/home/twisted/jdk1.8.0_201/bin/java
+# include the JAVAHOME
+source ${workingDir}'/JAVAHOME.sh'
+runCommand=${JAVA__HOME}'/java'

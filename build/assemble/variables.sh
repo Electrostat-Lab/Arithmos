@@ -5,7 +5,6 @@
 #*
 #* @author pavl_g.
 #*#
-
 # 1) print the current working directory to a string value
 pwd=`pwd`
 # cut the working directory from its end by a one '/' delimiter
@@ -14,8 +13,10 @@ cut="${pwd%/*}"
 cut2="${cut%/*}"
 # pass the value of the dire
 workingDir=$cut2
+# include the Ccoffee JAVAHOME file
+source ${workingDir}'/JAVAHOME.sh'
 outputJAR='Arithmos'
 manifest='Manifest-Version: 1.0'
 mainclass='Main-Class: main.TestCase'
-command=/home/twisted/jdk1.8.0_201/bin/jar
+command=${JAVA__HOME}'/jar'
 classpath='Class-Path: dependencies'
