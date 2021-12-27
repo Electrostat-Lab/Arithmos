@@ -37,7 +37,7 @@ dependencies {
 - Statistics : https://eg1lib.org/book/3594749/50610d		 
 - Check : https://github.com/Scrappers-glitch/NativeJmeTemplate
 
-## Wiki : 
+### Wiki : 
 - [Wiki](https://github.com/Scrappers-glitch/Arithmos/wiki/How-to-use-Arithmos-%3F)
 
 ### Dependencies : 
