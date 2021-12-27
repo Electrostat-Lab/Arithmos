@@ -23,9 +23,10 @@ function compile() {
     nativeSources=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
     chmod +x $nativeSources
     # append -lwiringPi for raspberry wiringPi includes
+    # ${JAVA__HOME%/*} : % returns back to the root base directory of the java home, / is the separator delimiter of the directory string
     g++ -fPIC ${nativeSources} -shared -o ${clibName} \
-                -I'/usr/lib/jvm/java-11-openjdk-amd64/include' \
-                -I'/usr/lib/jvm/java-11-openjdk-amd64/include/linux' \
+                -I${JAVA__HOME%/*}'/include' \
+                -I${JAVA__HOME%/*}'/include/linux' \
                 -I${workDir}'/code/natives/includes' 
     mv ${clibName} ${workDir}'/shared'
     rm $nativeSources
