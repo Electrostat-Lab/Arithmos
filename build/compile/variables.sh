@@ -25,4 +25,4 @@ enable_java_build=true
 enable_scala_build=true
 enable_kt_build=true
 enable_groovy_build=true
-enable_natives_build=false
+enable_natives_build=true

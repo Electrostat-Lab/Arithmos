@@ -44,13 +44,18 @@ function addAssets() {
 }
 
 function createJar() {
-    cd $outputJARDir
-    manifestFile=${outputJAR}'/Manifest.mf'
-    javaClasses='*/*.class'
-    nativeLibs=${workingDir}'/shared/*.so'
+    # get the object files to link them
+    cd ${workingDir}'/shared'
+    nativeLibs=`find -name "*.so"`
     # copy the object file to the build dir
     cp $nativeLibs $outputJARDir''${outputJAR}
-    $command cmf ${manifestFile} ${outputJAR}'.jar' ${javaClasses} ${nativeLibs}
+    # get the manifest file to link it
+    cd $outputJARDir
+    manifestFile=${outputJAR}'/Manifest.mf'
+    # get the class files ready
+    javaClasses=`find -name "*.class"`
+    # command and output a jar file with linked manifest, java class files and object files
+    $command cmf ${manifestFile} ${outputJAR}'.jar' ${javaClasses} $outputJARDir''${outputJAR}'/'${nativeLibs}
     # move the jar to its respective output folder
     mv ${outputJAR}'.jar' $outputJARDir''${outputJAR}
     # move the jar directory containing the jar and the assets to the output directory

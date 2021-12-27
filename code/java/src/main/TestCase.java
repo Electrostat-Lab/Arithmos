@@ -10,6 +10,9 @@ import time.*;
 import java.util.Arrays;
 
 public class TestCase {
+    static {
+        System.loadLibrary("ArithmosNatives");
+    }
     public static void main(String[] args) {
         // test kotlin
         final Test test1 = new Test();
@@ -20,6 +23,7 @@ public class TestCase {
         // test groovy
         final TestGroovy test3 = new TestGroovy();
         test3.greet();
+        testNatives();
         testMath();
         testSort();
     }
@@ -46,4 +50,5 @@ public class TestCase {
         System.out.println(ItemsSorting.mirrorSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.Z_A));
         System.out.println(ItemsSorting.bubbleSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.A_Z));
     }
+    public static native void testNatives();
 }
