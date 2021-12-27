@@ -62,3 +62,5 @@ WIKI is still a wip.
 - calculus/AngleUtils.java
 - linearAlgebra/Matrix.java -- Uses vectors too.
 - time/Chronometer.java
+- Android arm build
+- Pi arm build
