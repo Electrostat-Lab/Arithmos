@@ -16,5 +16,7 @@ cut="${pwd%/*}"
 cut2="${cut%/*}"
 # pass the value of the dire
 workDir=$cut2
-command=/home/twisted/jdk1.8.0_201/bin/javac
+# include the JAVAHOME
+source ${workDir}'/JAVAHOME.sh'
+command=${JAVA__HOME}'/javac'
 clibName=('libArithmosNatives.so')
