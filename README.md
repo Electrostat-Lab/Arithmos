@@ -37,6 +37,9 @@ dependencies {
 - Statistics : https://eg1lib.org/book/3594749/50610d		 
 - Check : https://github.com/Scrappers-glitch/NativeJmeTemplate
 
+## Wiki : 
+- [Wiki](https://github.com/Scrappers-glitch/Arithmos/wiki/How-to-use-Arithmos-%3F)
+
 ### Dependencies : 
 - Groovy : https://mvnrepository.com/artifact/org.codehaus.groovy/groovy/3.0.9
 - Scala : https://mvnrepository.com/artifact/org.scala-lang/scala-library/2.13.7
@@ -53,8 +56,6 @@ sdk install kotlinc
 ```bash 
 sdk install groovyc
 ```
-
-WIKI is still a wip.
 
 ### TODO : 
 - vector/Vector.java
