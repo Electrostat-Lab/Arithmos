@@ -55,7 +55,7 @@ function createJar() {
     # get the class files ready
     javaClasses=`find -name "*.class"`
     # command and output a jar file with linked manifest, java class files and object files
-    $command cmf ${manifestFile} ${outputJAR}'.jar' ${javaClasses} $outputJARDir''${outputJAR}'/'${nativeLibs}
+    $command cmf ${manifestFile} ${outputJAR}'.jar' ${javaClasses}
     # move the jar to its respective output folder
     mv ${outputJAR}'.jar' $outputJARDir''${outputJAR}
     # move the jar directory containing the jar and the assets to the output directory
