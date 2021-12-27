@@ -23,7 +23,7 @@ public class TestCase {
         testMath();
         testSort();
     }
-    
+
     public static void testMath() {
         System.out.println(Arrays.toString(NumberFormat.convertToBinary(13)));
         System.out.println(Arrays.toString(NumberFormat.convertToBinary("Guru")));
@@ -37,12 +37,13 @@ public class TestCase {
 
         System.out.println(time);
     }
-    
+
     public static void testSort() {
         System.out.println(PatternMatching.findBrute("Pavly Gerges", "Gerges"));
         System.out.println(PatternMatching.findBoyerMoore("Pavly Gerges", "Gerges"));
         System.out.println(ItemsSorting.selectionSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.A_Z));
-        System.out.println(ItemsSorting.selectionSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.Z_A));
-    
+        System.out.println(ItemsSorting.mirrorSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.A_Z));
+        System.out.println(ItemsSorting.mirrorSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.Z_A));
+        System.out.println(ItemsSorting.bubbleSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.A_Z));
     }
 }

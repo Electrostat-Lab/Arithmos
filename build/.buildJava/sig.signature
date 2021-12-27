@@ -375,6 +375,160 @@
  Compiled 
  from 
  "ItemsSorting.java" 
+ class 
+ sorting.ItemsSorting$1$1 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ int 
+ val$index; 
+ descriptor: 
+ I 
+ final 
+ sorting.ItemsSorting$1 
+ this$0; 
+ descriptor: 
+ Lsorting/ItemsSorting$1; 
+ sorting.ItemsSorting$1$1(sorting.ItemsSorting$1, 
+ int); 
+ descriptor: 
+ (Lsorting/ItemsSorting$1;I)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ final 
+ class 
+ sorting.ItemsSorting$1 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ sorting.SortUtils 
+ val$utils; 
+ descriptor: 
+ Lsorting/SortUtils; 
+ final 
+ java.lang.String[] 
+ val$list; 
+ descriptor: 
+ [Ljava/lang/String; 
+ final 
+ sorting.ItemsSorting$SortAlgorithm 
+ val$sortAlgorithm; 
+ descriptor: 
+ Lsorting/ItemsSorting$SortAlgorithm; 
+ sorting.ItemsSorting$1(sorting.SortUtils, 
+ java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ (Lsorting/SortUtils;[Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ class 
+ sorting.ItemsSorting$2$1 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ int 
+ val$index; 
+ descriptor: 
+ I 
+ final 
+ sorting.ItemsSorting$2 
+ this$0; 
+ descriptor: 
+ Lsorting/ItemsSorting$2; 
+ sorting.ItemsSorting$2$1(sorting.ItemsSorting$2, 
+ int); 
+ descriptor: 
+ (Lsorting/ItemsSorting$2;I)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
+ final 
+ class 
+ sorting.ItemsSorting$2 
+ implements 
+ sorting.SortUtils$ActionInjection<java.lang.String> 
+ { 
+ final 
+ sorting.SortUtils 
+ val$utils; 
+ descriptor: 
+ Lsorting/SortUtils; 
+ final 
+ java.lang.String[] 
+ val$list; 
+ descriptor: 
+ [Ljava/lang/String; 
+ final 
+ sorting.ItemsSorting$SortAlgorithm 
+ val$sortAlgorithm; 
+ descriptor: 
+ Lsorting/ItemsSorting$SortAlgorithm; 
+ sorting.ItemsSorting$2(sorting.SortUtils, 
+ java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ (Lsorting/SortUtils;[Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)V 
+ public 
+ void 
+ inject(java.lang.String[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/String;I)V 
+ public 
+ void 
+ inject(java.lang.Object[], 
+ int); 
+ descriptor: 
+ ([Ljava/lang/Object;I)V 
+ } 
+ Compiled 
+ from 
+ "ItemsSorting.java" 
  public 
  final 
  class 
@@ -458,6 +612,20 @@
  ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
  public 
  static 
+ java.util.List<java.lang.String> 
+ mirrorSort(java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
+ public 
+ static 
+ java.util.List<java.lang.String> 
+ bubbleSort(java.lang.String[], 
+ sorting.ItemsSorting$SortAlgorithm); 
+ descriptor: 
+ ([Ljava/lang/String;Lsorting/ItemsSorting$SortAlgorithm;)Ljava/util/List; 
+ public 
+ static 
  int 
  compare(java.lang.String[], 
  int, 
@@ -475,14 +643,15 @@
  "SortUtils.java" 
  public 
  interface 
- sorting.SortUtils$ActionInjection 
+ sorting.SortUtils$ActionInjection<T> 
  { 
  public 
  abstract 
  void 
- inject(); 
+ inject(T[], 
+ int); 
  descriptor: 
- ()V 
+ ([Ljava/lang/Object;I)V 
  } 
  Compiled 
  from 
@@ -557,6 +726,13 @@
  descriptor: 
  Lsorting/SortUtils; 
  private 
+ static 
+ final 
+ java.lang.Object 
+ synchronizer; 
+ descriptor: 
+ Ljava/lang/Object; 
+ private 
  sorting.SortUtils(); 
  descriptor: 
  ()V 
@@ -578,12 +754,17 @@
  public 
  <T> 
  void 
- customComparative(int, 
+ customComparative(T[], 
+ int, 
  int, 
  sorting.SortUtils$Directionality, 
  sorting.SortUtils$ActionInjection); 
  descriptor: 
- (IILsorting/SortUtils$Directionality;Lsorting/SortUtils$ActionInjection;)V 
+ ([Ljava/lang/Object;IILsorting/SortUtils$Directionality;Lsorting/SortUtils$ActionInjection;)V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
  } 
  Compiled 
  from 
