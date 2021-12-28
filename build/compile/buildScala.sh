@@ -19,10 +19,10 @@ function copyScSources() {
 # Compiles and package Scala into a dependency jar file to be included inside the java module.
 ##
 function compileScala() {
-   buildDir=(${workDir}'/build/.buildScala/*/*.scala')
    cd ${workDir}'/build/.buildScala'
-   scalac ${buildDir} -d ${workDir}'/code/java/dependencies/scala.jar'
+   scalaFiles=`find -name '*.scala'`
+   scalac ${scalaFiles} -d ${workDir}'/code/java/dependencies/scala.jar'
    ## remove sources after compilation is completed
-   rm -r $buildDir
+   rm -r $scalaFiles
 }
 

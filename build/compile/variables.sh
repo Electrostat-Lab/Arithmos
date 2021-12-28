@@ -20,3 +20,9 @@ workDir=$cut2
 source ${workDir}'/JAVAHOME.sh'
 command=${JAVA__HOME}'/javac'
 clibName=('libArithmosNatives.so')
+# set some build guards
+enable_java_build=true
+enable_scala_build=true
+enable_kt_build=true
+enable_groovy_build=true
+enable_natives_build=false

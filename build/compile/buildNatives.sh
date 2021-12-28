@@ -13,25 +13,20 @@ function copyNativeSources() {
      # dir to compile & sharedLib name
     libs=(${workDir}'/code/natives/libs/*')
     main=(${workDir}'/code/natives/main/*')
-    merge[0]=${libs}
-    merge[1]=${main}
     # copy cpp files to a gather directory
-    for ((idx=0; idx < ${#merge[@]}; idx++)); do
-        ##act on ${merge[$idx]}
-        cp -r ${merge[$idx]} ${workDir}'/build/.buildNatives'
-    done
+    cp -r ${libs} ${workDir}'/build/.buildNatives'
+    cp -r ${main} ${workDir}'/build/.buildNatives'
 }
 
 function compile() {
-    cd ${workDir}'/shared'
-    
-    nativeSources=${workDir}'/build/.buildNatives/*'
+    cd ${workDir}'/build/.buildNatives'
+    nativeSources= `find -name '*.c' '*.cxx' '*.cpp' '*.h' '*.c++'`
     # append -lwiringPi for raspberry wiringPi includes
     g++ -fPIC ${nativeSources} -shared  -o ${clibName} \
                 -I'/usr/lib/jvm/java-11-openjdk-amd64/include' \
                 -I'/usr/lib/jvm/java-11-openjdk-amd64/include/linux' \
                 -I${workDir}'/code/natives/includes' \
-                
+    mv ${clibName} ${workDir}'/shared'
     rm $nativeSources
 } 
 

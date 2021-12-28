@@ -1,4 +1,4 @@
-package statistics;
+package math.statistics;
 
 import java.util.ArrayList;
 import java.util.logging.Level;

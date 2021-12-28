@@ -1,7 +1,5 @@
 #**
 #* Ccoffee Build tool, manual build, alpha-v1.
-#* Custom Includsions for GTKmm cpp wrapper
-#* dependencies '-I"/usr/include/glibmm-2.9.1/glib" -I"/usr/include/sigc++-2.0/sigc++" -I"/usr/include/giomm-2.4" -I"/usr/include/gtkmm-4.2.0/gtk"'
 #*
 #* @author pavl_g.
 #*#
@@ -52,11 +50,12 @@ function createJar() {
     nativeLibs=${workingDir}'/shared/*.so'
     # copy the object file to the build dir
     cp $nativeLibs $outputJARDir''${outputJAR}
-    
     $command cmf ${manifestFile} ${outputJAR}'.jar' ${javaClasses} ${nativeLibs}
-    
+    # move the jar to its respective output folder
     mv ${outputJAR}'.jar' $outputJARDir''${outputJAR}
-    
+    # move the jar directory containing the jar and the assets to the output directory
     mv $outputJARDir''${outputJAR} $workingDir'/output'
-
+    # remove the residual manifest file
+    cd $workingDir'/output/'${outputJAR}
+    rm 'Manifest.mf'
 }
