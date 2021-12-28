@@ -1,13 +1,13 @@
 #**
 #* Ccoffee Build tool, manual build, alpha-v1.
-#* Custom Includsions for GTKmm cpp wrapper
-#* dependencies '-I"/usr/include/glibmm-2.9.1/glib" -I"/usr/include/sigc++-2.0/sigc++" -I"/usr/include/giomm-2.4" -I"/usr/include/gtkmm-4.2.0/gtk"'
 #*
 #* @author pavl_g.
 #*#
 source variables.sh
 # make a dir for java byte code
-mkdir ${workDir}'/build/.buildJava'
+if [[ ! -d ${workDir}'/build/.buildJava' ]]; then
+    mkdir ${workDir}'/build/.buildJava'
+fi
 
 ##
 # Copies the source files to a single dir to be compiled manually.
@@ -40,6 +40,9 @@ function generateHeaders() {
 ##
 function moveHeaders() {
     headers=(${workDir}'/build/.buildJava/*.h')
-    mv ${headers} ${workDir}'/code/natives/includes/'
+    # check if the headers exist then move them
+    if [[ -f $headers ]]; then
+        mv ${headers} ${workDir}'/code/natives/includes/'
+    fi
 }
 
