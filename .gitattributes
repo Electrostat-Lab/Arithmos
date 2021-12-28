@@ -4,6 +4,6 @@
 *.c linguist-vendored=false
 *.cxx linguist-vendored=false
 *.cpp linguist-vendored=false
-*.sig linguist-language=C
+*.sig linguist-language=c
 
 
