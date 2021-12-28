@@ -20,12 +20,13 @@ function copyNativeSources() {
 
 function compile() {
     cd ${workDir}'/build/.buildNatives'
-    nativeSources= `find -name '*.c' '*.cxx' '*.cpp' '*.h' '*.c++'`
+    nativeSources=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
+    chmod +x $nativeSources
     # append -lwiringPi for raspberry wiringPi includes
-    g++ -fPIC ${nativeSources} -shared  -o ${clibName} \
+    g++ -fPIC ${nativeSources} -shared -o ${clibName} \
                 -I'/usr/lib/jvm/java-11-openjdk-amd64/include' \
                 -I'/usr/lib/jvm/java-11-openjdk-amd64/include/linux' \
-                -I${workDir}'/code/natives/includes' \
+                -I${workDir}'/code/natives/includes' 
     mv ${clibName} ${workDir}'/shared'
     rm $nativeSources
 } 
