@@ -5,15 +5,18 @@
 #*#
 source variables.sh
 # make a dir for java byte code
-mkdir ${workDir}'/build/.buildScala'
-
+if [[ ! -d ${workDir}'/build/.buildScala' ]]; then
+    mkdir ${workDir}'/build/.buildScala'
+fi
 ##
 # Copies the source files to a single dir to be compiled manually.
 ##
 function copyScSources() {
     #copy code to buildDir to compile java files
-    codeDir=(${workDir}'/code/scala/src/*')
-    cp -r ${codeDir} ${workDir}'/build/.buildScala'
+    codeFiles=(${workDir}'/code/scala/src/*')
+    if [[ -f ${codeFiles} ]]; then
+        cp -r ${codeFiles} ${workDir}'/build/.buildScala'
+    fi
 }
 ##
 # Compiles and package Scala into a dependency jar file to be included inside the java module.
@@ -21,8 +24,10 @@ function copyScSources() {
 function compileScala() {
    cd ${workDir}'/build/.buildScala'
    scalaFiles=`find -name '*.scala'`
-   scalac ${scalaFiles} -d ${workDir}'/code/java/dependencies/scala.jar'
-   ## remove sources after compilation is completed
-   rm -r $scalaFiles
+   if [[ -f ${scalaFiles} ]]; then
+         scalac ${scalaFiles} -d ${workDir}'/code/java/dependencies/scala.jar'
+         ## remove sources after compilation is completed
+         rm -r $scalaFiles
+   fi
 }
 

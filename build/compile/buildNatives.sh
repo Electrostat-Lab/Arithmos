@@ -7,29 +7,39 @@
 #*#
 source variables.sh
 # Compile C++ code & bind to the header created from java
-mkdir ${workDir}'/build/.buildNatives'
+if [[ ! -d ${workDir}'/build/.buildNatives' ]]; then
+    mkdir ${workDir}'/build/.buildNatives'
+fi
 
 function copyNativeSources() {
      # dir to compile & sharedLib name
     libs=(${workDir}'/code/natives/libs/*')
     main=(${workDir}'/code/natives/main/*')
     # copy cpp files to a gather directory
-    cp -r ${libs} ${workDir}'/build/.buildNatives'
-    cp -r ${main} ${workDir}'/build/.buildNatives'
+    if [[ -f ${libs} ]]; then
+        cp -r ${libs} ${workDir}'/build/.buildNatives'
+    fi
+    
+    if [[ -f ${main} ]]; then
+        cp -r ${main} ${workDir}'/build/.buildNatives'
+    fi        
 }
 
 function compile() {
     cd ${workDir}'/build/.buildNatives'
     nativeSources=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
-    chmod +x $nativeSources
-    # append -lwiringPi for raspberry wiringPi includes
-    # ${JAVA__HOME%/*} : % returns back to the root base directory of the java home, / is the separator delimiter of the directory string
-    g++ -fPIC ${nativeSources} -shared -o ${clibName} \
-                -I${JAVA__HOME%/*}'/include' \
-                -I${JAVA__HOME%/*}'/include/linux' \
-                -I${workDir}'/code/natives/includes' 
-    mv ${clibName} ${workDir}'/shared'
-    rm $nativeSources
+    # tests if the sources exist, then give the current user full permissions on them and compile them
+    if [[ -f ${nativeSources} ]]; then  
+        chmod +x $nativeSources
+        # append -lwiringPi for raspberry wiringPi includes
+        # ${JAVA__HOME%/*} : % returns back to the root base directory of the java home, / is the separator delimiter of the directory string
+        g++ -fPIC ${nativeSources} -shared -o ${clibName} \
+                    -I${JAVA__HOME%/*}'/include' \
+                    -I${JAVA__HOME%/*}'/include/linux' \
+                    -I${workDir}'/code/natives/includes' 
+        mv ${clibName} ${workDir}'/shared'
+        rm $nativeSources
+    fi  
 } 
 
 function setJavaLibSource() {
