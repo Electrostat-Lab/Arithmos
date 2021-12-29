@@ -1184,13 +1184,6 @@
  testSort(); 
  descriptor: 
  ()V 
- public 
- static 
- native 
- void 
- testNatives(); 
- descriptor: 
- ()V 
  static 
  {}; 
  descriptor: 
