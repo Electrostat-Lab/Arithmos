@@ -10,45 +10,57 @@ outputJARDir=${workingDir}'/build/.buildJava/'
 
 function makeOutputDir() {
     cd ${outputJARDir}
-    mkdir ${outputJAR}
-    mkdir ${outputJAR}'/dependencies'
-    mkdir ${outputJAR}'/dependencies/assets'
+    
+    if [[ ! -f ${outputJAR} ]]; then
+        mkdir ${outputJAR}
+    fi
+    
+    if [[ ! -d ${workingDir}'/code/java/dependencies' ]]; then
+        mkdir ${workingDir}'/code/java/dependencies'
+    fi
+    
 }
 
 function createManifest() {
     cd ${outputJARDir}''${outputJAR}
-    cat Manifest.mf
     echo ${manifest} > Manifest.mf
     echo ${mainclass} >> Manifest.mf
 }
 
 function addDependencies() {
-    dependencies=${workingDir}'/code/java/dependencies/*'
-    cp -r ${dependencies} ${outputJARDir}''${outputJAR}'/dependencies'
-    cd ${outputJARDir}''${outputJAR}'/'
-    jars=('dependencies/*.jar') 
-    printf '%s ' ${classpath} >> ${outputJARDir}''${outputJAR}'/Manifest.mf'
-    printf ' %s \n' ${jars[0]} >> ${outputJARDir}''${outputJAR}'/Manifest.mf'
+    dependencies=${workingDir}'/code/java/dependencies'
+    if [[ $dependencies ]]; then
+        cp -r ${dependencies} ${outputJARDir}''${outputJAR}'/dependencies'
+        cd ${outputJARDir}''${outputJAR}'/'
+        jars=('dependencies/*.jar') 
+        printf '%s ' ${classpath} >> ${outputJARDir}''${outputJAR}'/Manifest.mf'
+        printf ' %s \n' ${jars[0]} >> ${outputJARDir}''${outputJAR}'/Manifest.mf'
+    fi
 }
 
 function addAssets() {
     assets=${workingDir}'/code/java/assets/*'
-    assetsFolder=${outputJARDir}''${outputJAR}'/dependencies/assets'
-    # copy to an asset folder
-    cp -r $assets $assetsFolder
-    cd ${outputJARDir}''${outputJAR}'/dependencies'
-    # zip the assets into a jar file
-    zip -r assets.jar . -i 'assets/*'
-    # remove the assets folder
-    rm -rf 'assets'
+    if [[ -f $assets ]]; then
+        mkdir ${outputJAR}'/dependencies/assets'
+        assetsFolder=${outputJARDir}''${outputJAR}'/dependencies/assets'
+        # copy to an asset folder
+        cp -r $assets $assetsFolder
+        cd ${outputJARDir}''${outputJAR}'/dependencies'
+        # zip the assets into a jar file
+        zip -r assets.jar . -i 'assets/*'
+        # remove the assets folder
+        rm -rf 'assets'
+    fi
 }
 
 function createJar() {
     # get the object files to link them
     cd ${workingDir}'/shared'
     nativeLibs=`find -name "*.so"`
-    # copy the object file to the build dir
-    cp $nativeLibs $outputJARDir''${outputJAR}
+    if [[ -f $nativeLibs ]]; then
+        # copy the object file to the build dir
+        cp $nativeLibs $outputJARDir''${outputJAR}    
+    fi
     # get the manifest file to link it
     cd $outputJARDir
     manifestFile=${outputJAR}'/Manifest.mf'
