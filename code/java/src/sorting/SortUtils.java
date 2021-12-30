@@ -29,7 +29,7 @@ public final class SortUtils {
     }
 
 
-    public <T> void recursiveLoop(final T[] array, int startIndex, final Directionality direction, final ActionInjection injector) {
+    public <T> void recursiveLoop(final T[] array, int startIndex, final Directionality direction, final ActionInjection<T> injector) {
        switch(direction.ID) {
            case 1:
                if(startIndex > 0) {
@@ -53,7 +53,7 @@ public final class SortUtils {
        }
    }
 
-    public <T> void customComparative(final T[] array, int startIndex, int endIndex, final Directionality direction, final ActionInjection injector) {
+    public <T> void customComparative(final T[] array, int startIndex, int endIndex, final Directionality direction, final ActionInjection<T> injector) {
       switch(direction.ID) {
           case 1:
                // backward motion until reaching the startIndex.
