@@ -26,7 +26,7 @@ function generateHeaders() {
     cd ${buildDir}
     javaFiles=`find -name "*.java"`
     # creates C headers file for java natives.
-    $command -cp '.:'${workDir}'/code/java/dependencies/*' -h . $javaFiles 
+    $command -cp '.:'${workDir}'/code/java/dependencies/*' -h . $javaFiles -Xlint:unchecked
     # generate a methods signature file to help in invocation api
     classFiles=`find -name "*.class"`
     sigs=`javap -s -p ${classFiles}`
