@@ -14,7 +14,7 @@ fi
 function copyKtSources() {
     #copy code to buildDir to compile java files
     codeFiles=(${workDir}'/code/kotlin/src/*')
-    if [[ -f ${codeFiles} ]]; then
+    if [[ ${codeFiles} ]]; then
         cp -r ${codeFiles} ${workDir}'/build/.buildKotlin'
     fi
 }
@@ -25,7 +25,11 @@ function compileKotlin() {
    cd ${workDir}'/build/.buildKotlin'
    ktFiles=`find -name '*.kt'`
    if [[ -f ${ktFiles} ]]; then
-        kotlinc ${ktFiles} -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
+        if [[ $enable_android_build == true ]]; then
+            kotlinc ${ktFiles} -d ${workDir}'/code/java/dependencies/kotlin.jar'
+        else
+            kotlinc ${ktFiles} -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
+        fi
         ## remove sources after compilation is completed
         rm -r $ktFiles
    fi
