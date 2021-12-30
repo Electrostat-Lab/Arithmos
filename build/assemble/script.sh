@@ -38,6 +38,18 @@ function addDependencies() {
     fi
 }
 
+function addNativeDependencies() {
+    # get the object files to link them
+    cd ${workingDir}'/shared'
+    zip -r "android-natives-${min_android_sdk}.jar" . -i 'lib/*' 
+    
+    nativeLibs=${workingDir}"/shared/android-natives-${min_android_sdk}.jar"
+    if [[ $nativeLibs ]]; then
+        # copy the object file to the build dir
+        mv $nativeLibs $outputJARDir''${outputJAR}'/dependencies/'    
+    fi
+}
+
 function addAssets() {
     assets=${workingDir}'/code/java/assets/*'
     if [[ -f $assets ]]; then
@@ -54,13 +66,6 @@ function addAssets() {
 }
 
 function createJar() {
-    # get the object files to link them
-    cd ${workingDir}'/shared'
-    nativeLibs=`find -name "*.so"`
-    if [[ -f $nativeLibs ]]; then
-        # copy the object file to the build dir
-        cp $nativeLibs $outputJARDir''${outputJAR}    
-    fi
     # get the manifest file to link it
     cd $outputJARDir
     manifestFile=${outputJAR}'/Manifest.mf'

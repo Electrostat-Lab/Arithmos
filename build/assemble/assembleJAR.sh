@@ -19,6 +19,8 @@ createManifest
 
 addDependencies
 
+addNativeDependencies
+
 addAssets
 
 createJar
