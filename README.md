@@ -46,6 +46,7 @@ dependencies {
 - Android NDK build using clang++ : https://developer.android.com/ndk/guides/other_build_systems
 				    https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md#libc
 				    https://stackoverflow.com/a/17131418/11094789
+                                    https://developer.arm.com/documentation/den0024/a
 - Use SDKMAN on linux to install their compilers : 
 
 ```bash
