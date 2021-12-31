@@ -5,7 +5,6 @@
 #*#
 
 # define work directory
-
 # 1) print the current working directory to a string value
 pwd=`pwd`
 # cut the working directory from its end by a one '/' delimiter
@@ -23,5 +22,17 @@ enable_java_build=true
 enable_scala_build=true
 enable_kt_build=true
 enable_groovy_build=true
-enable_natives_build=false
+enable_natives_build=true
 enable_android_build=true
+
+source ${workDir}'/NDKPATH.sh'
+
+min_android_sdk=21
+arm64="aarch64-linux-android"
+arm64_lib="arm64-v8a"
+arm32="armv7a-linux-androideabi"
+arm32_lib="armeabi-v7a"
+intel32="i686-linux-android"
+intel32_lib="x86"
+intel64="x86_64-linux-android"
+intel64_lib="x86_64"

@@ -26,7 +26,7 @@ function generateHeaders() {
     cd ${buildDir}
     javaFiles=`find -name "*.java"`
     # creates C headers file for java natives.
-    $command -cp '.:'${workDir}'/code/java/dependencies/*' -h . $javaFiles
+    $command -cp '.:'${workDir}'/code/java/dependencies/*' -h . $javaFiles 
     # generate a methods signature file to help in invocation api
     classFiles=`find -name "*.class"`
     sigs=`javap -s -p ${classFiles}`
@@ -39,9 +39,10 @@ function generateHeaders() {
 # Moves all the generated header files from the build dir to the include dir of the natives.
 ##
 function moveHeaders() {
-    headers=(${workDir}'/build/.buildJava/*.h')
+    cd ${workDir}'/build/.buildJava'
+    headers=`find -name "*.h"`
     # check if the headers exist then move them
-    if [[ -f $headers ]]; then
+    if [[ $headers ]]; then
         mv ${headers} ${workDir}'/code/natives/includes/'
     fi
 }

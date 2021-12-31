@@ -15,6 +15,7 @@ cut2="${cut%/*}"
 workingDir=$cut2
 # include the Ccoffee JAVAHOME file
 source ${workingDir}'/JAVAHOME.sh'
+source ${cut}'/compile/variables.sh'
 outputJAR='Arithmos'
 manifest='Manifest-Version: 1.0'
 mainclass='Main-Class: main.TestCase'
