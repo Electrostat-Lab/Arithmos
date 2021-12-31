@@ -45,6 +45,7 @@ dependencies {
 - Scala : https://mvnrepository.com/artifact/org.scala-lang/scala-library/2.13.7
 - Android NDK build using clang++ : https://developer.android.com/ndk/guides/other_build_systems
 				    https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md#libc
+				    https://stackoverflow.com/a/17131418/11094789
 - Use SDKMAN on linux to install their compilers : 
 
 ```bash
