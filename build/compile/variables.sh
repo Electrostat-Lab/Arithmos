@@ -3,6 +3,9 @@
 #*
 #* @author pavl_g.
 #*#
+# Bash colors using ANSI 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
 
 # define work directory
 # 1) print the current working directory to a string value
