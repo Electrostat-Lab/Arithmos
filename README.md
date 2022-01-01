@@ -34,7 +34,9 @@ dependencies {
 - Git docs : https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository
 - Bash scripting : - https://books.goalkicker.com/BashBook/ 
 		   - https://eg1lib.org/book/3707757/3869f3
-- GNU GCC : https://gcc.gnu.org/onlinedocs/gcc-9.4.0/gcc.pdf 		 
+- GNU GCC : https://gcc.gnu.org/onlinedocs/gcc-9.4.0/gcc.pdf
+-- Useful topics : - `3.16 Options for Code Generation Conventions`
+		   - `3.14 Options for Linking`
 - Statistics : https://eg1lib.org/book/3594749/50610d		 
 - Check : https://github.com/Scrappers-glitch/NativeJmeTemplate
 
