@@ -1,26 +1,29 @@
 #**
 #* Ccoffee Build tool, manual build, alpha-v1.
-#* Custom Includsions for GTKmm cpp wrapper
-#* dependencies '-I"/usr/include/glibmm-2.9.1/glib" -I"/usr/include/sigc++-2.0/sigc++" -I"/usr/include/giomm-2.4" -I"/usr/include/#* gtkmm-4.2.0/gtk"'
 #* 
-#*  Supports android natives @2022. 
-#*
 #* @author pavl_g.
 #*#
 source variables.sh
-# Compile C++ code & bind to the header created from java
+
 if [[ ! -d ${workDir}'/build/.buildNatives' ]]; then
     mkdir ${workDir}'/build/.buildNatives'
 fi
 
+##
+# Copies all native sources to the build directory using 'the find'.
+# @echo Script Succeeded if one command has passed successfully, exit with error code if non of them has passed.
+##
 function copyNativeSources() {
     # dir to compile & sharedLib name
     # copy cpp files to a gather directory
+    errors=$(( 0 ))
     cd ${workDir}'/code/natives/libs'
     libs=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
     if [[ ${libs} ]]; then
         chmod +x $libs
         cp ${libs} ${workDir}'/build/.buildNatives'
+    else 
+        errors=$(( errors + 1 ))
     fi
     
     cd ${workDir}'/code/natives/main'
@@ -28,9 +31,22 @@ function copyNativeSources() {
     if [[ ${main} ]]; then
         chmod +x $main
         cp ${main} ${workDir}'/build/.buildNatives'
-    fi    
+    else 
+        errors=$(( errors + 1 ))
+    fi
+    
+    if (( $errors > 1 )); then  
+        echo '---MajorTask@Build Native Sources : No native sources to build---'
+        exit 1200
+    else
+        echo '---MajorTask@Build Native Sources : Found native sources---'
+    fi
 }
 
+##
+# Compile and build native sources.
+# @echo Script Succeeded if all the commands have passed successfully, exit with error code otherwise.
+##
 function compile() {
     cd ${workDir}'/build/.buildNatives'
     nativeSources=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
@@ -39,31 +55,77 @@ function compile() {
         chmod +x $nativeSources
         # append -lwiringPi for raspberry wiringPi includes
         # ${JAVA__HOME%/*} : % returns back to the root base directory of the java home, / is the separator delimiter of the directory string
-        linux_x86_x64 "${nativeSources}"
+        # compile and build a shared lib for linux systems
+        if [[ `linux_x86_x64 "${nativeSources}"` -eq 0 ]]; then
+            echo "Task@Build Linux-x86-x64 : Succeeded"
+        else
+            echo "Task@Build Linux-x86-x64 : Failed"
+            echo "Exitting Script with error 150"
+            exit 150
+        fi
+        # compile and build a shared lib for android systems
         if [[ $enable_android_build == true ]]; then
-             linux_android "${arm64}" "${arm64_lib}" "${nativeSources}" "${min_android_sdk}"
-             linux_android "${arm32}" "${arm32_lib}" "${nativeSources}" "${min_android_sdk}"
-             linux_android "${intel64}" "${intel64_lib}" "${nativeSources}" "${min_android_sdk}"
-             linux_android "${intel32}" "${intel32_lib}" "${nativeSources}" "${min_android_sdk}"
+             if [[ `linux_android "${arm64}" "${arm64_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then
+                echo "Task@Build Android-Arm-64 : Succeeded"
+             else
+                echo "Task@Build Android-Arm-64 : Failed"
+                echo "Exitting Script with error 250"
+                exit 250
+             fi
+             
+             if [[ `linux_android "${arm32}" "${arm32_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then 
+                echo "Task@Build Android-Arm-32 : Succeeded"
+             else
+                echo "Task@Build Android-Arm-32 : Failed"
+                echo "Exitting Script with error 350"
+                exit 350
+             fi
+             
+             if [[ `linux_android "${intel64}" "${intel64_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then
+                echo "Task@Build Android-Intel-64 : Succeeded"
+             else 
+                echo "Task@Build Android-Intel-64 : Failed"
+                echo "Exitting Script with error 450"
+                exit 450
+             fi
+             
+             if [[ `linux_android "${intel32}" "${intel32_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then 
+                echo "Task@Build Android-Intel-32 : Succeeded"
+             else
+                echo "Task@Build Android-Intel-32 : Failed"
+                echo "Exitting Script with error 550"
+                exit 550
+             fi
         fi
 
         rm $nativeSources
-    fi  
+    fi
+    echo '---MajorTask@Build Native Sources : Succeeded---'
 } 
+
 ##
 # Build for desktop linux systems
+# @param nativeSources sources to be compiled for linux desktop.
+# @return 0 if command passes, non zero number otherwise with exit code 150 (search the code on repo's wiki).
 ##
 function linux_x86_x64() {
+    local nativeSources=$1
     if [[ ! -d ${workDir}'/shared/linux-x86-x64' ]]; then
         mkdir ${workDir}'/shared/linux-x86-x64'
     fi
-    g++ -fPIC $1 -shared -o ${workDir}'/shared/linux-x86-x64/'${clibName} \
-            -I${JAVA__HOME%/*}'/include' \
-            -I${JAVA__HOME%/*}'/include/linux' \
-            -I${workDir}'/code/natives/includes' 
+    g++ -fPIC $nativeSources -shared -o ${workDir}'/shared/linux-x86-x64/'${clibName} \
+        -I${JAVA__HOME%/*}'/include' \
+        -I${JAVA__HOME%/*}'/include/linux' \
+        -I${workDir}'/code/natives/includes' 
+    return $?
 }
 ##
 # Building native code for arm and intel android.
+# @param triple the ABI triple name, also used for -target flag of the clang++.
+# @param folder the created folder name.
+# @param sources the sources to compile and build an object file for them.
+# @param min_android_sdk the minimum android sdk to compile against.
+# @return 0 if command passes, non zero number otherwise.
 ##
 function linux_android() {
     # parameters attributes
@@ -86,9 +148,7 @@ function linux_android() {
         -I${workDir}'/code/natives/includes' \
         -I$NDK__BASEHOME'/sources/cxx-stl/llvm-libc++/include' \
         -lc++_shared
+    ndkBuildingCommand=$?
     cp $NDK__BASEHOME"/sources/cxx-stl/llvm-libc++/libs/${folder}/libc++_shared.so" ${workDir}"/shared/lib/$folder"
-}
-
-function setJavaLibSource() {
-    java.library.path=${workDir}'/shared'
+    return $ndkBuildingCommand
 }
