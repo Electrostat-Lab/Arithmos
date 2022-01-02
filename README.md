@@ -37,6 +37,7 @@ dependencies {
 - GNU GCC : https://gcc.gnu.org/onlinedocs/gcc-9.4.0/gcc.pdf
 -- Useful topics : - `3.16 Options for Code Generation Conventions`
 		   - `3.14 Options for Linking`
+- ANSI Bash Color System (Check 24-bit-RGB color system) : https://en.wikipedia.org/wiki/ANSI_escape_code
 - Statistics : https://eg1lib.org/book/3594749/50610d		 
 - Check : https://github.com/Scrappers-glitch/NativeJmeTemplate
 
