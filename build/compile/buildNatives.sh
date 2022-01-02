@@ -36,10 +36,10 @@ function copyNativeSources() {
     fi
     
     if (( $errors > 1 )); then  
-        echo '---MajorTask@Build Native Sources : No native sources to build---'
+        echo -e "$RED_C---MajorTask@Build Native Sources : No native sources to build---"
         exit 1200
     else
-        echo '---MajorTask@Build Native Sources : Found native sources---'
+        echo -e "$GREEN_C---MajorTask@Build Native Sources : Found native sources---"
     fi
 }
 
@@ -57,50 +57,50 @@ function compile() {
         # ${JAVA__HOME%/*} : % returns back to the root base directory of the java home, / is the separator delimiter of the directory string
         # compile and build a shared lib for linux systems
         if [[ `linux_x86_x64 "${nativeSources}"` -eq 0 ]]; then
-            echo "Task@Build Linux-x86-x64 : Succeeded"
+            echo -e "$GREEN_C Task@Build Linux-x86-x64 : Succeeded"
         else
-            echo "Task@Build Linux-x86-x64 : Failed"
-            echo "Exitting Script with error 150"
+            echo -e "$RED_C Task@Build Linux-x86-x64 : Failed"
+            echo -e "$RED_C Exiting Script with error 150"
             exit 150
         fi
         # compile and build a shared lib for android systems
         if [[ $enable_android_build == true ]]; then
              if [[ `linux_android "${arm64}" "${arm64_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then
-                echo "Task@Build Android-Arm-64 : Succeeded"
+                echo -e "$GREEN_C Task@Build Android-Arm-64 : Succeeded"
              else
-                echo "Task@Build Android-Arm-64 : Failed"
-                echo "Exitting Script with error 250"
+                echo -e "$RED_C Task@Build Android-Arm-64 : Failed"
+                echo -e "$RED_C Exiting Script with error 250"
                 exit 250
              fi
              
              if [[ `linux_android "${arm32}" "${arm32_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then 
-                echo "Task@Build Android-Arm-32 : Succeeded"
+                echo -e "$GREEN_C Task@Build Android-Arm-32 : Succeeded"
              else
-                echo "Task@Build Android-Arm-32 : Failed"
-                echo "Exitting Script with error 350"
+                echo -e "$RED_C Task@Build Android-Arm-32 : Failed"
+                echo -e "$RED_C Exiting Script with error 350"
                 exit 350
              fi
              
              if [[ `linux_android "${intel64}" "${intel64_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then
-                echo "Task@Build Android-Intel-64 : Succeeded"
+                echo -e "$GREEN_C Task@Build Android-Intel-64 : Succeeded"
              else 
-                echo "Task@Build Android-Intel-64 : Failed"
-                echo "Exitting Script with error 450"
+                echo -e "$RED_C Task@Build Android-Intel-64 : Failed"
+                echo -e "$RED_C Exiting Script with error 450"
                 exit 450
              fi
              
              if [[ `linux_android "${intel32}" "${intel32_lib}" "${nativeSources}" "${min_android_sdk}"` -eq 0 ]]; then 
-                echo "Task@Build Android-Intel-32 : Succeeded"
+                echo -e "$GREEN_C Task@Build Android-Intel-32 : Succeeded"
              else
-                echo "Task@Build Android-Intel-32 : Failed"
-                echo "Exitting Script with error 550"
+                echo -e "$RED_C Task@Build Android-Intel-32 : Failed"
+                echo -e "$RED_C Exiting Script with error 550"
                 exit 550
              fi
         fi
 
         rm $nativeSources
     fi
-    echo '---MajorTask@Build Native Sources : Succeeded---'
+    echo -e "$GREEN_C---MajorTask@Build Native Sources : Succeeded---"
 } 
 
 ##

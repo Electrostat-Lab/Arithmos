@@ -22,17 +22,20 @@ function copyJavaSources() {
 # Generates C headers for the java native files and compiles java code inside the buildDir.
 ##
 function generateHeaders() {
+    local result=-1
     buildDir=${workDir}'/build/.buildJava'
     cd ${buildDir}
     javaFiles=`find -name "*.java"`
     # creates C headers file for java natives.
     $command -cp '.:'${workDir}'/code/java/dependencies/*' -h . $javaFiles -Xlint:unchecked
+    result=$?
     # generate a methods signature file to help in invocation api
     classFiles=`find -name "*.class"`
     sigs=`javap -s -p ${classFiles}`
     printf ' %s \n' ${sigs} > 'sig.signature'
     # remove the source code
     rm $javaFiles
+    return $result
 }
 
 ##
