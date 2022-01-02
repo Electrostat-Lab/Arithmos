@@ -31,7 +31,7 @@ dependencies {
 - JNI Invocation API : https://www.ibm.com/docs/en/i/7.1?topic=api-example-java-invocation
 - Kotlinc : https://kotlinlang.org/docs/command-line.html#manual-install
 - Scalac : https://docs.scala-lang.org/overviews/compiler-options/index.html
-- Git docs : https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository
+- Git docs : https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository - https://dev.to/aashiya123/git-commands-cheatsheet-advanced-20-git-commands-advanced--35i3
 - Bash scripting : - https://books.goalkicker.com/BashBook/ 
 		   - https://eg1lib.org/book/3707757/3869f3
 - GNU GCC : https://gcc.gnu.org/onlinedocs/gcc-9.4.0/gcc.pdf
