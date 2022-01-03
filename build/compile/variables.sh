@@ -4,8 +4,20 @@
 #* @author pavl_g.
 #*#
 # Bash colors using ANSI 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
+
+# Colors
+RED_C='\033[1;31m'
+GREEN_C='\033[1;32m'
+WHITE_C='\e[1;37m'
+# Highlights
+RED_H='\033[1;41m'
+GREEN_H='\033[1;42m'
+WHITE_H='\e[1;47m'
+# Flashes
+RED_C_F='\033[1;5;41m'
+GREEN_C_F='\033[1;5;42m'
+WHITE_C_F='\e[1;5;47m'
+
 
 # define work directory
 # 1) print the current working directory to a string value

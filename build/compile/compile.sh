@@ -15,9 +15,14 @@ source buildJava.sh
 source buildNatives.sh
 
 if [[ $enable_scala_build == true ]]; then
+    echo -e "$WHITE_C---MajorTask@Build Scala : Scala build started"
     copyScSources
-
-    compileScala
+    if [[ `compileScala` -eq 0 ]]; then
+        echo -e "$GREEN_C Task@Build Compile Scala : Succeeded"
+    else 
+        echo -e "$RED_C Task@Build Compile Scala : Failed"
+    fi
+    echo -e "$WHITE_C---MajorTask@Build Scala : Scala build finished"
 fi
 
 if [[ $enable_kt_build == true ]]; then
@@ -41,7 +46,8 @@ if [[ $enable_java_build == true ]]; then
 fi
 
 if [[ $enable_natives_build == true ]]; then
+    echo -e "$WHITE_C---MajorTask@Build Native Sources : Native build started"
     copyNativeSources
-
     compile
+    echo -e "$WHITE_C---MajorTask@Build Native Sources : Native build finished"
 fi
