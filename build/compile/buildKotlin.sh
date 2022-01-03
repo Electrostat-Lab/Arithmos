@@ -4,7 +4,7 @@
 #* @author pavl_g.
 #*#
 source variables.sh
-# make a dir for java byte code
+# make a dir for kotlin byte code
 if [[ ! -d ${workDir}'/build/.buildKotlin' ]]; then
     mkdir ${workDir}'/build/.buildKotlin'
 fi
@@ -23,7 +23,7 @@ function copyKtSources() {
 # @return Compilation result, 0 for success.
 ##
 function compileKotlin() {
-   local compileResult=0
+   local compileResult=-1
    cd ${workDir}'/build/.buildKotlin'
    ktFiles=`find -name '*.kt'`
    if [[ -f ${ktFiles} ]]; then

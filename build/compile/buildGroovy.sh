@@ -4,7 +4,7 @@
 #* @author pavl_g.
 #*#
 source variables.sh
-# make a dir for java byte code
+# make a dir for groovy byte code
 if [[ ! -d ${workDir}'/build/.buildGroovy' ]]; then
     mkdir ${workDir}'/build/.buildGroovy'
 fi
@@ -19,9 +19,11 @@ function copyGroovySources() {
     fi
 }
 ##
-# Compiles and package kotlin into a dependency jar file to be included inside the java module.
+# Compiles and package groovy into a dependency jar file to be included inside the java module.
+# @return Compilation result, 0 for success.
 ##
 function compileGroovy() {
+   local compileResult=-1
    cd ${workDir}'/build/.buildGroovy'
    groovyFiles=`find -name '*.groovy'`
    # compile groovy sources if exist
@@ -30,10 +32,12 @@ function compileGroovy() {
        cd ${workDir}'/code/java/dependencies/groovy'
        zip -r groovy.jar . -i '*/*'
        cp groovy.jar ${workDir}'/code/java/dependencies/groovy' ${workDir}'/code/java/dependencies'
+       compileResult=$?
         # remove the assets folder
        rm -rf ${workDir}'/code/java/dependencies/groovy'
        ## remove sources after compilation is completed
        cd ${workDir}'/build/.buildGroovy' 
        rm -r $groovyFiles  
    fi
+   return $compileResult
 }

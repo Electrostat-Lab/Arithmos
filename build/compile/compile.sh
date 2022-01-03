@@ -7,7 +7,7 @@
 #*#
 
 echo "Compiling the project"
-
+echo -e "\e[0m--------Script start--------"
 source buildScala.sh
 source buildKotlin.sh
 source buildGroovy.sh
@@ -26,33 +26,44 @@ if [[ $enable_scala_build == true ]]; then
 fi
 
 if [[ $enable_kt_build == true ]]; then
-    echo -e "$WHITE_C---MajorTask@Build Kotlin : Kotlin build started"
+    echo -e "$VIOLET_C---MajorTask@Build Kotlin : Kotlin build started"
     copyKtSources
     if [[ `compileKotlin` -eq 0 ]]; then
         echo -e "$GREEN_C Task@Build Compile Kotlin : Succeeded"
     else
         echo -e "$RED_C Task@Build Compile Kotlin : Failed"
     fi
-    echo -e "$WHITE_C---MajorTask@Build Kotlin : Kotlin build finished"
+    echo -e "$VIOLET_C---MajorTask@Build Kotlin : Kotlin build finished"
 fi
 
 if [[ $enable_groovy_build == true ]]; then
+    echo -e "$CYAN_C---MajorTask@Build Groovy : Groovy build started"
     copyGroovySources
-
-    compileGroovy
+    if [[ `compileGroovy` -eq 0 ]]; then
+        echo -e "$GREEN_C Task@Build Compile Groovy : Succeeded"
+    else
+        echo -e "$RED_C Task@Build Compile Groovy : Failed"
+    fi
+    echo -e "$CYAN_C---MajorTask@Build Groovy : Groovy build finished"
 fi
 
 if [[ $enable_java_build == true ]]; then
+    echo -e "$YELLOW_C---MajorTask@Build Java Sources : Java build started"
     copyJavaSources
-
-    generateHeaders
-
-    moveHeaders
+    if [[ `generateHeaders` -eq 0 ]]; then
+       moveHeaders
+       echo -e "$GREEN_C Task@Build Compile Java : Succeeded"
+    else
+        echo -e "$RED_C Task@Build Compile Java : Failed"
+    fi
+    echo -e "$YELLOW_C---MajorTask@Build Java Sources : Java build finished"
 fi
 
 if [[ $enable_natives_build == true ]]; then
-    echo -e "$WHITE_C---MajorTask@Build Native Sources : Native build started"
+    echo -e "$DARK_GREY_C---MajorTask@Build Native Sources : Native build started"
     copyNativeSources
     compile
-    echo -e "$WHITE_C---MajorTask@Build Native Sources : Native build finished"
+    echo -e "$DARK_GREY_C---MajorTask@Build Native Sources : Native build finished"
 fi
+
+echo -e "\e[0m--------Script end--------"

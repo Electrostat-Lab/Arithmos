@@ -9,6 +9,10 @@
 RED_C='\033[1;31m'
 GREEN_C='\033[1;32m'
 WHITE_C='\e[1;37m'
+YELLOW_C='\e[1;33m'
+DARK_GREY_C='\e[1;30m'
+VIOLET_C='\e[1;35m'
+CYAN_C='\e[1;36m'
 # Highlights
 RED_H='\033[1;41m'
 GREEN_H='\033[1;42m'
