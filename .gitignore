@@ -1,6 +1,2 @@
-./build/.buildJava
-./build/.buildScala
-./build/.buildNatives
-./build/.buildKotlin
-./build/.buildGroovy
-./output/Arithmos
+*.class
+./output/Arithmos/*
