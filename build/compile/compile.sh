@@ -26,9 +26,14 @@ if [[ $enable_scala_build == true ]]; then
 fi
 
 if [[ $enable_kt_build == true ]]; then
+    echo -e "$WHITE_C---MajorTask@Build Kotlin : Kotlin build started"
     copyKtSources
-
-    compileKotlin
+    if [[ `compileKotlin` -eq 0 ]]; then
+        echo -e "$GREEN_C Task@Build Compile Kotlin : Succeeded"
+    else
+        echo -e "$RED_C Task@Build Compile Kotlin : Failed"
+    fi
+    echo -e "$WHITE_C---MajorTask@Build Kotlin : Kotlin build finished"
 fi
 
 if [[ $enable_groovy_build == true ]]; then

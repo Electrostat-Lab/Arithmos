@@ -20,8 +20,10 @@ function copyKtSources() {
 }
 ##
 # Compiles and package kotlin into a dependency jar file to be included inside the java module.
+# @return Compilation result, 0 for success.
 ##
 function compileKotlin() {
+   local compileResult=0
    cd ${workDir}'/build/.buildKotlin'
    ktFiles=`find -name '*.kt'`
    if [[ -f ${ktFiles} ]]; then
@@ -30,8 +32,10 @@ function compileKotlin() {
         else
             kotlinc ${ktFiles} -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
         fi
+        compileResult=$?
         ## remove sources after compilation is completed
         rm -r $ktFiles
    fi
+   return $compileResult
 }
 
