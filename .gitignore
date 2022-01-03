@@ -3,3 +3,4 @@
 ./build/buildNatives
 ./build/buildKotlin
 ./build/buildGroovy
+./output/Arithmos
