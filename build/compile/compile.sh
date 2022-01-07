@@ -7,7 +7,8 @@
 #*#
 
 echo "Compiling the project"
-echo -e "\e[0m--------Script start--------"
+echo -e $RESET_Cs
+echo "--------Script start--------"
 source buildScala.sh
 source buildKotlin.sh
 source buildGroovy.sh
@@ -77,5 +78,4 @@ if [[ $enable_natives_build == true ]]; then
 fi
 
 echo -e $RESET_Cs
-
 echo "--------Script end--------"
