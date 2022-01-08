@@ -9,6 +9,8 @@
 # Sanity check the build directory
 source variables.sh
 
+buildDir=${workingDir}'/build/.buildJava'
+
 if [[ ! -d $buildDir ]]; then 
     chmod +x ${workingDir}'/build/compile/compile.sh'
     cd ${workingDir}'/build/compile'
