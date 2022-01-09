@@ -163,6 +163,6 @@ sdk install groovyc
 - calculus/FunctionUtils.java
 - calculus/AngleUtils.java
 - linearAlgebra/Matrix.java -- Uses vectors too.
-- time/Chronometer.java
+- <s> time/Chronometer.java </s>
 - <s> Android arm build </s>
 - Pi arm build
