@@ -2,24 +2,7 @@
 
 Arithmos is an algorithmic library which makes use of java and native bindings to achieve the best result for your gradle products.
 
-To use the library, download the jar from the releases or add jitpack dependency if using gradle :
-
-### Inside your root project `gradle.build` : 
-```gradle
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
-
-### Inside your module `gradle.build` :
-```gradle
-dependencies {
-	implementation 'com.github.Scrappers-glitch:Arithmos:v0.0.1-alpha'
-}
-```
+To use the library, download the jar from the releases.
 
 ### References : 
 - Java : https://eg1lib.org/book/18151841/129bda
