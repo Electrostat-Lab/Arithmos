@@ -2,7 +2,7 @@
 
 Arithmos is an algorithmic library which makes use of java and native bindings to achieve the best result for your products.
 
-**What Arithmos offers ? **
+### Arithmos General Structure : 
 ```bash
 ├── build
 │   ├── assemble
