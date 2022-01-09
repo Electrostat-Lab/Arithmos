@@ -45,8 +45,12 @@ public class TestCase {
     }
 
     public static void testSort() {
+      try {
         System.out.println(PatternMatching.findBrute("Pavly Gerges", "Gerges"));
         System.out.println(PatternMatching.findBoyerMoore("Pavly Gerges", "Gerges"));
+      } catch(java.lang.IllegalAccessException ex) {
+        System.err.println(ex); 
+      }
         System.out.println(ItemsSorting.selectionSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.A_Z));
         System.out.println(ItemsSorting.mirrorSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.A_Z));
         System.out.println(ItemsSorting.mirrorSort(new String[]{"Pavly", "Bavly", "Pavel", "Amer", "Ahmed", "AAme", "Amy", "Emy"}, ItemsSorting.SortAlgorithm.Z_A));

@@ -12,7 +12,7 @@ public final class Units {
     
     }
     
-    public enum IndexNotation{
+    public enum IndexNotation {
         YOCTO("yocto", "y", Math.pow(10, -24)),
         ZEPTO("zepto", "z", Math.pow(10, -21)),
         ATTO("atto", "a", Math.pow(10, -18)),
@@ -44,10 +44,10 @@ public final class Units {
             this.BASE_10 = BASE_10;
         }
     }
-    public static double convertInto(final long number, final IndexNotation notation){
+    public static double convertInto(final double number, final IndexNotation notation){
         return number * notation.BASE_10;
     }
-    public static String getFormat(final long number, final IndexNotation notation){
+    public static String getFormat(final double number, final IndexNotation notation){
         return convertInto(number, notation) + " " + notation.SYMBOL;
     }
 }
