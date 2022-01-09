@@ -2,6 +2,116 @@
 
 Arithmos is an algorithmic library which makes use of java and native bindings to achieve the best result for your products.
 
+**What Arithmos offers ? **
+```bash
+├── build
+│   ├── assemble
+│   │   ├── assembleJAR.sh
+│   │   ├── clean.sh
+│   │   ├── script.sh
+│   │   └── variables.sh
+│   └── compile
+│       ├── buildGroovy.sh
+│       ├── buildJava.sh
+│       ├── buildKotlin.sh
+│       ├── buildNatives.sh
+│       ├── buildScala.sh
+│       ├── compile.sh
+│       └── variables.sh
+├── code
+│   ├── clojure
+│   ├── groovy
+│   │   └── src
+│   │       └── testGroovy
+│   │           └── TestGroovy.groovy
+│   ├── java
+│   │   ├── assets
+│   │   ├── dependencies
+│   │   │   ├── groovy-2.4.7.jar
+│   │   │   ├── groovy.jar
+│   │   │   ├── kotlin.jar
+│   │   │   ├── scala.jar
+│   │   │   └── scala-library-2.13.7.jar
+│   │   └── src
+│   │       ├── main
+│   │       │   └── TestCase.java
+│   │       ├── math
+│   │       │   └── statistics
+│   │       │       ├── Quartile.java
+│   │       │       └── Statistics.java
+│   │       ├── number
+│   │       │   └── NumberFormat.java
+│   │       ├── patternMatching
+│   │       │   └── PatternMatching.java
+│   │       ├── physics
+│   │       │   └── Units.java
+│   │       ├── sorting
+│   │       │   ├── ItemsSorting.java
+│   │       │   └── SortUtils.java
+│   │       ├── time
+│   │       │   └── TimeFormat.java
+│   │       └── utils
+│   │           └── Chronograph.java
+│   ├── kotlin
+│   │   └── src
+│   │       └── testKotlin
+│   │           └── Test.kt
+│   ├── natives
+│   │   ├── includes
+│   │   │   ├── main_TestCase.h
+│   │   │   └── Test.h
+│   │   ├── libs
+│   │   │   ├── NativeTest.cxx
+│   │   │   └── Test.cpp
+│   │   └── main
+│   └── scala
+│       └── src
+│           └── testScala
+│               └── ScalaTest.scala
+├── CommonVariables.sh
+├── JAVAHOME.sh
+├── NDKPATH.sh
+├── output
+│   ├── Arithmos
+│   │   ├── Arithmos.jar
+│   │   ├── dependencies
+│   │   │   ├── android-natives-21.jar
+│   │   │   ├── groovy-2.4.7.jar
+│   │   │   ├── groovy.jar
+│   │   │   ├── kotlin.jar
+│   │   │   ├── scala.jar
+│   │   │   └── scala-library-2.13.7.jar
+│   │   └── linux-x86-x64
+│   │       └── libArithmosNatives.so
+│   └── run
+│       ├── run.sh
+│       ├── script.sh
+│       └── variables.sh
+├── README.md
+├── references
+│   ├── ansi_escape_sequences.pdf
+│   ├── BashNotesForProfessionals.pdf
+│   └── gcc.pdf
+└── shared
+    ├── lib
+    │   ├── arm64-v8a
+    │   │   ├── libArithmosNatives.so
+    │   │   └── libc++_shared.so
+    │   ├── armeabi-v7a
+    │   │   ├── libArithmosNatives.so
+    │   │   └── libc++_shared.so
+    │   ├── x86
+    │   │   ├── libArithmosNatives.so
+    │   │   └── libc++_shared.so
+    │   └── x86_64
+    │       ├── libArithmosNatives.so
+    │       └── libc++_shared.so
+    └── linux-x86-x64
+        └── libArithmosNatives.so
+
+44 directories, 60 files
+```
+
 To use the library, download the jar from the releases.
 
 ### References : 
