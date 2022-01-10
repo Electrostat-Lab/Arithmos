@@ -7,9 +7,8 @@
 #*#
 
 source variables.sh
-source ${workingDir}'/build/assemble/variables.sh'
 
 function run() {
-    cd ${workingDir}'/output/'${outputJAR}
+    cd ${workingDir}'/output/Arithmos'
     $runCommand -jar -Djava.library.path=linux-x86-x64 'Arithmos.jar'
 }

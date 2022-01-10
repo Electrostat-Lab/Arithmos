@@ -21,11 +21,11 @@ public final class SortUtils {
         if(utils == null) {
             synchronized(synchronizer) {
                 if(utils == null) {
-                    return new SortUtils();
+                    utils = new SortUtils();
                 }
             }
         }
-        return null;
+        return utils;
     }
 
 

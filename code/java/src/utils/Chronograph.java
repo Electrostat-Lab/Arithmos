@@ -16,7 +16,7 @@ public final class Chronograph {
     private double[] records = new double[0];
     private int nOfRec = records.length - 1;
     private static Chronograph chronograph;
-    private static Object chronometer = new Object();
+    private static final Object chronometer = new Object();
     
     private Chronograph() {
     }
@@ -24,7 +24,9 @@ public final class Chronograph {
     public static Chronograph getChronometer() {
         if (chronograph == null) {
              synchronized(chronometer) {
-                  chronograph = new Chronograph();
+                  if (chronograph == null) {
+                        chronograph = new Chronograph();
+                  }
              }
         }
         return chronograph;
