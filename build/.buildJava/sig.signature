@@ -1,5 +1,87 @@
  Compiled 
  from 
+ "Chronograph.java" 
+ public 
+ final 
+ class 
+ utils.Chronograph 
+ { 
+ private 
+ double[] 
+ records; 
+ descriptor: 
+ [D 
+ private 
+ int 
+ nOfRec; 
+ descriptor: 
+ I 
+ private 
+ static 
+ utils.Chronograph 
+ chronograph; 
+ descriptor: 
+ Lutils/Chronograph; 
+ private 
+ static 
+ java.lang.Object 
+ chronometer; 
+ descriptor: 
+ Ljava/lang/Object; 
+ private 
+ utils.Chronograph(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ utils.Chronograph 
+ getChronometer(); 
+ descriptor: 
+ ()Lutils/Chronograph; 
+ public 
+ void 
+ recordPoint(); 
+ descriptor: 
+ ()V 
+ public 
+ void 
+ removePoint(int) 
+ throws 
+ java.lang.IllegalAccessException; 
+ descriptor: 
+ (I)V 
+ public 
+ double 
+ getPoint(int) 
+ throws 
+ java.lang.IllegalAccessException; 
+ descriptor: 
+ (I)D 
+ public 
+ void 
+ reset(); 
+ descriptor: 
+ ()V 
+ public 
+ double 
+ getElapsedTime(int, 
+ int) 
+ throws 
+ java.lang.IllegalAccessException; 
+ descriptor: 
+ (II)D 
+ public 
+ double 
+ toSeconds(double); 
+ descriptor: 
+ (D)D 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
  "Quartile.java" 
  public 
  final 
@@ -732,17 +814,17 @@
  public 
  static 
  double 
- convertInto(long, 
+ convertInto(double, 
  physics.Units$IndexNotation); 
  descriptor: 
- (JLphysics/Units$IndexNotation;)D 
+ (DLphysics/Units$IndexNotation;)D 
  public 
  static 
  java.lang.String 
- getFormat(long, 
+ getFormat(double, 
  physics.Units$IndexNotation); 
  descriptor: 
- (JLphysics/Units$IndexNotation;)Ljava/lang/String; 
+ (DLphysics/Units$IndexNotation;)Ljava/lang/String; 
  } 
  Compiled 
  from 
@@ -1211,6 +1293,13 @@
  logger; 
  descriptor: 
  Ljava/util/logging/Logger; 
+ private 
+ static 
+ final 
+ utils.Chronograph 
+ chronograph; 
+ descriptor: 
+ Lutils/Chronograph; 
  static 
  final 
  boolean 
@@ -1225,14 +1314,18 @@
  static 
  int 
  findBrute(java.lang.String, 
- java.lang.String); 
+ java.lang.String) 
+ throws 
+ java.lang.IllegalAccessException; 
  descriptor: 
  (Ljava/lang/String;Ljava/lang/String;)I 
  public 
  static 
  int 
  findBoyerMoore(java.lang.String, 
- java.lang.String); 
+ java.lang.String) 
+ throws 
+ java.lang.IllegalAccessException; 
  descriptor: 
  (Ljava/lang/String;Ljava/lang/String;)I 
  static 

@@ -1,9 +1,11 @@
 package patternMatching;
 
+import java.lang.IllegalAccessException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utils.Chronograph;
 
 /**
  * A Utility Class for patternMatching.PatternMatching Algos, includes :
@@ -14,7 +16,8 @@ import java.util.logging.Logger;
 public final class PatternMatching {
 
     private static final Logger logger = Logger.getLogger(PatternMatching.class.getName());
-
+    private static final Chronograph chronograph = Chronograph.getChronometer();
+    
     /**
      * Private constructor to inhibit its intialization.
      */
@@ -48,10 +51,10 @@ public final class PatternMatching {
      * @param pattern the pattern to search for inside it.
      * @return the first index of the pattern -if-located- w/in the main text, otherwise exit w/ error <b>-1</b>.
      */
-    public static int findBrute(String text, String pattern) {
+    public static int findBrute(String text, String pattern) throws IllegalAccessException {
         //find time
-        double time = System.currentTimeMillis() / 1000d;
-        logger.log(Level.INFO, String.valueOf(time));
+        chronograph.recordPoint();
+        logger.log(Level.INFO, String.valueOf(chronograph.getPoint(0)));
 
         final int textLen = text.length();
         final int patternLen = pattern.length();
@@ -65,9 +68,10 @@ public final class PatternMatching {
                 //              terminate returning the first matched index
                 if (k == patternLen - 1) {
                     //find time
-                    double _time = System.currentTimeMillis() / 1000d;
-                    double __time = _time - time;
+                    chronograph.recordPoint();
+                    final double __time = chronograph.toSeconds(chronograph.getElapsedTime(0, 1));
                     logger.log(Level.INFO, "Spent : " + __time + " seconds");
+                    chronograph.reset();
                     return i;
                 }
             }
@@ -76,10 +80,10 @@ public final class PatternMatching {
         return -1;
     }
 
-    public static int findBoyerMoore(String text, String pattern) {
+    public static int findBoyerMoore(String text, String pattern) throws IllegalAccessException {
         //find time
-        double time = System.currentTimeMillis() / 1000d;
-        logger.log(Level.INFO, String.valueOf(time));
+        chronograph.recordPoint();
+        logger.log(Level.INFO, String.valueOf(chronograph.getPoint(0)));
 
         final int textLen = text.length();
         final int patternLen = pattern.length();
@@ -98,9 +102,10 @@ public final class PatternMatching {
             if (text.charAt(i) == pattern.charAt(k)) {
                 if (k == 0) {
                     //find time spent in this algo
-                    double _time = System.currentTimeMillis() / 1000d;
-                    double __time = _time - time;
+                    chronograph.recordPoint();
+                    final double __time = chronograph.toSeconds(chronograph.getElapsedTime(0, 1));
                     logger.log(Level.INFO, "Spent : " + __time + " seconds");
+                    chronograph.reset();
                     return i;
                 }
                 i--;
