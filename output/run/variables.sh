@@ -15,3 +15,4 @@ workingDir=$cut2
 # include the JAVAHOME
 source ${workingDir}'/JAVAHOME.sh'
 runCommand=${JAVA__HOME}'/java'
+source ${workingDir}'/CommonVariables.sh'

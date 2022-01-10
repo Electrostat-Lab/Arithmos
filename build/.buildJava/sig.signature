@@ -24,6 +24,7 @@
  Lutils/Chronograph; 
  private 
  static 
+ final 
  java.lang.Object 
  chronometer; 
  descriptor: 
