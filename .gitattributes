@@ -1,5 +1,5 @@
 *.scala linguist-vendored=true
-*.kt linguist-vendored=true
+*.kt linguist-vendored=false
 *.groovy linguist-vendored=true
 *.c linguist-vendored=false
 *.cxx linguist-vendored=false
