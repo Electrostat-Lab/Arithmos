@@ -27,10 +27,13 @@ function compileKotlin() {
    cd ${workDir}'/build/.buildKotlin'
    ktFiles=`find -name '*.kt'`
    if [[ -f ${ktFiles} ]]; then
+        dependencies=${workDir}'/code/java/dependencies'
+        javaSources=${workDir}'/code/java/src'
         if [[ $enable_android_build == true ]]; then
-            kotlinc ${ktFiles} -d ${workDir}'/code/java/dependencies/kotlin.jar'
+            # Compile java and kotlin sources together
+            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources -d ${workDir}'/code/java/dependencies/kotlin.jar'
         else
-            kotlinc ${ktFiles} -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
+            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
         fi
         compileResult=$?
         ## remove sources after compilation is completed
