@@ -19,7 +19,6 @@ echo -e $RESET_Cs
 
 if [[ $enable_scala_build == true ]]; then
     echo -e "$BRIGHT_RED_C---MajorTask@Build Scala : Scala build started"
-    copyScSources
     if [[ `compileScala` -eq 0 ]]; then
         echo -e "$GREEN_C Task@Build Compile Scala : Succeeded"
     else 
@@ -32,7 +31,6 @@ echo -e $RESET_Cs
 
 if [[ $enable_kt_build == true ]]; then
     echo -e "$VIOLET_C---MajorTask@Build Kotlin : Kotlin build started"
-    copyKtSources
     if [[ `compileKotlin` -eq 0 ]]; then
         echo -e "$GREEN_C Task@Build Compile Kotlin : Succeeded"
     else
@@ -45,7 +43,6 @@ echo -e $RESET_Cs
 
 if [[ $enable_groovy_build == true ]]; then
     echo -e "$CYAN_C---MajorTask@Build Groovy : Groovy build started"
-    copyGroovySources
     if [[ `compileGroovy` -eq 0 ]]; then
         echo -e "$GREEN_C Task@Build Compile Groovy : Succeeded"
     else
@@ -72,7 +69,6 @@ echo -e $RESET_Cs
 
 if [[ $enable_natives_build == true ]]; then
     echo -e "$MAGNETA_C---MajorTask@Build Native Sources : Native build started"
-    copyNativeSources
     compile
     echo -e "$MAGNETA_C---MajorTask@Build Native Sources : Native build finished"
 fi
