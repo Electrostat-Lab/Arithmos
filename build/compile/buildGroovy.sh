@@ -14,7 +14,7 @@ fi
 function copyGroovySources() {
     #copy code to buildDir to compile java files
     codeDir=(${workDir}'/code/groovy/src/*')
-    if [[ -d ${codeDir} ]]; then
+    if [[ ${codeDir} ]]; then
         cp -r ${codeDir} ${workDir}'/build/.buildGroovy'
     fi
 }
@@ -31,7 +31,7 @@ function compileGroovy() {
        groovyc ${groovyFiles} -d ${workDir}'/code/java/dependencies/groovy'
        cd ${workDir}'/code/java/dependencies/groovy'
        zip -r groovy.jar . -i '*/*'
-       cp groovy.jar ${workDir}'/code/java/dependencies/groovy' ${workDir}'/code/java/dependencies'
+       cp groovy.jar ${workDir}'/code/java/dependencies'
        compileResult=$?
         # remove the assets folder
        rm -rf ${workDir}'/code/java/dependencies/groovy'

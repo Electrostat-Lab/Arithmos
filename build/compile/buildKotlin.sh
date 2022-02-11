@@ -29,11 +29,13 @@ function compileKotlin() {
    if [[ -f ${ktFiles} ]]; then
         dependencies=${workDir}'/code/java/dependencies'
         javaSources=${workDir}'/code/java/src'
+	    scalaSources=${workDir}'/code/scala/src'
+	    groovySources=${workDir}'/code/groovy/src'
         if [[ $enable_android_build == true ]]; then
             # Compile java and kotlin sources together
-            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources -d ${workDir}'/code/java/dependencies/kotlin.jar'
+            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources $scalaSources $groovySources -d ${workDir}'/code/java/dependencies/kotlin.jar'
         else
-            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
+            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources $scalaSources $groovySources -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
         fi
         compileResult=$?
         ## remove sources after compilation is completed
