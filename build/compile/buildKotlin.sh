@@ -4,28 +4,14 @@
 #* @author pavl_g.
 #*#
 source variables.sh
-# make a dir for kotlin byte code
-if [[ ! -d ${workDir}'/build/.buildKotlin' ]]; then
-    mkdir ${workDir}'/build/.buildKotlin'
-fi
-##
-# Copies the source files to a single dir to be compiled manually.
-##
-function copyKtSources() {
-    #copy code to buildDir to compile java files
-    codeFiles=(${workDir}'/code/kotlin/src/*')
-    if [[ ${codeFiles} ]]; then
-        cp -r ${codeFiles} ${workDir}'/build/.buildKotlin'
-    fi
-}
+
 ##
 # Compiles and package kotlin into a dependency jar file to be included inside the java module.
 # @return Compilation result, 0 for success.
 ##
 function compileKotlin() {
    local compileResult=-1
-   cd ${workDir}'/build/.buildKotlin'
-   ktFiles=`find -name '*.kt'`
+   ktFiles=`find ${workDir}'/code/kotlin/src' -name '*.kt'`
    if [[ -f ${ktFiles} ]]; then
         dependencies=${workDir}'/code/java/dependencies'
         javaSources=${workDir}'/code/java/src'
@@ -33,13 +19,11 @@ function compileKotlin() {
 	    groovySources=${workDir}'/code/groovy/src'
         if [[ $enable_android_build == true ]]; then
             # Compile java and kotlin sources together
-            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources $scalaSources $groovySources -d ${workDir}'/code/java/dependencies/kotlin.jar'
+            kotlinc-jvm -cp $dependencies $ktFiles $javaSources $scalaSources $groovySources -d ${workDir}'/code/java/dependencies/kotlin.jar'
         else
-            kotlinc-jvm -cp $dependencies ${ktFiles} $javaSources $scalaSources $groovySources -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
+            kotlinc-jvm -cp $dependencies $ktFiles $javaSources $scalaSources $groovySources -include-runtime -d ${workDir}'/code/java/dependencies/kotlin.jar'
         fi
         compileResult=$?
-        ## remove sources after compilation is completed
-        rm -r $ktFiles
    fi
    return $compileResult
 }

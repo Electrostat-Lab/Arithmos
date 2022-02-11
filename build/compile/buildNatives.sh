@@ -5,51 +5,12 @@
 #*#
 source variables.sh
 
-if [[ ! -d ${workDir}'/build/.buildNatives' ]]; then
-    mkdir ${workDir}'/build/.buildNatives'
-fi
-
-##
-# Copies all native sources to the build directory using 'the find'.
-# @echo Script Succeeded if one command has passed successfully, exit with error code if non of them has passed.
-##
-function copyNativeSources() {
-    # dir to compile & sharedLib name
-    # copy cpp files to a gather directory
-    errors=$(( 0 ))
-    cd ${workDir}'/code/natives/libs'
-    libs=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
-    if [[ ${libs} ]]; then
-        chmod +x $libs
-        cp ${libs} ${workDir}'/build/.buildNatives'
-    else 
-        errors=$(( errors + 1 ))
-    fi
-    
-    cd ${workDir}'/code/natives/main'
-    main=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
-    if [[ ${main} ]]; then
-        chmod +x $main
-        cp ${main} ${workDir}'/build/.buildNatives'
-    else 
-        errors=$(( errors + 1 ))
-    fi
-    
-    if (( $errors > 1 )); then  
-        echo -e "$RED_C---MajorTask@Build Native Sources : No native sources to build---"
-        exit 1200
-    else
-        echo -e "$GREEN_C---MajorTask@Build Native Sources : Found native sources---"
-    fi
-}
-
 ##
 # Compile and build native sources.
 # @echo Script Succeeded if all the commands have passed successfully, exit with error code otherwise.
 ##
 function compile() {
-    cd ${workDir}'/build/.buildNatives'
-    nativeSources=`find -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
+    nativeSources=`find ${workDir}'/code/natives/libs' ${workDir}'/code/natives/main' -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
     # tests if the sources exist, then give the current user full permissions on them and compile them
     if [[ ${nativeSources} ]]; then  
         chmod +x $nativeSources
@@ -97,8 +58,6 @@ function compile() {
                 exit 550
              fi
         fi
-
-        rm $nativeSources
     fi
     echo -e "$GREEN_C---MajorTask@Build Native Sources : Succeeded---"
 } 
