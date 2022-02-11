@@ -31,7 +31,7 @@ function generateHeaders() {
     result=$?
     # generate a methods signature file to help in invocation api
     classFiles=`find -name "*.class"`
-    sigs=`javap -s -p ${classFiles}`
+    sigs=`${JAVA__HOME}'/javap' -s -p ${classFiles}`
     printf ' %s \n' ${sigs} > 'sig.signature'
     # remove the source code
     rm $javaFiles

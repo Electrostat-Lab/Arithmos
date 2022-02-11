@@ -14,7 +14,7 @@ fi
 function copyScSources() {
     #copy code to buildDir to compile java files
     codeFiles=(${workDir}'/code/scala/src/*')
-    if [[ -f ${codeFiles} ]]; then
+    if [[ ${codeFiles} ]]; then
         cp -r ${codeFiles} ${workDir}'/build/.buildScala'
     fi
 }
@@ -26,6 +26,8 @@ function compileScala() {
    local compileResult=-1
    cd ${workDir}'/build/.buildScala'
    scalaFiles=`find -name '*.scala'`
+   dependencies=${workDir}'/code/java/dependencies'
+
    if [[ -f ${scalaFiles} ]]; then
          scalac ${scalaFiles} -d ${workDir}'/code/java/dependencies/scala.jar'
          compileResult=$?
