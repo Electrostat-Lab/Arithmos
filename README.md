@@ -147,7 +147,7 @@ To use the library, download the jar from the releases.
 - Use SDKMAN on linux to install their compilers : 
 
 ```bash
-sdk install scalac
+sdk install scala 2.13.7
 ```
 
 ```bash 
@@ -155,7 +155,7 @@ sdk install kotlinc
 ```
 
 ```bash 
-sdk install groovyc
+sdk install groovy 2.4.7
 ```
 
 ### TODO : 
