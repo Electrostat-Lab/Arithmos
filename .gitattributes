@@ -1,10 +1,10 @@
-*.scala linguist-vendored=true
-*.kt linguist-vendored=true
-*.groovy linguist-vendored=true
-*.c linguist-vendored=true
-*.h linguist-vendored=true
-*.cxx linguist-vendored=true
-*.cpp linguist-vendored=true
+*.scala linguist-vendored=false
+*.kt linguist-vendored=false
+*.groovy linguist-vendored=false
+*.c linguist-vendored=false
+*.h linguist-vendored=false
+*.cxx linguist-vendored=false
+*.cpp linguist-vendored=false
 *.sig linguist-language=c
 
 
