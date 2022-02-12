@@ -76,6 +76,19 @@
  toSeconds(double); 
  descriptor: 
  (D)D 
+ private 
+ native 
+ double 
+ getCPUClock(); 
+ descriptor: 
+ ()D 
+ private 
+ native 
+ double 
+ getElapsedTime(double, 
+ double); 
+ descriptor: 
+ (DD)D 
  static 
  {}; 
  descriptor: 

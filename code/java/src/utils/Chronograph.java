@@ -1,13 +1,11 @@
 package utils;
 
 import java.lang.IllegalAccessException;
-import java.lang.System;
 import physics.Units;
 
 /**
  * A utility used for calculating the elapsed time of an algorithm 
- * or various algos at the same time, it also plugs the time into a 
- * function to find the algo Big-O notation.
+ * or various algos at the same time using the native clock speed.
  *
  * @author pavl_g.
  */
@@ -18,6 +16,10 @@ public final class Chronograph {
     private static Chronograph chronograph;
     private static final Object chronometer = new Object();
     
+    static {
+         System.loadLibrary("ArithmosNatives");
+    }   
+	
     private Chronograph() {
     }
     
@@ -39,7 +41,7 @@ public final class Chronograph {
         for (int i = 0; i < temp.length; i++) {
             records[i] = temp[i];
         }    
-        records[++nOfRec] = System.currentTimeMillis();
+        records[++nOfRec] = getCPUClock();
     }
     
     public void removePoint(final int index) throws IllegalAccessException {
@@ -77,10 +79,12 @@ public final class Chronograph {
     }
     
     public double getElapsedTime(int index0, int index1) throws IllegalAccessException  {
-        return getPoint(index1) - getPoint(index0);
+        return getElapsedTime(getPoint(index1), getPoint(index0));
     }
     
     public double toSeconds(final double time) {
         return Units.convertInto(time, Units.IndexNotation.MILLI);
     }
+	private native double getCPUClock();
+	private native double getElapsedTime(final double time0, final double time1);
 }
