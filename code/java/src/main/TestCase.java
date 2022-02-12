@@ -4,8 +4,6 @@ import java.io.File;
 import java.nio.file.FileSystems;
 import patternMatching.PatternMatching;
 import testKotlin.Test;
-import testScala.TestScala;
-import testGroovy.TestGroovy;
 import sorting.ItemsSorting;
 import number.*;
 import time.*;
@@ -19,12 +17,6 @@ public class TestCase {
         // test kotlin
         final Test test1 = new Test();
         test1.testMe();
-        // test scala
-        final TestScala test2 = new TestScala();
-        test2.testMe();
-        // test groovy
-        final TestGroovy test3 = new TestGroovy();
-        test3.greet();
         testNatives();
         testMath();
         testSort();
