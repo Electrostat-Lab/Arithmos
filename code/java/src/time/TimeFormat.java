@@ -10,7 +10,6 @@ public final class TimeFormat {
     
     private TimeFormat() {
     
-    
     }
     
     /**
@@ -63,6 +62,7 @@ public final class TimeFormat {
          * The formats wrapper
          */
         public enum Format{
+            COLON_NO_LABELS(1000),
             HRS_MINS_SECS(1231),
             HRS_COLON_MINS_COLON_SECS(4141);
             public final int formatId;
@@ -93,7 +93,12 @@ public final class TimeFormat {
         public static String getTime(double seconds, double minutes, double hours,
                                      double days, double weeks, double months, double years){
                 String s_seconds, s_minutes, s_hours, s_days, s_weeks, s_months, s_years;
-                if(format.formatId == Format.HRS_COLON_MINS_COLON_SECS.formatId){
+                if (format.formatId == Format.COLON_NO_LABELS.formatId) {
+                    s_seconds = getPostfix(seconds);
+                    s_minutes = getPostfix(minutes);
+                    s_hours = getPostfix(hours + days/(24 * 7) + weeks/(24 * 4) + months/(24 * 12));
+                    return s_hours + ":" + s_minutes + ":" + s_seconds; 
+                } else if (format.formatId == Format.HRS_COLON_MINS_COLON_SECS.formatId) {
                     //do the other formats
                     s_seconds = ((seconds < 1) ? "" : (getPostfix(seconds) + " SECS"));
                     s_minutes = ((minutes < 1) ? "" : (getPostfix(minutes) + " MINS : "));

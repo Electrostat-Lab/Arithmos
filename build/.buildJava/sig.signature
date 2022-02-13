@@ -919,6 +919,13 @@
  static 
  final 
  time.TimeFormat$TimeRepresentFormat$Format 
+ COLON_NO_LABELS; 
+ descriptor: 
+ Ltime/TimeFormat$TimeRepresentFormat$Format; 
+ public 
+ static 
+ final 
+ time.TimeFormat$TimeRepresentFormat$Format 
  HRS_MINS_SECS; 
  descriptor: 
  Ltime/TimeFormat$TimeRepresentFormat$Format; 
@@ -1269,6 +1276,11 @@
  descriptor: 
  ([Ljava/lang/String;)V 
  public 
+ void 
+ testThreading(); 
+ descriptor: 
+ ()V 
+ public 
  static 
  void 
  testMath(); 
@@ -1289,6 +1301,24 @@
  ()V 
  static 
  {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestCase.java" 
+ final 
+ class 
+ main.TestCase$1 
+ implements 
+ java.lang.Runnable 
+ { 
+ main.TestCase$1(); 
+ descriptor: 
+ ()V 
+ public 
+ void 
+ run(); 
  descriptor: 
  ()V 
  } 
@@ -1346,4 +1376,121 @@
  {}; 
  descriptor: 
  ()V 
+ } 
+ Compiled 
+ from 
+ "ThreadDispatcher.java" 
+ public 
+ class 
+ pthread.ThreadDispatcher 
+ { 
+ private 
+ pthread.ThreadDispatcher(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ native 
+ void 
+ dispatch(pthread.model.ThreadModel); 
+ descriptor: 
+ (Lpthread/model/ThreadModel;)V 
+ public 
+ static 
+ native 
+ int 
+ finish(); 
+ descriptor: 
+ ()I 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "ThreadModel.java" 
+ public 
+ class 
+ pthread.model.ThreadModel 
+ extends 
+ pthread.model.SimpleModel 
+ { 
+ public 
+ pthread.model.ThreadModel(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "SimpleModel.java" 
+ public 
+ abstract 
+ class 
+ pthread.model.SimpleModel 
+ { 
+ protected 
+ java.lang.String 
+ classRelativePath; 
+ descriptor: 
+ Ljava/lang/String; 
+ protected 
+ java.lang.String 
+ methodName; 
+ descriptor: 
+ Ljava/lang/String; 
+ protected 
+ java.lang.String 
+ methodSignature; 
+ descriptor: 
+ Ljava/lang/String; 
+ protected 
+ int 
+ methodId; 
+ descriptor: 
+ I 
+ public 
+ pthread.model.SimpleModel(); 
+ descriptor: 
+ ()V 
+ public 
+ void 
+ setClassRelativePath(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)V 
+ public 
+ void 
+ setMethodName(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)V 
+ public 
+ void 
+ setMethodSignature(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)V 
+ public 
+ void 
+ setMethodId(int); 
+ descriptor: 
+ (I)V 
+ public 
+ java.lang.String 
+ getClassRelativePath(); 
+ descriptor: 
+ ()Ljava/lang/String; 
+ public 
+ java.lang.String 
+ getMethodName(); 
+ descriptor: 
+ ()Ljava/lang/String; 
+ public 
+ java.lang.String 
+ getMethodSignature(); 
+ descriptor: 
+ ()Ljava/lang/String; 
+ public 
+ int 
+ getMethodId(); 
+ descriptor: 
+ ()I 
  } 
