@@ -6,13 +6,14 @@ extern "C" {
     Class getClassObject(JNIEnv* env, jobject modelObj, const char* fieldName);
     jobject getParamsObject(JNIEnv* env, jobject modelObj, const char* fieldName);
     jstring getString(JNIEnv* env, jobject modelObj, const char* fieldName);
-    jint convertInt(JNIEnv* env, jobject modelObj, const char* fieldName);
+    jint getInt(JNIEnv* env, jobject modelObj, const char* fieldName);
 
     Mutex* mutex = new Mutex();
     MutexAttr* mutexAttr = new MutexAttr();
 
     JNIEXPORT void JNICALL Java_pthread_ThreadDispatcher_dispatch
     (JNIEnv *env, jclass invoker, jobject modelObj){
+        usleep(getInt(env, modelObj, "delay")); 
         /* implementation of pthreads wrapper for java applications */
         POSIX::Threader::DispatcherArgs* args = new POSIX::Threader::DispatcherArgs();
         args->javaEnv = env;
@@ -60,7 +61,7 @@ extern "C" {
         return value;
     }
 
-    jint convertInt(JNIEnv* env, jobject modelObj, const char* fieldName) {
+    jint getInt(JNIEnv* env, jobject modelObj, const char* fieldName) {
         jclass modelClass = env->GetObjectClass(modelObj);
         jfieldID intField = env->GetFieldID(modelClass, fieldName, "I");
         jint value = env->GetIntField(modelObj, intField);

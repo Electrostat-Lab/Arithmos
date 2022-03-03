@@ -7,6 +7,7 @@ import pthread.Pthread;
  */
 public abstract class SimpleModel {
     protected String classPath = "";
+    protected int delay = 0;
     public void setClazz(Class<? extends Pthread> clazz) {
         if (clazz == null) {
             throw new IllegalStateException("Cannot operate on a void state");
@@ -15,5 +16,11 @@ public abstract class SimpleModel {
     }
     public String getClassPath() {
         return classPath;
+    }
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+    public int getDelay() {
+        return delay;
     }
 }

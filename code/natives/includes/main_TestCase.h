@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef main_TestCase_FIVE_SECONDS
+#define main_TestCase_FIVE_SECONDS 5000000L
 /*
  * Class:     main_TestCase
  * Method:    testNatives
