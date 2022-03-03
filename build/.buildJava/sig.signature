@@ -1284,6 +1284,13 @@
  class 
  main.TestCase 
  { 
+ private 
+ static 
+ final 
+ int 
+ FIVE_SECONDS; 
+ descriptor: 
+ I 
  public 
  main.TestCase(); 
  descriptor: 
@@ -1552,9 +1559,10 @@
  pthread.model.ThreadModel(java.lang.Class<? 
  extends 
  pthread.Pthread>, 
- pthread.model.ParameterList); 
+ pthread.model.ParameterList, 
+ int); 
  descriptor: 
- (Ljava/lang/Class;Lpthread/model/ParameterList;)V 
+ (Ljava/lang/Class;Lpthread/model/ParameterList;I)V 
  public 
  void 
  setParameterList(pthread.model.ParameterList); 
@@ -1579,6 +1587,11 @@
  classPath; 
  descriptor: 
  Ljava/lang/String; 
+ protected 
+ int 
+ delay; 
+ descriptor: 
+ I 
  public 
  pthread.model.SimpleModel(); 
  descriptor: 
@@ -1595,4 +1608,14 @@
  getClassPath(); 
  descriptor: 
  ()Ljava/lang/String; 
+ public 
+ void 
+ setDelay(int); 
+ descriptor: 
+ (I)V 
+ public 
+ int 
+ getDelay(); 
+ descriptor: 
+ ()I 
  } 

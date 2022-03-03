@@ -13,11 +13,15 @@ public class ThreadModel extends SimpleModel {
     }
     /**
      * For quick initialization.
+     * 
      * @param clazz the threading class.
+     * @param parameterList
+     * @param delay delay in microseconds.
      */
-    public ThreadModel(final Class<? extends Pthread> clazz, final ParameterList parameterList) {
+    public ThreadModel(final Class<? extends Pthread> clazz, final ParameterList parameterList, final int delay) {
         setClazz(clazz);
         setParameterList(parameterList);    
+        setDelay(delay);
     }
 
     public void setParameterList(ParameterList parameterList) {

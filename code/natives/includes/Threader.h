@@ -29,7 +29,7 @@
 #define Linux_x64 0xFF
 #define Android_x86_x64 0x00
 /* define default platform */
-#define Platform Android_x86_x64
+#define Platform Linux_x64
 
 static int isInitialized = -1;
 
