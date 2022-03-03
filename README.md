@@ -122,6 +122,8 @@ To use the library, download the jar from the releases.
 - Native Algorithms : https://eg1lib.org/book/1168423/d3e00f
 - Native JNI : https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html#wp16656
 - JNI Invocation API : https://www.ibm.com/docs/en/i/7.1?topic=api-example-java-invocation
+- JNI Crash Course : https://www.iitk.ac.in/esc101/05Aug/tutorial/native1.1/implementing/index.html
+- NativeActivity Example (Android) : https://github.com/android/ndk-samples/tree/main/native-activity
 - Kotlinc : https://kotlinlang.org/docs/command-line.html#manual-install
 - Scalac : https://docs.scala-lang.org/overviews/compiler-options/index.html
 - Git docs : https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository - https://dev.to/aashiya123/git-commands-cheatsheet-advanced-20-git-commands-advanced--35i3
