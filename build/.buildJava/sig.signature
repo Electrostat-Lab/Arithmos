@@ -1263,6 +1263,25 @@
  "TestCase.java" 
  public 
  class 
+ main.TestCase$TestThreading2 
+ extends 
+ pthread.Pthread 
+ { 
+ public 
+ main.TestCase$TestThreading2(); 
+ descriptor: 
+ ()V 
+ public 
+ void 
+ invoke(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestCase.java" 
+ public 
+ class 
  main.TestCase 
  { 
  public 
@@ -1275,11 +1294,6 @@
  main(java.lang.String[]); 
  descriptor: 
  ([Ljava/lang/String;)V 
- public 
- void 
- testThreading(); 
- descriptor: 
- ()V 
  public 
  static 
  void 
@@ -1307,6 +1321,44 @@
  Compiled 
  from 
  "TestCase.java" 
+ public 
+ class 
+ main.TestCase$TestThreading 
+ extends 
+ pthread.Pthread 
+ { 
+ public 
+ main.TestCase$TestThreading(); 
+ descriptor: 
+ ()V 
+ public 
+ void 
+ invoke(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestThreading.java" 
+ public 
+ class 
+ main.TestThreading 
+ extends 
+ pthread.Pthread 
+ { 
+ public 
+ main.TestThreading(pthread.model.ParameterList); 
+ descriptor: 
+ (Lpthread/model/ParameterList;)V 
+ public 
+ void 
+ invoke(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestCase.java" 
  final 
  class 
  main.TestCase$1 
@@ -1319,6 +1371,25 @@
  public 
  void 
  run(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestThreading2.java" 
+ public 
+ class 
+ main.TestThreading2 
+ extends 
+ pthread.Pthread 
+ { 
+ public 
+ main.TestThreading2(pthread.model.ParameterList); 
+ descriptor: 
+ (Lpthread/model/ParameterList;)V 
+ public 
+ void 
+ invoke(); 
  descriptor: 
  ()V 
  } 
@@ -1379,6 +1450,31 @@
  } 
  Compiled 
  from 
+ "Pthread.java" 
+ public 
+ abstract 
+ class 
+ pthread.Pthread 
+ { 
+ protected 
+ final 
+ pthread.model.ParameterList 
+ parameterList; 
+ descriptor: 
+ Lpthread/model/ParameterList; 
+ public 
+ pthread.Pthread(pthread.model.ParameterList); 
+ descriptor: 
+ (Lpthread/model/ParameterList;)V 
+ public 
+ abstract 
+ void 
+ invoke(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
  "ThreadDispatcher.java" 
  public 
  class 
@@ -1409,6 +1505,33 @@
  } 
  Compiled 
  from 
+ "ParameterList.java" 
+ public 
+ class 
+ pthread.model.ParameterList 
+ { 
+ private 
+ java.lang.Object[] 
+ params; 
+ descriptor: 
+ [Ljava/lang/Object; 
+ public 
+ pthread.model.ParameterList(java.lang.Object[]); 
+ descriptor: 
+ ([Ljava/lang/Object;)V 
+ public 
+ void 
+ setParams(java.lang.Object[]); 
+ descriptor: 
+ ([Ljava/lang/Object;)V 
+ public 
+ java.lang.Object[] 
+ getParams(); 
+ descriptor: 
+ ()[Ljava/lang/Object; 
+ } 
+ Compiled 
+ from 
  "ThreadModel.java" 
  public 
  class 
@@ -1416,10 +1539,32 @@
  extends 
  pthread.model.SimpleModel 
  { 
+ protected 
+ pthread.model.ParameterList 
+ parameterList; 
+ descriptor: 
+ Lpthread/model/ParameterList; 
  public 
  pthread.model.ThreadModel(); 
  descriptor: 
  ()V 
+ public 
+ pthread.model.ThreadModel(java.lang.Class<? 
+ extends 
+ pthread.Pthread>, 
+ pthread.model.ParameterList); 
+ descriptor: 
+ (Ljava/lang/Class;Lpthread/model/ParameterList;)V 
+ public 
+ void 
+ setParameterList(pthread.model.ParameterList); 
+ descriptor: 
+ (Lpthread/model/ParameterList;)V 
+ public 
+ pthread.model.ParameterList 
+ getParameterList(); 
+ descriptor: 
+ ()Lpthread/model/ParameterList; 
  } 
  Compiled 
  from 
@@ -1431,66 +1576,23 @@
  { 
  protected 
  java.lang.String 
- classRelativePath; 
+ classPath; 
  descriptor: 
  Ljava/lang/String; 
- protected 
- java.lang.String 
- methodName; 
- descriptor: 
- Ljava/lang/String; 
- protected 
- java.lang.String 
- methodSignature; 
- descriptor: 
- Ljava/lang/String; 
- protected 
- int 
- methodId; 
- descriptor: 
- I 
  public 
  pthread.model.SimpleModel(); 
  descriptor: 
  ()V 
  public 
  void 
- setClassRelativePath(java.lang.String); 
+ setClazz(java.lang.Class<? 
+ extends 
+ pthread.Pthread>); 
  descriptor: 
- (Ljava/lang/String;)V 
- public 
- void 
- setMethodName(java.lang.String); 
- descriptor: 
- (Ljava/lang/String;)V 
- public 
- void 
- setMethodSignature(java.lang.String); 
- descriptor: 
- (Ljava/lang/String;)V 
- public 
- void 
- setMethodId(int); 
- descriptor: 
- (I)V 
+ (Ljava/lang/Class;)V 
  public 
  java.lang.String 
- getClassRelativePath(); 
+ getClassPath(); 
  descriptor: 
  ()Ljava/lang/String; 
- public 
- java.lang.String 
- getMethodName(); 
- descriptor: 
- ()Ljava/lang/String; 
- public 
- java.lang.String 
- getMethodSignature(); 
- descriptor: 
- ()Ljava/lang/String; 
- public 
- int 
- getMethodId(); 
- descriptor: 
- ()I 
  } 
