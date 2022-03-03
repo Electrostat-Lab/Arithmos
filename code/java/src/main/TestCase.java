@@ -9,34 +9,28 @@ import number.*;
 import time.*;
 import java.util.Arrays;
 import pthread.ThreadDispatcher;
+import pthread.model.ParameterList;
 import pthread.model.ThreadModel;
+import pthread.Pthread;
 
 public class TestCase {
     static {
          System.loadLibrary("ArithmosNatives");
     }
+
     public static void main(String[] args) {
         // test kotlin
         final ThreadModel model = new ThreadModel();
-        model.setClassRelativePath("main/TestCase");
-        model.setMethodName("testThreading");
-        model.setMethodId(21321);
-        model.setMethodSignature("()V");
-        // ThreadDispatcher.dispatch(model);
+        model.setClazz(TestThreading2.class);
+        model.setParameterList(new ParameterList(new Object[]{"My name ", " is Pavly"}));
         ThreadDispatcher.dispatch(model);
-        // new Thread(new Runnable() {
-        //   public void run() {
-        //       testMath();
+        
+        final ThreadModel model2 = new ThreadModel();
+        model2.setClazz(TestThreading.class);
+        model2.setParameterList(new ParameterList(new Object[]{"I am a ", " medical Student"}));
+        ThreadDispatcher.dispatch(model2);
 
-        //   }
-
-        // }).start();
-    }
-
-    public void testThreading() {
-      testMath();
-      
-      // ThreadDispatcher.finish();
+        testMath();
     }
 
     public static void testMath() {

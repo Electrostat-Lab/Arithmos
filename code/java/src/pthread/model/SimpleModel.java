@@ -1,37 +1,19 @@
 package pthread.model;
+import pthread.Pthread;
 
 /**
  * The Simple reflection model describes method data.
  * @author pavl_g.
  */
 public abstract class SimpleModel {
-    protected String classRelativePath;
-    protected String methodName;
-    protected String methodSignature;
-    protected int methodId;
-
-    public void setClassRelativePath(final String classRelativePath) {
-        this.classRelativePath = classRelativePath;
+    protected String classPath = "";
+    public void setClazz(Class<? extends Pthread> clazz) {
+        if (clazz == null) {
+            throw new IllegalStateException("Cannot operate on a void state");
+        }
+        this.classPath = clazz.getCanonicalName().replace(".", "/");
     }
-    public void setMethodName(final String methodName) {
-        this.methodName = methodName;
-    }
-    public void setMethodSignature(final String methodSignature) {
-        this.methodSignature = methodSignature;
-    }
-    public void setMethodId(final int methodId) {
-        this.methodId = methodId;
-    }
-    public String getClassRelativePath() {
-        return classRelativePath;
-    }
-    public String getMethodName() {
-        return methodName;
-    }
-    public String getMethodSignature() {
-        return methodSignature;
-    }
-    public int getMethodId() {
-        return methodId;
+    public String getClassPath() {
+        return classPath;
     }
 }
