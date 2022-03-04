@@ -13,7 +13,6 @@ extern "C" {
 
     JNIEXPORT void JNICALL Java_pthread_ThreadDispatcher_dispatch
     (JNIEnv *env, jclass invoker, jobject modelObj){
-        usleep(getInt(env, modelObj, "delay")); 
         /* implementation of pthreads wrapper for java applications */
         POSIX::Threader::DispatcherArgs* args = new POSIX::Threader::DispatcherArgs();
         args->javaEnv = env;
@@ -22,6 +21,7 @@ extern "C" {
         args->threadType = POSIX::Threader::SYNC;
         args->mutex = mutex;
         args->mutexAttr = mutexAttr;
+        args->delay = getInt(env, modelObj, "delay");
 
         POSIX::Threader* threader = new POSIX::Threader(args);
         threader->dispatch(); 

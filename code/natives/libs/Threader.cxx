@@ -139,6 +139,7 @@ void* startDispatcher(void* arguments) {
 }
 
 void POSIX::Threader::dispatch() {   
+    usleep(this->args->delay);
     /* get javaVM from JNIEnv */
     if (this->args == NULL) {
         throw "IllegalStateException : Cannot proceed with NULL Args !";
