@@ -46,6 +46,7 @@ namespace POSIX {
                     JavaVM* javaVM;
                     int threadType = (int) ASYNC;
                     Threader* instance;
+                    u_int32_t delay = 0;
             };
             constexpr static int ASYNC = 123;
             constexpr static int SYNC = 456;
