@@ -1,47 +1,66 @@
 #include<Threader.h>
 
 POSIX::Threader::Threader(DispatcherArgs* args) {
-    this->dispatcher = new ThreadDispatcher();
     this->args = args;
+    this->dispatcher = new ThreadDispatcher();
 }
 
 POSIX::Threader::~Threader() {
-    delete this->dispatcher;
     this->dispatcher = NULL;
+    delete this->dispatcher;
     
-    delete this->args;
     this->args = NULL;
+    delete this->args;
 }
 
 int methodDispatcher(void* arguments) {
+    /* lateinit vars */
+    Class clazz = NULL;
+    Object params = NULL;
+    Method constructor = NULL;
+    Method method = NULL;
+    Object object = NULL;
+    /* local pointers*/
     POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
     
-    /* get the method from a java class by its name, using the classPath and the method signature */
-    Class clazz = args->javaEnv->FindClass(args->classPath);
-    jobject params = args->params;
-    Method constructor = args->javaEnv->GetMethodID(clazz, "<init>", "(Lpthread/model/ParameterList;)V");
+    if (args->javaEnv == NULL) {
+        throw "Cannot find a valid java environment pointer !";
+    }
 
-    jobject object = args->javaEnv->NewObject(clazz, constructor, params);
-    
-    Method method = NULL;
+    /* get the method from a java class by its name, using the classPath and the method signature */
+    clazz = args->javaEnv->FindClass(args->classPath);
+    params = args->params;
     
     if (clazz != NULL) {
-        method = args->javaEnv->GetMethodID(clazz, "invoke", "()V");
+        constructor = args->javaEnv->GetMethodID(clazz, "<init>", args->INTERFACE_CONSTRUCTOR_SIG);
     } else {
-        printf("Cannot find the class\n");
+        args->javaEnv->ExceptionDescribe();
+    }
+    
+    if (clazz != NULL && constructor != NULL && params != NULL) {
+        object = args->javaEnv->NewObject(clazz, constructor, params);
+    } else {
+        args->javaEnv->ExceptionDescribe();
+    }
+    
+    if (clazz != NULL) {
+        method = args->javaEnv->GetMethodID(clazz, args->INTERFACING_METHOD, args->INTERFACING_METHOD_SIG);
+    } else {
         args->javaEnv->ExceptionDescribe();
         return 0;
     }
     if (method != NULL) {
         args->javaEnv->CallVoidMethod(object, method);
     } else {
-        printf("Cannot find the method \n");
         args->javaEnv->ExceptionDescribe();
     }
 
     if (args->threadType == POSIX::Threader::SYNC) {
         //unlock the mutex Object for the other threads
-        unlockMutex(args->mutex);
+        int isUnlocked = -1;
+        while(isUnlocked <= 0) {
+            isUnlocked = unlockMutex(args->mutex);
+        }
     }
 
     return 1;
@@ -69,7 +88,7 @@ void attachDispatcher(void* arguments) {
     /* setup jvm thread attach args info */
     int isAttached = -1;
     JavaVMAttachArgs jvmArgs;
-    jvmArgs.name = (const char*) "invoke";
+    jvmArgs.name = (char*) args->INTERFACING_METHOD;
     jvmArgs.group = NULL;
      /* attach the current thread to the Java VM based on the platform */
     while (isAttached == -1) {
@@ -86,12 +105,15 @@ void attachDispatcher(void* arguments) {
 
 int detachDispatcher(JNIEnv* env) {
     int isFinished = -1;
-    do {
-        JavaVM* javaVm;
-        env->GetJavaVM(&javaVm);
+    JavaVM* javaVm;
+    env->GetJavaVM(&javaVm);
+    
+    while(isFinished == -1) {
         isFinished = javaVm->DetachCurrentThread();
-        javaVm->DestroyJavaVM();
-    } while(isFinished == -1);
+    }
+
+    javaVm->DestroyJavaVM();
+
     return isFinished;
 }
 
@@ -101,8 +123,8 @@ int startMutex(void* arguments) {
      while(true) {
         //lock the mutexObject to this thread(obtain the object to this event)
         //=> once obtained the synchronized work(exclusive actions execute
-        int lockResult = lockMutex(args->mutex);
-        if (lockResult != -1) {
+        int isLocked = lockMutex(args->mutex);
+        if (isLocked != -1) {
             result = methodDispatcher(arguments);
             return result;
         }                    
@@ -112,29 +134,34 @@ int startMutex(void* arguments) {
 
 void* startDispatcher(void* arguments) {
     int result = -1;
+    int isFinished = -1;
+
     POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
     
     attachDispatcher(arguments);
-    
-    if (args->threadType == POSIX::Threader::ASYNC) {
-        result = methodDispatcher(arguments);
-    } else if (args->threadType == POSIX::Threader::SYNC) {
-        // mutex-based threading
-        while(true) { 
-            bool isInitialized = initSyncDispatcher(arguments);
-            if (isInitialized) {
-                //start mutex here
-                result = startMutex(arguments);
-                break;
+
+    while (result <= 0) {
+        if (args->threadType == POSIX::Threader::ASYNC) {
+            result = methodDispatcher(arguments);
+        } else if (args->threadType == POSIX::Threader::SYNC) {
+            // mutex-based threading
+            while(true) { 
+                bool isInitialized = initSyncDispatcher(arguments);
+                if (isInitialized) {
+                    //start mutex here
+                    result = startMutex(arguments);
+                    break;
+                }
             }
         }
     }
-    while(true) {
-        if (result >= 1) {
-            exitCurrentThread(NULL);
-            detachDispatcher(args->javaEnv);
-        }
+
+    exitCurrentThread(NULL);
+
+    while (isFinished <= 0) {
+        isFinished = detachDispatcher(args->javaEnv);
     }
+
     return NULL;
 }
 
@@ -150,5 +177,3 @@ void POSIX::Threader::dispatch() {
         throw "Cannot determine the dispatcher type, please use either DispatcherType::ASYNC or DispatcherType::SYNC";
     }
 }
-
-
