@@ -22,8 +22,12 @@ extern "C" {
         args->mutex = mutex;
         args->mutexAttr = mutexAttr;
         args->delay = getInt(env, modelObj, "delay");
+        args->INTERFACING_METHOD = (char*) "invoke";
+        args->INTERFACING_METHOD_SIG = (char*) "()V";
+        args->INTERFACE_CONSTRUCTOR_SIG = (char*) "(Lpthread/model/ParameterList;)V";
 
         POSIX::Threader* threader = new POSIX::Threader(args);
+        delete args;
         threader->dispatch(); 
     }
 

@@ -12,6 +12,8 @@
 #define MutexAttr pthread_mutexattr_t
 #define Class jclass 
 #define Method jmethodID 
+#define Object jobject
+#define Integer jint
 #define String const char* 
 
 /* redefine some methods */
@@ -45,6 +47,9 @@ namespace POSIX {
                     JNIEnv* javaEnv;
                     JavaVM* javaVM;
                     int threadType = (int) ASYNC;
+                    char* INTERFACING_METHOD;
+                    char* INTERFACING_METHOD_SIG;
+                    char* INTERFACE_CONSTRUCTOR_SIG;
                     Threader* instance;
                     u_int32_t delay = 0;
             };
