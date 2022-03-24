@@ -9,6 +9,7 @@ import number.*;
 import time.*;
 import java.util.Arrays;
 import pthread.ThreadDispatcher;
+import pthread.ThreadDispatcher.OperationType;
 import pthread.model.ParameterList;
 import pthread.model.ThreadModel;
 import pthread.Pthread;
@@ -20,19 +21,20 @@ public class TestCase {
     }
 
     public static void main(String[] args) {
-        // test kotlin
+        final ThreadDispatcher threadDispatcher = ThreadDispatcher.getInstance(OperationType.ASYNC);
+
         // test pthreads running from java using Model->thread->Object->Model architecture
         final ThreadModel model = new ThreadModel();
         model.setClazz(TestThreading2.class);
         model.setParameterList(new ParameterList(new Object[]{"My name ", " is Pavly"}));
         model.setDelay(FIVE_SECONDS);
-        ThreadDispatcher.dispatch(model);
+        threadDispatcher.dispatch(model);
         
         final ThreadModel model2 = new ThreadModel();
         model2.setClazz(TestThreading.class);
         model2.setParameterList(new ParameterList(new Object[]{"I am a ", " medical Student"}));
         model2.setDelay(FIVE_SECONDS * 2);
-        ThreadDispatcher.dispatch(model2);
+        threadDispatcher.dispatch(model2);
 
         testMath();
     }

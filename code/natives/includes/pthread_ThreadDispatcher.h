@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (Lpthread/model/ThreadModel;)V
  */
 JNIEXPORT void JNICALL Java_pthread_ThreadDispatcher_dispatch
-  (JNIEnv *, jclass, jobject);
+  (JNIEnv *, jobject, jobject);
 
 /*
  * Class:     pthread_ThreadDispatcher
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_pthread_ThreadDispatcher_dispatch
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_pthread_ThreadDispatcher_finish
-  (JNIEnv *, jclass);
+  (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }

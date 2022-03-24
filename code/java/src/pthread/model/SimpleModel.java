@@ -8,6 +8,16 @@ import pthread.Pthread;
 public abstract class SimpleModel {
     protected String classPath = "";
     protected int delay = 0;
+    protected ParameterList parameterList;
+    protected String pthreadModelClass = ThreadModel.class.getCanonicalName().replace(".", "/");
+    
+    /**
+     * Infers the model class path to the implementation,
+     */
+    public SimpleModel() {
+        this.pthreadModelClass = this.getClass().getCanonicalName().replace(".", "/");
+    }
+
     public void setClazz(Class<? extends Pthread> clazz) {
         if (clazz == null) {
             throw new IllegalStateException("Cannot operate on a void state");
@@ -22,5 +32,14 @@ public abstract class SimpleModel {
     }
     public int getDelay() {
         return delay;
+    }
+    public void setParameterList(ParameterList parameterList) {
+        this.parameterList = parameterList;
+    }
+    public ParameterList getParameterList() {
+        return parameterList;
+    }
+    public String getPthreadModelClass() {
+        return pthreadModelClass;
     }
 }
