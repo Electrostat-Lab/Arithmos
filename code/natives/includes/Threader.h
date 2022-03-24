@@ -34,8 +34,17 @@
 #define Platform Linux_x64
 
 static int isInitialized = -1;
+/* 1000 micro-sec = 1 ms */
+static constexpr int RECYCLE_TIME = 1000;
 
 namespace POSIX {
+    static int coolDown(int time) {
+        return usleep(time);
+    }
+    static void forceCoolDown(int time) {
+        int remainingTime = coolDown(time);
+        while(remainingTime == time);
+    } 
     struct Threader {
         public:
            struct DispatcherArgs {
@@ -44,17 +53,18 @@ namespace POSIX {
                     MutexAttr* mutexAttr;
                     String classPath;
                     jobject params;
-                    JNIEnv* javaEnv;
                     JavaVM* javaVM;
+                    JavaVMAttachArgs* jvmArgs;
                     int threadType = (int) ASYNC;
                     char* INTERFACING_METHOD;
                     char* INTERFACING_METHOD_SIG;
                     char* INTERFACE_CONSTRUCTOR_SIG;
+                    Object javaDispatcherInstance;
                     Threader* instance;
                     u_int32_t delay = 0;
             };
             constexpr static int ASYNC = 123;
-            constexpr static int SYNC = 456;
+            constexpr static int MUTEX = 456;
             void dispatch();
             jint finish(JNIEnv* env);
         public:
@@ -62,7 +72,8 @@ namespace POSIX {
             ~Threader();
         private:
             DispatcherArgs* args;
-            ThreadDispatcher* dispatcher;         
+            ThreadDispatcher* dispatcher;
+              
             friend bool initSyncDispatcher(void*);
             friend void attachDisptacher(void*);
             friend void startMutex(void*);

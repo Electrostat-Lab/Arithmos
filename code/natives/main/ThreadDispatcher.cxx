@@ -3,6 +3,8 @@
 #include<cstdlib>
 
 extern "C" {
+
+
     Class getClassObject(JNIEnv* env, jobject modelObj, const char* fieldName);
     jobject getParamsObject(JNIEnv* env, jobject modelObj, const char* fieldName);
     jstring getString(JNIEnv* env, jobject modelObj, const char* fieldName);
@@ -12,27 +14,41 @@ extern "C" {
     MutexAttr* mutexAttr = new MutexAttr();
 
     JNIEXPORT void JNICALL Java_pthread_ThreadDispatcher_dispatch
-    (JNIEnv *env, jclass invoker, jobject modelObj){
+    (JNIEnv *env, jobject javaDispatcherInstance, jobject modelObj){
         /* implementation of pthreads wrapper for java applications */
         POSIX::Threader::DispatcherArgs* args = new POSIX::Threader::DispatcherArgs();
-        args->javaEnv = env;
+        args->javaDispatcherInstance = javaDispatcherInstance;
         args->params = getParamsObject(env, modelObj, "parameterList");
         args->classPath = env->GetStringUTFChars(getString(env, modelObj, "classPath"), 0);
-        args->threadType = POSIX::Threader::SYNC;
+        args->threadType = getInt(env, javaDispatcherInstance, "OPERATION_TYPE_VALUE");
         args->mutex = mutex;
         args->mutexAttr = mutexAttr;
         args->delay = getInt(env, modelObj, "delay");
         args->INTERFACING_METHOD = (char*) "invoke";
-        args->INTERFACING_METHOD_SIG = (char*) "()V";
+        args->INTERFACING_METHOD_SIG = (char*) "(Lpthread/ThreadDispatcher;)V";
         args->INTERFACE_CONSTRUCTOR_SIG = (char*) "(Lpthread/model/ParameterList;)V";
 
+        env->GetJavaVM(&(args->javaVM));
+
+        JavaVMAttachArgs* jvmArgs = new JavaVMAttachArgs();
+        jvmArgs->name = (char*) args->INTERFACING_METHOD;
+        jvmArgs->group = NULL;
+
+        #if (Platform == Linux_x64)
+            jvmArgs->version = JNI_VERSION_1_8; 
+        #elif (Platform == Android_x86_x64)
+            jvmArgs->version = JNI_VERSION_1_6;
+        #endif
+        args->jvmArgs = jvmArgs;
+
         POSIX::Threader* threader = new POSIX::Threader(args);
-        delete args;
         threader->dispatch(); 
+
+        POSIX::forceCoolDown(RECYCLE_TIME);
     }
 
     JNIEXPORT jint JNICALL Java_pthread_ThreadDispatcher_finish
-    (JNIEnv *env, jclass _class){
+    (JNIEnv *env, jobject object){
         int isFinished = -1;
     
         JavaVM* javaVm;
@@ -41,6 +57,9 @@ extern "C" {
         javaVm->DestroyJavaVM();
         destroyMutex(mutex);
 
+        javaVm = NULL;
+        delete javaVm;
+        
         return isFinished;
     }
 
@@ -65,10 +84,10 @@ extern "C" {
         return value;
     }
 
-    jint getInt(JNIEnv* env, jobject modelObj, const char* fieldName) {
-        jclass modelClass = env->GetObjectClass(modelObj);
+    jint getInt(JNIEnv* env, jobject object, const char* fieldName) {
+        jclass modelClass = env->GetObjectClass(object);
         jfieldID intField = env->GetFieldID(modelClass, fieldName, "I");
-        jint value = env->GetIntField(modelObj, intField);
+        jint value = env->GetIntField(object, intField);
         return value;
     }
 }

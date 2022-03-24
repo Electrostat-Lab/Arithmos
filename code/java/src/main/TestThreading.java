@@ -1,6 +1,7 @@
 package main;
 
 import pthread.Pthread;
+import pthread.ThreadDispatcher;
 import pthread.model.ParameterList;
 
 public class TestThreading extends Pthread {
@@ -8,7 +9,8 @@ public class TestThreading extends Pthread {
         super(parameterList);
     }
     @Override
-    public void invoke() {
+    public void invoke(ThreadDispatcher threadDispatcher) {
+     
         System.out.println((String)parameterList.getParams()[0] + (String)parameterList.getParams()[1]);
     }
 }

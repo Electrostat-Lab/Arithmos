@@ -13,56 +13,74 @@ POSIX::Threader::~Threader() {
     delete this->args;
 }
 
+int detachDispatcher(JavaVM& vm) {
+    int isFinished = -1;
+    
+    while(isFinished == -1) {
+        isFinished = vm.DetachCurrentThread();
+    }
+
+    vm.DestroyJavaVM();
+
+    return isFinished;
+}
+
 int methodDispatcher(void* arguments) {
+
     /* lateinit vars */
     Class clazz = NULL;
     Object params = NULL;
     Method constructor = NULL;
     Method method = NULL;
     Object object = NULL;
+    
     /* local pointers*/
     POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
     
-    if (args->javaEnv == NULL) {
+    JNIEnv* javaEnv;
+    args->javaVM->GetEnv((void**)&(javaEnv), args->jvmArgs->version);
+
+    /* Sanity check the inputs */
+    if (javaEnv == NULL) {
         throw "Cannot find a valid java environment pointer !";
     }
 
     /* get the method from a java class by its name, using the classPath and the method signature */
-    clazz = args->javaEnv->FindClass(args->classPath);
+    clazz = javaEnv->FindClass(args->classPath);
     params = args->params;
     
     if (clazz != NULL) {
-        constructor = args->javaEnv->GetMethodID(clazz, "<init>", args->INTERFACE_CONSTRUCTOR_SIG);
+        constructor = javaEnv->GetMethodID(clazz, "<init>", args->INTERFACE_CONSTRUCTOR_SIG);
     } else {
-        args->javaEnv->ExceptionDescribe();
+        javaEnv->ExceptionDescribe();
     }
     
     if (clazz != NULL && constructor != NULL && params != NULL) {
-        object = args->javaEnv->NewObject(clazz, constructor, params);
+        object = javaEnv->NewObject(clazz, constructor, params);
     } else {
-        args->javaEnv->ExceptionDescribe();
+        javaEnv->ExceptionDescribe();
     }
     
     if (clazz != NULL) {
-        method = args->javaEnv->GetMethodID(clazz, args->INTERFACING_METHOD, args->INTERFACING_METHOD_SIG);
+        method = javaEnv->GetMethodID(clazz, args->INTERFACING_METHOD, args->INTERFACING_METHOD_SIG);
     } else {
-        args->javaEnv->ExceptionDescribe();
+        javaEnv->ExceptionDescribe();
         return 0;
     }
     if (method != NULL) {
-        args->javaEnv->CallVoidMethod(object, method);
+            POSIX::forceCoolDown(args->delay);
+            javaEnv->CallVoidMethod(object, method, args->javaDispatcherInstance);
     } else {
-        args->javaEnv->ExceptionDescribe();
+        javaEnv->ExceptionDescribe();
     }
 
-    if (args->threadType == POSIX::Threader::SYNC) {
+    if (args->threadType == POSIX::Threader::MUTEX) {
         //unlock the mutex Object for the other threads
         int isUnlocked = -1;
         while(isUnlocked <= 0) {
             isUnlocked = unlockMutex(args->mutex);
         }
     }
-
     return 1;
 }
 
@@ -87,34 +105,19 @@ void attachDispatcher(void* arguments) {
     POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
     /* setup jvm thread attach args info */
     int isAttached = -1;
-    JavaVMAttachArgs jvmArgs;
-    jvmArgs.name = (char*) args->INTERFACING_METHOD;
-    jvmArgs.group = NULL;
+
+    JNIEnv* javaEnv;
+    args->javaVM->GetEnv((void**)&(javaEnv), args->jvmArgs->version);
+
      /* attach the current thread to the Java VM based on the platform */
     while (isAttached == -1) {
         #if (Platform == Linux_x64)
-            jvmArgs.version = JNI_VERSION_1_8; 
-            isAttached = args->javaVM->AttachCurrentThread((void**)&(args->javaEnv), &jvmArgs);
+            isAttached = args->javaVM->AttachCurrentThread((void**)&(javaEnv), args->jvmArgs);
         #elif (Platform == Android_x86_x64)
-            jvmArgs.version = JNI_VERSION_1_6;
-            isAttached = args->javaVM->AttachCurrentThread(&(args->javaEnv), &jvmArgs);
+            isAttached = args->javaVM->AttachCurrentThread(&(javaEnv), args->jvmArgs);
         #endif
     /* wait until the thread is attached to the jvm then start invoking the java funtions */
     }
-}
-
-int detachDispatcher(JNIEnv* env) {
-    int isFinished = -1;
-    JavaVM* javaVm;
-    env->GetJavaVM(&javaVm);
-    
-    while(isFinished == -1) {
-        isFinished = javaVm->DetachCurrentThread();
-    }
-
-    javaVm->DestroyJavaVM();
-
-    return isFinished;
 }
 
 int startMutex(void* arguments) {
@@ -135,15 +138,22 @@ int startMutex(void* arguments) {
 void* startDispatcher(void* arguments) {
     int result = -1;
     int isFinished = -1;
-
-    POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
     
+    POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
+
+    /* fetch java env from java vm */
+    JNIEnv* javaEnv;
+    args->javaVM->GetEnv((void**)&(javaEnv), args->jvmArgs->version);
+    
+    /* attach the current thread to the jvm env */
     attachDispatcher(arguments);
 
+    /* dispatch the job */
     while (result <= 0) {
         if (args->threadType == POSIX::Threader::ASYNC) {
             result = methodDispatcher(arguments);
-        } else if (args->threadType == POSIX::Threader::SYNC) {
+            POSIX::forceCoolDown(RECYCLE_TIME);
+        } else if (args->threadType == POSIX::Threader::MUTEX) {
             // mutex-based threading
             while(true) { 
                 bool isInitialized = initSyncDispatcher(arguments);
@@ -159,21 +169,15 @@ void* startDispatcher(void* arguments) {
     exitCurrentThread(NULL);
 
     while (isFinished <= 0) {
-        isFinished = detachDispatcher(args->javaEnv);
+        isFinished = detachDispatcher(*(args->javaVM));
     }
-
     return NULL;
 }
 
 void POSIX::Threader::dispatch() {   
-    usleep(this->args->delay);
     /* get javaVM from JNIEnv */
     if (this->args == NULL) {
         throw "IllegalStateException : Cannot proceed with NULL Args !";
     }
-    if (this->args->javaEnv->GetJavaVM(&(args->javaVM)) != -1) {
-        dispatchThread(dispatcher, NULL, startDispatcher, (POSIX::Threader::DispatcherArgs*) this->args);
-    } else {
-        throw "Cannot determine the dispatcher type, please use either DispatcherType::ASYNC or DispatcherType::SYNC";
-    }
+    dispatchThread(dispatcher, NULL, startDispatcher, (POSIX::Threader::DispatcherArgs*) this->args);
 }

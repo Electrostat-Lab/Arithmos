@@ -1359,9 +1359,9 @@
  (Lpthread/model/ParameterList;)V 
  public 
  void 
- invoke(); 
+ invoke(pthread.ThreadDispatcher); 
  descriptor: 
- ()V 
+ (Lpthread/ThreadDispatcher;)V 
  } 
  Compiled 
  from 
@@ -1396,9 +1396,9 @@
  (Lpthread/model/ParameterList;)V 
  public 
  void 
- invoke(); 
+ invoke(pthread.ThreadDispatcher); 
  descriptor: 
- ()V 
+ (Lpthread/ThreadDispatcher;)V 
  } 
  Compiled 
  from 
@@ -1457,6 +1457,68 @@
  } 
  Compiled 
  from 
+ "ThreadDispatcher.java" 
+ public 
+ final 
+ class 
+ pthread.ThreadDispatcher$OperationType 
+ extends 
+ java.lang.Enum<pthread.ThreadDispatcher$OperationType> 
+ { 
+ public 
+ static 
+ final 
+ pthread.ThreadDispatcher$OperationType 
+ ASYNC; 
+ descriptor: 
+ Lpthread/ThreadDispatcher$OperationType; 
+ public 
+ static 
+ final 
+ pthread.ThreadDispatcher$OperationType 
+ MUTEX; 
+ descriptor: 
+ Lpthread/ThreadDispatcher$OperationType; 
+ private 
+ int 
+ value; 
+ descriptor: 
+ I 
+ private 
+ static 
+ final 
+ pthread.ThreadDispatcher$OperationType[] 
+ $VALUES; 
+ descriptor: 
+ [Lpthread/ThreadDispatcher$OperationType; 
+ public 
+ static 
+ pthread.ThreadDispatcher$OperationType[] 
+ values(); 
+ descriptor: 
+ ()[Lpthread/ThreadDispatcher$OperationType; 
+ public 
+ static 
+ pthread.ThreadDispatcher$OperationType 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lpthread/ThreadDispatcher$OperationType; 
+ private 
+ pthread.ThreadDispatcher$OperationType(int); 
+ descriptor: 
+ (Ljava/lang/String;II)V 
+ static 
+ int 
+ access$000(pthread.ThreadDispatcher$OperationType); 
+ descriptor: 
+ (Lpthread/ThreadDispatcher$OperationType;)I 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
  "Pthread.java" 
  public 
  abstract 
@@ -1476,9 +1538,9 @@
  public 
  abstract 
  void 
- invoke(); 
+ invoke(pthread.ThreadDispatcher); 
  descriptor: 
- ()V 
+ (Lpthread/ThreadDispatcher;)V 
  } 
  Compiled 
  from 
@@ -1488,18 +1550,40 @@
  pthread.ThreadDispatcher 
  { 
  private 
- pthread.ThreadDispatcher(); 
+ static 
+ pthread.ThreadDispatcher 
+ threadDispatcher; 
  descriptor: 
- ()V 
+ Lpthread/ThreadDispatcher; 
+ private 
+ final 
+ int 
+ OPERATION_TYPE_VALUE; 
+ descriptor: 
+ I 
+ private 
+ pthread.ThreadDispatcher(int); 
+ descriptor: 
+ (I)V 
  public 
  static 
+ pthread.ThreadDispatcher 
+ getInstance(); 
+ descriptor: 
+ ()Lpthread/ThreadDispatcher; 
+ public 
+ static 
+ pthread.ThreadDispatcher 
+ getInstance(pthread.ThreadDispatcher$OperationType); 
+ descriptor: 
+ (Lpthread/ThreadDispatcher$OperationType;)Lpthread/ThreadDispatcher; 
+ public 
  native 
  void 
  dispatch(pthread.model.ThreadModel); 
  descriptor: 
  (Lpthread/model/ThreadModel;)V 
  public 
- static 
  native 
  int 
  finish(); 
@@ -1546,11 +1630,6 @@
  extends 
  pthread.model.SimpleModel 
  { 
- protected 
- pthread.model.ParameterList 
- parameterList; 
- descriptor: 
- Lpthread/model/ParameterList; 
  public 
  pthread.model.ThreadModel(); 
  descriptor: 
@@ -1563,16 +1642,6 @@
  int); 
  descriptor: 
  (Ljava/lang/Class;Lpthread/model/ParameterList;I)V 
- public 
- void 
- setParameterList(pthread.model.ParameterList); 
- descriptor: 
- (Lpthread/model/ParameterList;)V 
- public 
- pthread.model.ParameterList 
- getParameterList(); 
- descriptor: 
- ()Lpthread/model/ParameterList; 
  } 
  Compiled 
  from 
@@ -1592,6 +1661,16 @@
  delay; 
  descriptor: 
  I 
+ protected 
+ pthread.model.ParameterList 
+ parameterList; 
+ descriptor: 
+ Lpthread/model/ParameterList; 
+ protected 
+ java.lang.String 
+ pthreadModelClass; 
+ descriptor: 
+ Ljava/lang/String; 
  public 
  pthread.model.SimpleModel(); 
  descriptor: 
@@ -1618,4 +1697,19 @@
  getDelay(); 
  descriptor: 
  ()I 
+ public 
+ void 
+ setParameterList(pthread.model.ParameterList); 
+ descriptor: 
+ (Lpthread/model/ParameterList;)V 
+ public 
+ pthread.model.ParameterList 
+ getParameterList(); 
+ descriptor: 
+ ()Lpthread/model/ParameterList; 
+ public 
+ java.lang.String 
+ getPthreadModelClass(); 
+ descriptor: 
+ ()Ljava/lang/String; 
  } 

@@ -7,5 +7,5 @@ public abstract class Pthread {
     public Pthread(final ParameterList parameterList) {
         this.parameterList = parameterList;
     }
-    public abstract void invoke();
+    public abstract void invoke(final ThreadDispatcher threadDispatcher);
 }
