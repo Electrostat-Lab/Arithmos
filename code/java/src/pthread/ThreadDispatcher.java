@@ -55,8 +55,8 @@ public class ThreadDispatcher {
     public native void dispatch(final ThreadModel model);
 
     /**
-     * When called inside a native thread context, detaches it from the jvm thread.
+     * Releases the thread model Mutex object memory.
      */
-    public native int finish();
+    public native boolean finish();
 
 }

@@ -18,9 +18,9 @@ JNIEXPORT void JNICALL Java_pthread_ThreadDispatcher_dispatch
 /*
  * Class:     pthread_ThreadDispatcher
  * Method:    finish
- * Signature: ()I
+ * Signature: ()Z
  */
-JNIEXPORT jint JNICALL Java_pthread_ThreadDispatcher_finish
+JNIEXPORT jboolean JNICALL Java_pthread_ThreadDispatcher_finish
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

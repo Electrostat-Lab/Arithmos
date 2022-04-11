@@ -100,21 +100,91 @@
  public 
  final 
  class 
- utils.natives.LibraryPath 
+ utils.natives.LibraryPath$ProvisionalPath 
+ extends 
+ java.lang.Enum<utils.natives.LibraryPath$ProvisionalPath> 
  { 
  public 
+ static 
+ final 
+ utils.natives.LibraryPath$ProvisionalPath 
+ CUSTOM; 
+ descriptor: 
+ Lutils/natives/LibraryPath$ProvisionalPath; 
+ public 
+ static 
+ final 
+ utils.natives.LibraryPath$ProvisionalPath 
+ LIBS_FOLDER; 
+ descriptor: 
+ Lutils/natives/LibraryPath$ProvisionalPath; 
+ public 
+ static 
+ final 
+ utils.natives.LibraryPath$ProvisionalPath 
+ ROOT_FOLDER; 
+ descriptor: 
+ Lutils/natives/LibraryPath$ProvisionalPath; 
+ public 
+ java.lang.String 
+ path; 
+ descriptor: 
+ Ljava/lang/String; 
+ private 
+ static 
+ final 
+ utils.natives.LibraryPath$ProvisionalPath[] 
+ $VALUES; 
+ descriptor: 
+ [Lutils/natives/LibraryPath$ProvisionalPath; 
+ public 
+ static 
+ utils.natives.LibraryPath$ProvisionalPath[] 
+ values(); 
+ descriptor: 
+ ()[Lutils/natives/LibraryPath$ProvisionalPath; 
+ public 
+ static 
+ utils.natives.LibraryPath$ProvisionalPath 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lutils/natives/LibraryPath$ProvisionalPath; 
+ private 
+ utils.natives.LibraryPath$ProvisionalPath(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;ILjava/lang/String;)V 
+ public 
+ final 
+ void 
+ setCustomPath(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "LibraryPath.java" 
+ public 
+ final 
+ class 
+ utils.natives.LibraryPath 
+ { 
+ private 
  utils.natives.LibraryPath(); 
  descriptor: 
  ()V 
  public 
  static 
  void 
- setLibraryRelativePath(java.lang.String) 
+ setLibraryRelativePath(utils.natives.LibraryPath$ProvisionalPath) 
  throws 
  java.lang.NoSuchFieldException, 
  java.lang.IllegalAccessException; 
  descriptor: 
- (Ljava/lang/String;)V 
+ (Lutils/natives/LibraryPath$ProvisionalPath;)V 
  private 
  static 
  java.lang.String 
@@ -1613,10 +1683,10 @@
  (Lpthread/model/ThreadModel;)V 
  public 
  native 
- int 
+ boolean 
  finish(); 
  descriptor: 
- ()I 
+ ()Z 
  static 
  {}; 
  descriptor: 

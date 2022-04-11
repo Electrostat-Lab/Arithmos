@@ -42,26 +42,17 @@ extern "C" {
         args->jvmArgs = jvmArgs;
 
         POSIX::Threader* threader = new POSIX::Threader(args);
-        threader->dispatch(); 
-
+        threader->dispatch();
         POSIX::forceCoolDown(RECYCLE_TIME);
     }
 
-    JNIEXPORT jint JNICALL Java_pthread_ThreadDispatcher_finish
-    (JNIEnv *env, jobject object){
-        int isFinished = -1;
-    
-        destroyMutex(mutex);
-        JavaVM* javaVm;
-        env->GetJavaVM(&javaVm);
-        isFinished = javaVm->DetachCurrentThread();
-        
-        
+    JNIEXPORT jboolean JNICALL Java_pthread_ThreadDispatcher_finish
+    (JNIEnv *env, jobject object){  
+        int isFinished = destroyMutex(mutex);  
+        delete mutex;
+        delete mutexAttr;
 
-        javaVm = NULL;
-        delete javaVm;
-        
-        return isFinished;
+        return isFinished == 0;
     }
 
     Class getClassObject(JNIEnv* env, jobject modelObj, const char* fieldName) {

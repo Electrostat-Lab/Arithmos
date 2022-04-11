@@ -49,6 +49,7 @@ public class TestCase {
         model4.setParameterList(new ParameterList(new Object[]{"My name ", " is Pavly 2"}));
         model4.setDelay(FIVE_SECONDS);
         threadDispatcher.dispatch(model4);
+
         testMath();
     }
 
