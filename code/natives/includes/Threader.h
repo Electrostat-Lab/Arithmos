@@ -16,7 +16,7 @@
 #define Integer jint
 #define String const char* 
 
-/* redefine some methods */
+/* define aliases */
 #define dispatchThread pthread_create
 #define join pthread_join
 #define mutexInit pthread_mutex_init
@@ -60,7 +60,7 @@ namespace POSIX {
                     char* INTERFACING_METHOD_SIG;
                     char* INTERFACE_CONSTRUCTOR_SIG;
                     Object javaDispatcherInstance;
-                    Threader* instance;
+                    ThreadDispatcher* pthread;
                     u_int32_t delay = 0;
             };
             constexpr static int ASYNC = 123;
@@ -76,7 +76,7 @@ namespace POSIX {
               
             friend bool initSyncDispatcher(void*);
             friend void attachDisptacher(void*);
-            friend void startMutex(void*);
+            friend int startMutex(void*);
             friend void* startDispatcher(void*);
             friend void* methodDispatcher(void*);
     };

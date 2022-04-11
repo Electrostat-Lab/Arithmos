@@ -16,7 +16,7 @@ POSIX::Threader::~Threader() {
 int detachDispatcher(JavaVM& vm) {
     int isFinished = -1;
     
-    while(isFinished == -1) {
+    while(isFinished != 0) {
         isFinished = vm.DetachCurrentThread();
     }
 
@@ -37,6 +37,9 @@ int methodDispatcher(void* arguments) {
     /* local pointers*/
     POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
     
+    /* protect a critical section using join thread */
+    join(*(args->pthread), NULL);
+
     JNIEnv* javaEnv;
     args->javaVM->GetEnv((void**)&(javaEnv), args->jvmArgs->version);
 
@@ -68,8 +71,8 @@ int methodDispatcher(void* arguments) {
         return 0;
     }
     if (method != NULL) {
-            POSIX::forceCoolDown(args->delay);
-            javaEnv->CallVoidMethod(object, method, args->javaDispatcherInstance);
+        POSIX::forceCoolDown(args->delay);
+        javaEnv->CallVoidMethod(object, method, args->javaDispatcherInstance);
     } else {
         javaEnv->ExceptionDescribe();
     }
@@ -77,7 +80,7 @@ int methodDispatcher(void* arguments) {
     if (args->threadType == POSIX::Threader::MUTEX) {
         //unlock the mutex Object for the other threads
         int isUnlocked = -1;
-        while(isUnlocked <= 0) {
+        while (isUnlocked != 0) {
             isUnlocked = unlockMutex(args->mutex);
         }
     }
@@ -86,16 +89,17 @@ int methodDispatcher(void* arguments) {
 
 bool initSyncDispatcher(void* arguments) {
     POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
-    if (isInitialized >= 0) {
+    if (isInitialized == 0) {
         return true;
     }
-    if (mutexInit(args->mutex, args->mutexAttr) < 0) {
+    if (mutexInit(args->mutex, args->mutexAttr) != 0) {
         perror("mutex_initialize_stopped with errno EINVAL\n");                                                       
         return false;
     } else {
-        while(true) {
+        // 0 -> maps a success, non-zero maps a failure (bigger than zero in NPTL API)
+        while (isInitialized != 0) {
             isInitialized = setMutexAttrType(args->mutexAttr, PTHREAD_MUTEX_DEFAULT);
-            return isInitialized > -1;
+            return isInitialized == 0;
         }
     }
     return false;
@@ -110,7 +114,7 @@ void attachDispatcher(void* arguments) {
     args->javaVM->GetEnv((void**)&(javaEnv), args->jvmArgs->version);
 
      /* attach the current thread to the Java VM based on the platform */
-    while (isAttached == -1) {
+    while (isAttached != 0) {
         #if (Platform == Linux_x64)
             isAttached = args->javaVM->AttachCurrentThread((void**)&(javaEnv), args->jvmArgs);
         #elif (Platform == Android_x86_x64)
@@ -123,11 +127,11 @@ void attachDispatcher(void* arguments) {
 int startMutex(void* arguments) {
     int result = -1;
     POSIX::Threader::DispatcherArgs* args = (POSIX::Threader::DispatcherArgs*) arguments;
-     while(true) {
+     while (true) {
         //lock the mutexObject to this thread(obtain the object to this event)
         //=> once obtained the synchronized work(exclusive actions execute
         int isLocked = lockMutex(args->mutex);
-        if (isLocked != -1) {
+        if (isLocked == 0) {
             result = methodDispatcher(arguments);
             return result;
         }                    
@@ -149,13 +153,14 @@ void* startDispatcher(void* arguments) {
     attachDispatcher(arguments);
 
     /* dispatch the job */
-    while (result <= 0) {
+    while (result != 0) {
         if (args->threadType == POSIX::Threader::ASYNC) {
+            // async threading -- not thread safe or for non-shared purposes.
             result = methodDispatcher(arguments);
             POSIX::forceCoolDown(RECYCLE_TIME);
         } else if (args->threadType == POSIX::Threader::MUTEX) {
             // mutex-based threading
-            while(true) { 
+            while (true) { 
                 bool isInitialized = initSyncDispatcher(arguments);
                 if (isInitialized) {
                     //start mutex here
@@ -166,11 +171,13 @@ void* startDispatcher(void* arguments) {
         }
     }
 
+    // destroy the thread with its resources
     exitCurrentThread(NULL);
 
-    while (isFinished <= 0) {
+    while (isFinished != 0) {
         isFinished = detachDispatcher(*(args->javaVM));
     }
+
     return NULL;
 }
 
@@ -179,5 +186,6 @@ void POSIX::Threader::dispatch() {
     if (this->args == NULL) {
         throw "IllegalStateException : Cannot proceed with NULL Args !";
     }
-    dispatchThread(dispatcher, NULL, startDispatcher, (POSIX::Threader::DispatcherArgs*) this->args);
+    this->args->pthread = this->dispatcher;
+    dispatchThread(this->dispatcher, NULL, startDispatcher, (POSIX::Threader::DispatcherArgs*) this->args);
 }
