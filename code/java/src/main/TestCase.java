@@ -9,7 +9,7 @@ import number.*;
 import time.*;
 import java.util.Arrays;
 import pthread.ThreadDispatcher;
-import pthread.ThreadDispatcher.OperationType;
+import pthread.ThreadDispatcher.OperationMode;
 import pthread.model.ParameterList;
 import pthread.model.ThreadModel;
 import pthread.Pthread;
@@ -21,7 +21,7 @@ public class TestCase {
     }
 
     public static void main(String[] args) {
-        final ThreadDispatcher threadDispatcher = ThreadDispatcher.getInstance(OperationType.MUTEX);
+        final ThreadDispatcher threadDispatcher = ThreadDispatcher.getInstance();
 
         // test pthreads running from java using Model->thread->Object->Model architecture
         final ThreadModel model = new ThreadModel();

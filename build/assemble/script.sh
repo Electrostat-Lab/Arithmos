@@ -66,7 +66,7 @@ function addDependencies() {
             errors=$(( $errors + 1 ))
         fi
         cd ${buildDir}''${outputJAR}'/'
-        jars=('dependencies/*.jar') 
+        jars=`find 'dependencies' -name '*.jar'`
         printf '%s ' ${classpath} >> ${buildDir}''${outputJAR}'/Manifest.mf'
         printf ' %s \n' ${jars[0]} >> ${buildDir}''${outputJAR}'/Manifest.mf'
         errors=$(( $errors + $? ))

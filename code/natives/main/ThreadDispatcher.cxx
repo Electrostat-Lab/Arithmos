@@ -20,7 +20,7 @@ extern "C" {
         args->javaDispatcherInstance = javaDispatcherInstance;
         args->params = getParamsObject(env, modelObj, "parameterList");
         args->classPath = env->GetStringUTFChars(getString(env, modelObj, "classPath"), 0);
-        args->threadType = getInt(env, javaDispatcherInstance, "OPERATION_TYPE_VALUE");
+        args->threadType = getInt(env, javaDispatcherInstance, "OPERATION_MODE");
         args->mutex = mutex;
         args->mutexAttr = mutexAttr;
         args->delay = getInt(env, modelObj, "delay");
@@ -51,11 +51,12 @@ extern "C" {
     (JNIEnv *env, jobject object){
         int isFinished = -1;
     
+        destroyMutex(mutex);
         JavaVM* javaVm;
         env->GetJavaVM(&javaVm);
         isFinished = javaVm->DetachCurrentThread();
-        javaVm->DestroyJavaVM();
-        destroyMutex(mutex);
+        
+        
 
         javaVm = NULL;
         delete javaVm;

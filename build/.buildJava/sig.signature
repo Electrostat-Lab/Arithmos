@@ -96,6 +96,34 @@
  } 
  Compiled 
  from 
+ "LibraryPath.java" 
+ public 
+ final 
+ class 
+ utils.natives.LibraryPath 
+ { 
+ public 
+ utils.natives.LibraryPath(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ void 
+ setLibraryRelativePath(java.lang.String) 
+ throws 
+ java.lang.NoSuchFieldException, 
+ java.lang.IllegalAccessException; 
+ descriptor: 
+ (Ljava/lang/String;)V 
+ private 
+ static 
+ java.lang.String 
+ getProjectRelativePath(); 
+ descriptor: 
+ ()Ljava/lang/String; 
+ } 
+ Compiled 
+ from 
  "Quartile.java" 
  public 
  final 
@@ -1558,7 +1586,7 @@
  private 
  final 
  int 
- OPERATION_TYPE_VALUE; 
+ OPERATION_MODE; 
  descriptor: 
  I 
  private 
@@ -1574,9 +1602,9 @@
  public 
  static 
  pthread.ThreadDispatcher 
- getInstance(pthread.ThreadDispatcher$OperationType); 
+ getInstance(pthread.ThreadDispatcher$OperationMode); 
  descriptor: 
- (Lpthread/ThreadDispatcher$OperationType;)Lpthread/ThreadDispatcher; 
+ (Lpthread/ThreadDispatcher$OperationMode;)Lpthread/ThreadDispatcher; 
  public 
  native 
  void 
@@ -1712,4 +1740,60 @@
  getPthreadModelClass(); 
  descriptor: 
  ()Ljava/lang/String; 
+ } 
+ Compiled 
+ from 
+ "ThreadDispatcher.java" 
+ public 
+ final 
+ class 
+ pthread.ThreadDispatcher$OperationMode 
+ extends 
+ java.lang.Enum<pthread.ThreadDispatcher$OperationMode> 
+ { 
+ public 
+ static 
+ final 
+ pthread.ThreadDispatcher$OperationMode 
+ MUTEX; 
+ descriptor: 
+ Lpthread/ThreadDispatcher$OperationMode; 
+ private 
+ final 
+ int 
+ value; 
+ descriptor: 
+ I 
+ private 
+ static 
+ final 
+ pthread.ThreadDispatcher$OperationMode[] 
+ $VALUES; 
+ descriptor: 
+ [Lpthread/ThreadDispatcher$OperationMode; 
+ public 
+ static 
+ pthread.ThreadDispatcher$OperationMode[] 
+ values(); 
+ descriptor: 
+ ()[Lpthread/ThreadDispatcher$OperationMode; 
+ public 
+ static 
+ pthread.ThreadDispatcher$OperationMode 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lpthread/ThreadDispatcher$OperationMode; 
+ private 
+ pthread.ThreadDispatcher$OperationMode(int); 
+ descriptor: 
+ (Ljava/lang/String;II)V 
+ static 
+ int 
+ access$000(pthread.ThreadDispatcher$OperationMode); 
+ descriptor: 
+ (Lpthread/ThreadDispatcher$OperationMode;)I 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
  } 
