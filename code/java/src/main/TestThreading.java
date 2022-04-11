@@ -12,6 +12,7 @@ public class TestThreading extends Pthread {
     public void invoke(ThreadDispatcher threadDispatcher) {
      
         System.out.println((String)parameterList.getParams()[0] + (String)parameterList.getParams()[1]);
+
     }
 }
 

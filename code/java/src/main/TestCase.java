@@ -21,7 +21,7 @@ public class TestCase {
     }
 
     public static void main(String[] args) {
-        final ThreadDispatcher threadDispatcher = ThreadDispatcher.getInstance(OperationType.ASYNC);
+        final ThreadDispatcher threadDispatcher = ThreadDispatcher.getInstance(OperationType.MUTEX);
 
         // test pthreads running from java using Model->thread->Object->Model architecture
         final ThreadModel model = new ThreadModel();
@@ -36,6 +36,19 @@ public class TestCase {
         model2.setDelay(FIVE_SECONDS * 2);
         threadDispatcher.dispatch(model2);
 
+        
+        final ThreadModel model3 = new ThreadModel();
+        model3.setClazz(TestThreading.class);
+        model3.setParameterList(new ParameterList(new Object[]{"I am a ", " medical Student 2"}));
+        model3.setDelay(FIVE_SECONDS);
+        threadDispatcher.dispatch(model3);
+
+        // test pthreads running from java using Model->thread->Object->Model architecture
+        final ThreadModel model4 = new ThreadModel();
+        model4.setClazz(TestThreading2.class);
+        model4.setParameterList(new ParameterList(new Object[]{"My name ", " is Pavly 2"}));
+        model4.setDelay(FIVE_SECONDS);
+        threadDispatcher.dispatch(model4);
         testMath();
     }
 
