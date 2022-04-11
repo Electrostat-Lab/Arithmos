@@ -10,14 +10,14 @@ import pthread.model.ThreadModel;
 public class ThreadDispatcher {
     
     private static ThreadDispatcher threadDispatcher;
-    private final int OPERATION_TYPE_VALUE;
+    private final int OPERATION_MODE;
 
-    public enum OperationType {
-        ASYNC(456), MUTEX(123);
+    public enum OperationMode {
+        MUTEX(123);
 
-        private int value;
+        private final int value;
 
-        OperationType(final int value) {
+        OperationMode(final int value) {
             this.value = value;
         }
     }
@@ -29,19 +29,19 @@ public class ThreadDispatcher {
     /**
      * Private modifier to inhibit instantiation.
      */
-    private ThreadDispatcher(final int OPERATION_TYPE_VALUE) {
-        this.OPERATION_TYPE_VALUE = OPERATION_TYPE_VALUE;
+    private ThreadDispatcher(final int OPERATION_MODE) {
+        this.OPERATION_MODE = OPERATION_MODE;
     }
 
     public static ThreadDispatcher getInstance() {
-        return getInstance(OperationType.ASYNC);
+        return getInstance(OperationMode.MUTEX);
     }
     
-    public static ThreadDispatcher getInstance(final OperationType operationType) {
+    public static ThreadDispatcher getInstance(final OperationMode operationMode) {
         if (threadDispatcher == null) {
             synchronized (ThreadDispatcher.class) {
                 if (threadDispatcher == null) {
-                    threadDispatcher = new ThreadDispatcher(operationType.value);
+                    threadDispatcher = new ThreadDispatcher(operationMode.value);
                 }
             }
         }
@@ -55,8 +55,8 @@ public class ThreadDispatcher {
     public native void dispatch(final ThreadModel model);
 
     /**
-     * When called inside a native thread context, detaches it from the jvm thread.
+     * Releases the thread model Mutex object memory.
      */
-    public native int finish();
+    public native boolean finish();
 
 }

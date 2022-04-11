@@ -10,7 +10,8 @@ source variables.sh
 # @echo Script Succeeded if all the commands have passed successfully, exit with error code otherwise.
 ##
 function compile() {
-    nativeSources=`find ${workDir}'/code/natives/libs' ${workDir}'/code/natives/main' -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'`
+    nativeSources=`find ${workDir}'/code/natives/libs' ${workDir}'/code/natives/main' -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'\
+	-o -name '*.ino' -o -name '*.hxx'`
     # tests if the sources exist, then give the current user full permissions on them and compile them
     if [[ ${nativeSources} ]]; then  
         chmod +x $nativeSources

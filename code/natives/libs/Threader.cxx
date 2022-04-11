@@ -84,7 +84,7 @@ int methodDispatcher(void* arguments) {
             isUnlocked = unlockMutex(args->mutex);
         }
     }
-    return 1;
+    return 0;
 }
 
 bool initSyncDispatcher(void* arguments) {
