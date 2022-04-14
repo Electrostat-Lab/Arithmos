@@ -96,6 +96,165 @@
  } 
  Compiled 
  from 
+ "Semaphore.java" 
+ public 
+ final 
+ class 
+ utils.process.Semaphore 
+ { 
+ private 
+ final 
+ utils.process.Semaphore$Mutex 
+ mutex; 
+ descriptor: 
+ Lutils/process/Semaphore$Mutex; 
+ private 
+ static 
+ final 
+ java.util.logging.Logger 
+ logger; 
+ descriptor: 
+ Ljava/util/logging/Logger; 
+ private 
+ utils.process.Semaphore(utils.process.Semaphore$Mutex); 
+ descriptor: 
+ (Lutils/process/Semaphore$Mutex;)V 
+ public 
+ static 
+ utils.process.Semaphore 
+ build(utils.process.Semaphore$Mutex); 
+ descriptor: 
+ (Lutils/process/Semaphore$Mutex;)Lutils/process/Semaphore; 
+ public 
+ <MO> 
+ void 
+ lock(MO); 
+ descriptor: 
+ (Ljava/lang/Object;)V 
+ public 
+ void 
+ waitForUnlock(); 
+ descriptor: 
+ ()V 
+ public 
+ <O> 
+ void 
+ unlock(O); 
+ descriptor: 
+ (Ljava/lang/Object;)V 
+ public 
+ utils.process.Semaphore$Mutex 
+ getMutex(); 
+ descriptor: 
+ ()Lutils/process/Semaphore$Mutex; 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "Semaphore.java" 
+ public 
+ final 
+ class 
+ utils.process.Semaphore$Mutex 
+ extends 
+ java.lang.Enum<utils.process.Semaphore$Mutex> 
+ { 
+ public 
+ static 
+ final 
+ utils.process.Semaphore$Mutex 
+ SIMPLE_MUTEX; 
+ descriptor: 
+ Lutils/process/Semaphore$Mutex; 
+ private 
+ java.lang.Object 
+ lockData; 
+ descriptor: 
+ Ljava/lang/Object; 
+ private 
+ java.lang.Object 
+ monitorObject; 
+ descriptor: 
+ Ljava/lang/Object; 
+ private 
+ java.lang.Object 
+ unlockData; 
+ descriptor: 
+ Ljava/lang/Object; 
+ private 
+ static 
+ final 
+ utils.process.Semaphore$Mutex[] 
+ $VALUES; 
+ descriptor: 
+ [Lutils/process/Semaphore$Mutex; 
+ public 
+ static 
+ utils.process.Semaphore$Mutex[] 
+ values(); 
+ descriptor: 
+ ()[Lutils/process/Semaphore$Mutex; 
+ public 
+ static 
+ utils.process.Semaphore$Mutex 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lutils/process/Semaphore$Mutex; 
+ private 
+ <O, 
+ LD, 
+ ULD> 
+ utils.process.Semaphore$Mutex(O, 
+ LD, 
+ ULD); 
+ descriptor: 
+ (Ljava/lang/String;ILjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V 
+ public 
+ void 
+ setLockData(java.lang.Object); 
+ descriptor: 
+ (Ljava/lang/Object;)V 
+ public 
+ void 
+ setMonitorObject(java.lang.Object); 
+ descriptor: 
+ (Ljava/lang/Object;)V 
+ protected 
+ void 
+ setUnlockData(java.lang.Object); 
+ descriptor: 
+ (Ljava/lang/Object;)V 
+ public 
+ java.lang.Object 
+ getLockData(); 
+ descriptor: 
+ ()Ljava/lang/Object; 
+ public 
+ java.lang.Object 
+ getMonitorObject(); 
+ descriptor: 
+ ()Ljava/lang/Object; 
+ public 
+ java.lang.Object 
+ getUnlockData(); 
+ descriptor: 
+ ()Ljava/lang/Object; 
+ protected 
+ final 
+ java.lang.Void 
+ NO_JOB(); 
+ descriptor: 
+ ()Ljava/lang/Void; 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
  "LibraryPath.java" 
  public 
  final 
@@ -1358,6 +1517,27 @@
  } 
  Compiled 
  from 
+ "TestJavaSemaphore.java" 
+ class 
+ main.TestJavaSemaphore$Finalizier 
+ extends 
+ java.lang.Thread 
+ { 
+ private 
+ main.TestJavaSemaphore$Finalizier(); 
+ descriptor: 
+ ()V 
+ public 
+ void 
+ run(); 
+ descriptor: 
+ ()V 
+ main.TestJavaSemaphore$Finalizier(main.TestJavaSemaphore$1); 
+ descriptor: 
+ (Lmain/TestJavaSemaphore$1;)V 
+ } 
+ Compiled 
+ from 
  "TestCase.java" 
  public 
  class 
@@ -1382,13 +1562,6 @@
  class 
  main.TestCase 
  { 
- private 
- static 
- final 
- int 
- FIVE_SECONDS; 
- descriptor: 
- I 
  public 
  main.TestCase(); 
  descriptor: 
@@ -1399,27 +1572,67 @@
  main(java.lang.String[]); 
  descriptor: 
  ([Ljava/lang/String;)V 
+ } 
+ Compiled 
+ from 
+ "TestJavaSemaphore.java" 
+ public 
+ final 
+ class 
+ main.TestJavaSemaphore$State 
+ extends 
+ java.lang.Enum<main.TestJavaSemaphore$State> 
+ { 
  public 
  static 
- void 
- testMath(); 
+ final 
+ main.TestJavaSemaphore$State 
+ TOGGLED; 
  descriptor: 
- ()V 
+ Lmain/TestJavaSemaphore$State; 
+ private 
+ static 
+ final 
+ main.TestJavaSemaphore$State[] 
+ $VALUES; 
+ descriptor: 
+ [Lmain/TestJavaSemaphore$State; 
  public 
  static 
- void 
- testSort(); 
+ main.TestJavaSemaphore$State[] 
+ values(); 
  descriptor: 
- ()V 
+ ()[Lmain/TestJavaSemaphore$State; 
  public 
  static 
- native 
- void 
- testNatives(); 
+ main.TestJavaSemaphore$State 
+ valueOf(java.lang.String); 
  descriptor: 
- ()V 
+ (Ljava/lang/String;)Lmain/TestJavaSemaphore$State; 
+ private 
+ main.TestJavaSemaphore$State(); 
+ descriptor: 
+ (Ljava/lang/String;I)V 
  static 
  {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestSortingAlgorithms.java" 
+ public 
+ class 
+ main.TestSortingAlgorithms 
+ { 
+ public 
+ main.TestSortingAlgorithms(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ void 
+ execute(); 
  descriptor: 
  ()V 
  } 
@@ -1444,6 +1657,42 @@
  } 
  Compiled 
  from 
+ "TestPatternMatching.java" 
+ public 
+ class 
+ main.TestPatternMatching 
+ { 
+ public 
+ main.TestPatternMatching(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ void 
+ execute(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestPhysics.java" 
+ public 
+ class 
+ main.TestPhysics 
+ { 
+ public 
+ main.TestPhysics(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ void 
+ execute(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
  "TestThreading.java" 
  public 
  class 
@@ -1460,6 +1709,150 @@
  invoke(pthread.ThreadDispatcher); 
  descriptor: 
  (Lpthread/ThreadDispatcher;)V 
+ } 
+ Compiled 
+ from 
+ "TestJavaSemaphore.java" 
+ class 
+ main.TestJavaSemaphore$Initializer 
+ extends 
+ java.lang.Thread 
+ { 
+ private 
+ main.TestJavaSemaphore$Initializer(); 
+ descriptor: 
+ ()V 
+ public 
+ void 
+ run(); 
+ descriptor: 
+ ()V 
+ private 
+ void 
+ initMutexWithLockData(); 
+ descriptor: 
+ ()V 
+ main.TestJavaSemaphore$Initializer(main.TestJavaSemaphore$1); 
+ descriptor: 
+ (Lmain/TestJavaSemaphore$1;)V 
+ } 
+ Compiled 
+ from 
+ "TestJavaSemaphore.java" 
+ public 
+ class 
+ main.TestJavaSemaphore 
+ { 
+ protected 
+ static 
+ final 
+ utils.process.Semaphore$Mutex 
+ MUTEX; 
+ descriptor: 
+ Lutils/process/Semaphore$Mutex; 
+ protected 
+ static 
+ final 
+ utils.process.Semaphore 
+ SEMAPHORE; 
+ descriptor: 
+ Lutils/process/Semaphore; 
+ private 
+ static 
+ final 
+ java.util.logging.Logger 
+ logger; 
+ descriptor: 
+ Ljava/util/logging/Logger; 
+ public 
+ main.TestJavaSemaphore(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ void 
+ execute(); 
+ descriptor: 
+ ()V 
+ static 
+ java.util.logging.Logger 
+ access$200(); 
+ descriptor: 
+ ()Ljava/util/logging/Logger; 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "Initializer.java" 
+ public 
+ class 
+ main.nativethreads.Initializer 
+ extends 
+ pthread.Pthread 
+ { 
+ public 
+ main.nativethreads.Initializer(pthread.model.ParameterList); 
+ descriptor: 
+ (Lpthread/model/ParameterList;)V 
+ public 
+ void 
+ invoke(pthread.ThreadDispatcher); 
+ descriptor: 
+ (Lpthread/ThreadDispatcher;)V 
+ } 
+ Compiled 
+ from 
+ "Finalizer.java" 
+ public 
+ class 
+ main.nativethreads.Finalizer 
+ extends 
+ pthread.Pthread 
+ { 
+ public 
+ main.nativethreads.Finalizer(pthread.model.ParameterList); 
+ descriptor: 
+ (Lpthread/model/ParameterList;)V 
+ public 
+ void 
+ invoke(pthread.ThreadDispatcher); 
+ descriptor: 
+ (Lpthread/ThreadDispatcher;)V 
+ } 
+ Compiled 
+ from 
+ "TestNativeThreading.java" 
+ public 
+ class 
+ main.nativethreads.TestNativeThreading 
+ { 
+ private 
+ static 
+ final 
+ int 
+ FIVE_SECONDS; 
+ descriptor: 
+ I 
+ public 
+ main.nativethreads.TestNativeThreading(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ void 
+ execute(); 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "TestJavaSemaphore.java" 
+ class 
+ main.TestJavaSemaphore$1 
+ { 
  } 
  Compiled 
  from 
@@ -1497,6 +1890,24 @@
  invoke(pthread.ThreadDispatcher); 
  descriptor: 
  (Lpthread/ThreadDispatcher;)V 
+ } 
+ Compiled 
+ from 
+ "TestMaths.java" 
+ public 
+ class 
+ main.TestMaths 
+ { 
+ public 
+ main.TestMaths(); 
+ descriptor: 
+ ()V 
+ public 
+ static 
+ void 
+ execute(); 
+ descriptor: 
+ ()V 
  } 
  Compiled 
  from 
