@@ -2239,6 +2239,13 @@
  MUTEX; 
  descriptor: 
  Lpthread/ThreadDispatcher$OperationMode; 
+ public 
+ static 
+ final 
+ pthread.ThreadDispatcher$OperationMode 
+ ASYNC; 
+ descriptor: 
+ Lpthread/ThreadDispatcher$OperationMode; 
  private 
  final 
  int 

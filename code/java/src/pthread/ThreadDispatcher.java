@@ -13,7 +13,8 @@ public class ThreadDispatcher {
     private final int OPERATION_MODE;
 
     public enum OperationMode {
-        MUTEX(123);
+        MUTEX(456),
+        ASYNC(123);
 
         private final int value;
 

@@ -17,7 +17,7 @@ public class TestNativeThreading {
     private static final int FIVE_SECONDS = 5000000;
 
     public static void execute() {
-        final ThreadDispatcher threadDispatcher = ThreadDispatcher.getInstance();
+        final ThreadDispatcher threadDispatcher = ThreadDispatcher.getInstance(OperationMode.MUTEX);
 
         final ThreadModel finalizerModel = new ThreadModel();
         finalizerModel.setClazz(Finalizer.class);
@@ -29,8 +29,8 @@ public class TestNativeThreading {
         initializerModel.setParameterList(new ParameterList(new Object[]{"This is the", " Initializer " + Initializer.class.getName()}));
         initializerModel.setDelay(FIVE_SECONDS * 2);
 
-        threadDispatcher.dispatch(finalizerModel);
         threadDispatcher.dispatch(initializerModel);
+        threadDispatcher.dispatch(finalizerModel);
 
     }
 }

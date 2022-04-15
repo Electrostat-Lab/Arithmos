@@ -9,16 +9,16 @@ import main.nativethreads.TestNativeThreading;
 
 public class TestCase {
     public static void main(String[] args) {
-        // test maths
-        TestMaths.execute();
-        TestPhysics.execute();
+        // // test maths
+        // TestMaths.execute();
+        // TestPhysics.execute();
 
-        // test algos
-        TestPatternMatching.execute();
-        TestSortingAlgorithms.execute();
+        // // test algos
+        // TestPatternMatching.execute();
+        // TestSortingAlgorithms.execute();
 
         // test threadings
         TestNativeThreading.execute();
-        TestJavaSemaphore.execute();
+        // TestJavaSemaphore.execute();
     }
 }

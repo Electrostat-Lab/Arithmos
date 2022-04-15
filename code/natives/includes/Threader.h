@@ -18,7 +18,6 @@
 
 /* define aliases */
 #define dispatchThread pthread_create
-#define join pthread_join
 #define mutexInit pthread_mutex_init
 #define setMutexAttrType pthread_mutexattr_settype
 #define lockMutex pthread_mutex_lock
@@ -66,7 +65,6 @@ namespace POSIX {
             constexpr static int ASYNC = 123;
             constexpr static int MUTEX = 456;
             void dispatch();
-            jint finish(JNIEnv* env);
         public:
             Threader(DispatcherArgs*);
             ~Threader();
@@ -74,10 +72,11 @@ namespace POSIX {
             DispatcherArgs* args;
             ThreadDispatcher* dispatcher;
               
-            friend bool initSyncDispatcher(void*);
-            friend void attachDisptacher(void*);
-            friend int startMutex(void*);
-            friend void* startDispatcher(void*);
+            friend void lock(Mutex*);
+            friend void unlock(Mutex*);
+            
+            friend void attachDisptacher(POSIX::Threader::DispatcherArgs*);
+            friend void detachDispatcher(JavaVM& vm);
             friend void* methodDispatcher(void*);
     };
 }
