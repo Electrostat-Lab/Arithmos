@@ -1,3 +1,4 @@
 *.class
 ./output/Arithmos/*
 .buildconfig
+/build/.buildJava/*.class
