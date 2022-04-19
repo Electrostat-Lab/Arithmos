@@ -5,6 +5,7 @@ import pthread.ThreadDispatcher;
 import pthread.model.ParameterList;
 
 public class Initializer extends Pthread {
+
     public Initializer(final ParameterList parameterList) {
         super(parameterList);
     }

@@ -5,7 +5,7 @@ POSIX::Threader::Threader(DispatcherArgs* args) {
     this->dispatcher = new ThreadDispatcher();
 }
 
-POSIX::Threader::~Threader() {
+void POSIX::Threader::destroy() {
     this->dispatcher = NULL;
     delete this->dispatcher;
     
@@ -140,10 +140,10 @@ void* methodDispatcher(void* arguments) {
 
     detachDispatcher(*(args->javaVM));
     
+    args->threader->destroy();
 
     return NULL;
 }
-
 
 
 void POSIX::Threader::dispatch() {   
@@ -151,6 +151,6 @@ void POSIX::Threader::dispatch() {
     if (this->args == NULL) {
         throw "IllegalStateException : Cannot proceed with NULL Args !";
     }
-    this->args->pthread = this->dispatcher;
+    this->args->threader = this;
     dispatchThread(this->dispatcher, NULL, methodDispatcher, (POSIX::Threader::DispatcherArgs*) this->args);
 }

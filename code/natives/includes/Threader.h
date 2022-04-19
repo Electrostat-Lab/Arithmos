@@ -59,7 +59,7 @@ namespace POSIX {
                     char* INTERFACING_METHOD_SIG;
                     char* INTERFACE_CONSTRUCTOR_SIG;
                     Object javaDispatcherInstance;
-                    ThreadDispatcher* pthread;
+                    POSIX::Threader* threader;
                     u_int32_t delay = 0;
             };
             constexpr static int ASYNC = 123;
@@ -67,7 +67,7 @@ namespace POSIX {
             void dispatch();
         public:
             Threader(DispatcherArgs*);
-            ~Threader();
+            void destroy();
         private:
             DispatcherArgs* args;
             ThreadDispatcher* dispatcher;

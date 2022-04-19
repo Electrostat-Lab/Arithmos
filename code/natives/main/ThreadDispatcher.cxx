@@ -4,7 +4,6 @@
 
 extern "C" {
 
-
     Class getClassObject(JNIEnv* env, jobject modelObj, const char* fieldName);
     jobject getParamsObject(JNIEnv* env, jobject modelObj, const char* fieldName);
     jstring getString(JNIEnv* env, jobject modelObj, const char* fieldName);
