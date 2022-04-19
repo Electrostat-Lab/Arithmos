@@ -1833,7 +1833,7 @@
  static 
  final 
  int 
- FIVE_SECONDS; 
+ ONE_SECOND; 
  descriptor: 
  I 
  public 

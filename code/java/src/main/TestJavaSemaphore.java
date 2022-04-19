@@ -31,12 +31,11 @@ public class TestJavaSemaphore {
 		public void run() {
 			logger.info("Entered the initializer");
 
-			
 			initMutexWithLockData();
 
 			SEMAPHORE.lock(Initializer.this);
 			try{
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch(InterruptedException exception) {
 				exception.printStackTrace();
 			}
@@ -54,9 +53,9 @@ public class TestJavaSemaphore {
 	private static class Finalizier extends Thread {
 		@Override
 		public void run() {
-			logger.info("Entered the finalizer");
-
 			SEMAPHORE.waitForUnlock();
+
+			logger.info("Entered the finalizer");
 
 			logger.info("Finished the finalizer");
 		}
