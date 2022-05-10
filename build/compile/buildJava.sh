@@ -14,8 +14,8 @@ fi
 ##
 function copyJavaSources() {
     #copy code to buildDir to compile java files
-    codeDir=(${workDir}'/code/java/src/*')
-    cp -r ${codeDir} ${workDir}'/build/.buildJava'
+	javaFiles=($javasrc_directory'/*')
+    cp -r $javaFiles ${workDir}'/build/.buildJava'
 }
 
 ##
@@ -27,7 +27,7 @@ function generateHeaders() {
     cd ${buildDir}
     javaFiles=`find -name "*.java"`
     # creates C headers file for java natives.
-    $command -cp '.:'${workDir}'/code/java/dependencies/*' -h . $javaFiles -Xlint:unchecked
+    $command -cp '.:'$java_resources'dependencies/*' -h . $javaFiles -Xlint:unchecked
     result=$?
     # generate a methods signature file to help in invocation api
     classFiles=`find -name "*.class"`
@@ -46,7 +46,7 @@ function moveHeaders() {
     headers=`find -name "*.h"`
     # check if the headers exist then move them
     if [[ $headers ]]; then
-        mv ${headers} ${workDir}'/code/natives/includes/'
+        mv ${headers} $nativessrc_directory'/includes/'
     fi
 }
 

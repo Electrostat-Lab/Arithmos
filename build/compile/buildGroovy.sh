@@ -11,16 +11,16 @@ source variables.sh
 ##
 function compileGroovy() {
    local compileResult=-1
-   groovyFiles=`find ${workDir}'/code/groovy/src' -name '*.groovy'`
+   groovyFiles=`find $groovysrc_directory -name '*.groovy'`
    # compile groovy sources if exist
    if [[ -f ${groovyFiles} ]]; then
-       groovyc ${groovyFiles} -d ${workDir}'/code/java/dependencies/groovy'
-	   cd ${workDir}'/code/java/dependencies/groovy'
+       groovyc ${groovyFiles} -d $java_resources'/dependencies/groovy'
+	   cd $java_resources'/dependencies/groovy'
        zip  -r groovy.jar . -i '*/*'
-       cp groovy.jar ${workDir}'/code/java/dependencies'
+       cp groovy.jar $java_resources'/dependencies'
        compileResult=$?
         # remove the assets folder
-       rm -rf ${workDir}'/code/java/dependencies/groovy'
+       rm -rf $java_resources'/dependencies/groovy'
    fi
    return $compileResult
 }

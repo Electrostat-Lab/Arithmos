@@ -7,10 +7,11 @@ source variables.sh
 
 ##
 # Compile and build native sources.
+#
 # @echo Script Succeeded if all the commands have passed successfully, exit with error code otherwise.
 ##
 function compile() {
-    nativeSources=`find ${workDir}'/code/natives/libs' ${workDir}'/code/natives/main' -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'\
+    nativeSources=`find $nativessrc_directory'/libs' $nativessrc_directory'/main' -name '*.c' -o -name '*.cxx' -o -name '*.cpp' -o -name '*.h' -o -name '*.c++'\
 	-o -name '*.ino' -o -name '*.hxx'`
     # tests if the sources exist, then give the current user full permissions on them and compile them
     if [[ ${nativeSources} ]]; then  
@@ -65,6 +66,7 @@ function compile() {
 
 ##
 # Build for desktop linux systems
+#
 # @param nativeSources sources to be compiled for linux desktop.
 # @return 0 if command passes, non zero number otherwise with exit code 150 (search the code on repo's wiki).
 ##
@@ -76,11 +78,12 @@ function linux_x86_x64() {
     g++ -fPIC $nativeSources -shared -o ${workDir}'/shared/linux-x86-x64/'${clibName} \
         -I${JAVA__HOME%/*}'/include' \
         -I${JAVA__HOME%/*}'/include/linux' \
-        -I${workDir}'/code/natives/includes' 
+        -I$nativessrc_directory'/includes' 
     return $?
 }
 ##
 # Building native code for arm and intel android.
+#
 # @param triple the ABI triple name, also used for -target flag of the clang++.
 # @param folder the created folder name.
 # @param sources the sources to compile and build an object file for them.
@@ -105,7 +108,7 @@ function linux_android() {
         -fPIC $sources -shared \
         -stdlib=libstdc++ \
         -o ${workDir}"/shared/lib/$folder/"${clibName} \
-        -I${workDir}'/code/natives/includes' \
+        -I$nativessrc_directory'/includes' \
         -I$NDK__BASEHOME'/sources/cxx-stl/llvm-libc++/include' \
         -lc++_shared
     ndkBuildingCommand=$?

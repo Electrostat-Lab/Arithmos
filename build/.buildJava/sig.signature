@@ -1541,25 +1541,6 @@
  "TestCase.java" 
  public 
  class 
- main.TestCase$TestThreading2 
- extends 
- pthread.Pthread 
- { 
- public 
- main.TestCase$TestThreading2(); 
- descriptor: 
- ()V 
- public 
- void 
- invoke(); 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "TestCase.java" 
- public 
- class 
  main.TestCase 
  { 
  public 
@@ -1638,25 +1619,6 @@
  } 
  Compiled 
  from 
- "TestCase.java" 
- public 
- class 
- main.TestCase$TestThreading 
- extends 
- pthread.Pthread 
- { 
- public 
- main.TestCase$TestThreading(); 
- descriptor: 
- ()V 
- public 
- void 
- invoke(); 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
  "TestPatternMatching.java" 
  public 
  class 
@@ -1690,25 +1652,6 @@
  execute(); 
  descriptor: 
  ()V 
- } 
- Compiled 
- from 
- "TestThreading.java" 
- public 
- class 
- main.TestThreading 
- extends 
- pthread.Pthread 
- { 
- public 
- main.TestThreading(pthread.model.ParameterList); 
- descriptor: 
- (Lpthread/model/ParameterList;)V 
- public 
- void 
- invoke(pthread.ThreadDispatcher); 
- descriptor: 
- (Lpthread/ThreadDispatcher;)V 
  } 
  Compiled 
  from 
@@ -1856,43 +1799,6 @@
  } 
  Compiled 
  from 
- "TestCase.java" 
- final 
- class 
- main.TestCase$1 
- implements 
- java.lang.Runnable 
- { 
- main.TestCase$1(); 
- descriptor: 
- ()V 
- public 
- void 
- run(); 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "TestThreading2.java" 
- public 
- class 
- main.TestThreading2 
- extends 
- pthread.Pthread 
- { 
- public 
- main.TestThreading2(pthread.model.ParameterList); 
- descriptor: 
- (Lpthread/model/ParameterList;)V 
- public 
- void 
- invoke(pthread.ThreadDispatcher); 
- descriptor: 
- (Lpthread/ThreadDispatcher;)V 
- } 
- Compiled 
- from 
  "TestMaths.java" 
  public 
  class 
@@ -1959,68 +1865,6 @@
  java.lang.IllegalAccessException; 
  descriptor: 
  (Ljava/lang/String;Ljava/lang/String;)I 
- static 
- {}; 
- descriptor: 
- ()V 
- } 
- Compiled 
- from 
- "ThreadDispatcher.java" 
- public 
- final 
- class 
- pthread.ThreadDispatcher$OperationType 
- extends 
- java.lang.Enum<pthread.ThreadDispatcher$OperationType> 
- { 
- public 
- static 
- final 
- pthread.ThreadDispatcher$OperationType 
- ASYNC; 
- descriptor: 
- Lpthread/ThreadDispatcher$OperationType; 
- public 
- static 
- final 
- pthread.ThreadDispatcher$OperationType 
- MUTEX; 
- descriptor: 
- Lpthread/ThreadDispatcher$OperationType; 
- private 
- int 
- value; 
- descriptor: 
- I 
- private 
- static 
- final 
- pthread.ThreadDispatcher$OperationType[] 
- $VALUES; 
- descriptor: 
- [Lpthread/ThreadDispatcher$OperationType; 
- public 
- static 
- pthread.ThreadDispatcher$OperationType[] 
- values(); 
- descriptor: 
- ()[Lpthread/ThreadDispatcher$OperationType; 
- public 
- static 
- pthread.ThreadDispatcher$OperationType 
- valueOf(java.lang.String); 
- descriptor: 
- (Ljava/lang/String;)Lpthread/ThreadDispatcher$OperationType; 
- private 
- pthread.ThreadDispatcher$OperationType(int); 
- descriptor: 
- (Ljava/lang/String;II)V 
- static 
- int 
- access$000(pthread.ThreadDispatcher$OperationType); 
- descriptor: 
- (Lpthread/ThreadDispatcher$OperationType;)I 
  static 
  {}; 
  descriptor: 
