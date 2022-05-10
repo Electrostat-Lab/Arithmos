@@ -11,10 +11,10 @@ source variables.sh
 ##
 function compileScala() {
    local compileResult=-1
-   scalaFiles=`find ${workDir}'/code/scala/src' -name '*.scala'`
-   dependencies=${workDir}'/code/java/dependencies'
+   scalaFiles=`find $scalasrc_directory -name '*.scala'`
+   dependencies=$java_resources'/dependencies'
    if [[ -f ${scalaFiles} ]]; then
-         scalac ${scalaFiles} -d ${workDir}'/code/java/dependencies/scala.jar'
+         scalac ${scalaFiles} -d $java_resources'/dependencies/scala.jar'
          compileResult=$?
    fi
    return $compileResult

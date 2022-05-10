@@ -7,6 +7,8 @@
 source variables.sh
 
 buildDir=${workingDir}'/build/.buildJava/'
+dependencies=$java_resources'/dependencies'
+assets=$java_resources'/assets'
 
 #**
 #* Makes an output directory at the output location.
@@ -46,8 +48,8 @@ function createManifest() {
 #**
 function makeDependencyDir() {
     local errors=0
-    if [[ ! -d ${workingDir}'/code/java/dependencies' ]]; then
-        if [[ ! `mkdir ${workingDir}'/code/java/dependencies'` -eq 0 ]]; then
+    if [[ ! -d $dependencies ]]; then
+        if [[ ! `mkdir $dependencies` -eq 0 ]]; then
             errors=$(( $errors + 1 ))
         fi
     fi
@@ -60,7 +62,6 @@ function makeDependencyDir() {
 #**
 function addDependencies() {
     local errors=0
-    dependencies=${workingDir}'/code/java/dependencies'
     if [[ $dependencies ]]; then
         if [[ ! `cp -r ${dependencies} ${buildDir}''${outputJAR}'/dependencies'` -eq 0 ]]; then 
             errors=$(( $errors + 1 ))
@@ -117,7 +118,6 @@ function addLinuxNativeDependencies() {
 
 function addAssets() {
     local errors=1
-    assets=${workingDir}'/code/java/assets/*'
     if [[ -f $assets ]]; then
         if [[ ! `mkdir ${outputJAR}'/dependencies/assets'` -eq 0 ]]; then
             errors=$(( $errors + 1 ))

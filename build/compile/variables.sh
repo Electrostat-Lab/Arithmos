@@ -16,6 +16,15 @@ cut2="${cut%/*}"
 workDir=$cut2
 # include the JAVAHOME
 source ${workDir}'/JAVAHOME.sh'
+
+java_resources=${workDir}'/src/resources'
+javasrc_directory=${workDir}'/src/main/java'
+
+groovysrc_directory=${workDir}'/src/main/groovy'
+kotlinsrc_directory=${workDir}'/src/main/kotlin'
+scalasrc_directory=${workDir}'/src/main/scala'
+nativessrc_directory=${workDir}'/src/main/natives'
+
 command=${JAVA__HOME}'/javac'
 clibName=('libArithmosNatives.so')
 # set some build guards
@@ -24,7 +33,7 @@ enable_scala_build=false
 enable_kt_build=true
 enable_groovy_build=false
 enable_natives_build=true
-enable_android_build=true
+enable_android_build=false
 
 source ${workDir}'/NDKPATH.sh'
 
