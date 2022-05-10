@@ -16,7 +16,7 @@
    <repository>
      <id>github</id>
      <name>Arithmos By Scrappers</name>
-     <url>https://maven.pkg.github.com/Arithmos-Algorithms/Arithmos</url>
+     <url>https://maven.pkg.github.com/arithmos-algorithms/arithmos</url>
    </repository>
 </distributionManagement>
 
