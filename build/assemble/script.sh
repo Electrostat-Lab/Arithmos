@@ -43,35 +43,21 @@ function createManifest() {
 }
 
 #**
-#* Makes the dependencies directory at the code/java/dependencies relative path.
-#* @return the number of errors, 0 if no errors, 1 if there are errors.
-#**
-function makeDependencyDir() {
-    local errors=0
-    if [[ ! -d $dependencies ]]; then
-        if [[ ! `mkdir $dependencies` -eq 0 ]]; then
-            errors=$(( $errors + 1 ))
-        fi
-    fi
-    return $errors
-}
-
-#**
 #* Adds the dependencies to the dependencies directory at the code/java/dependencies relative path.
 #* @return the number of errors, 0 if no errors, 1 or more if there are errors.
 #**
 function addDependencies() {
     local errors=0
-    if [[ $dependencies ]]; then
-        if [[ ! `cp -r ${dependencies} ${buildDir}''${outputJAR}'/dependencies'` -eq 0 ]]; then 
-            errors=$(( $errors + 1 ))
-        fi
-        cd ${buildDir}''${outputJAR}'/'
-        jars=`find 'dependencies' -name '*.jar'`
-        printf '%s ' ${classpath} >> ${buildDir}''${outputJAR}'/Manifest.mf'
-        printf ' %s \n' ${jars[0]} >> ${buildDir}''${outputJAR}'/Manifest.mf'
-        errors=$(( $errors + $? ))
+	cd $dependencies
+	jars=`find -name '*.jar'`
+    if [[ ! `cp ${jars} ${buildDir}''${outputJAR}` -eq 0 ]]; then 
+        errors=$(( $errors + 1 ))
     fi
+    cd ${buildDir}''${outputJAR}'/'
+    printf '%s ' ${classpath} >> ${buildDir}''${outputJAR}'/Manifest.mf'
+    printf ' %s \n' ${jars[0]} >> ${buildDir}''${outputJAR}'/Manifest.mf'
+    errors=$(( $errors + $? ))
+
     return $errors
 }
 
@@ -91,9 +77,11 @@ function addAndroidNativeDependencies() {
     nativeLibs=${workingDir}"/shared/android-natives-${min_android_sdk}.jar"
     if [[ $nativeLibs ]]; then
         # copy the object file to the build dir
-        if [[ ! `mv $nativeLibs $buildDir''${outputJAR}'/dependencies/'` -eq 0 ]]; then
+        if [[ ! `mv $nativeLibs $buildDir''${outputJAR}'/'` -eq 0 ]]; then
             errors=$(( $errors + 1 ))
-        fi    
+        else
+		    printf ' %s \n' "./android-natives-${min_android_sdk}.jar" >> ${buildDir}''${outputJAR}'/Manifest.mf'
+		fi    
     fi
     return $errors
 }
@@ -105,27 +93,33 @@ function addAndroidNativeDependencies() {
 #**
 function addLinuxNativeDependencies() {
     local errors=0
-    # get the object files to link them
-    nativeLibs=${workingDir}"/shared/linux-x86-x64"
+    cd ${workingDir}'/shared'
+    if [[ ! `zip -r "native.jar" . -i "native/*"` -eq 0 ]]; then
+        errors=$(( $errors + 1 ))
+    fi
+    
+    nativeLibs=${workingDir}"/shared/native.jar"
     if [[ $nativeLibs ]]; then
         # copy the object file to the build dir
-        if [[ ! `cp -r $nativeLibs $buildDir''${outputJAR}` -eq 0 ]]; then
+        if [[ ! `mv $nativeLibs $buildDir''${outputJAR}'/'` -eq 0 ]]; then
             errors=$(( $errors + 1 ))
-        fi    
-    fi
+        else
+		    printf ' %s \n' "./native.jar" >> ${buildDir}''${outputJAR}'/Manifest.mf'
+		fi    
+    fi   
     return $errors
 }
 
 function addAssets() {
-    local errors=1
+    local errors=1 
     if [[ -f $assets ]]; then
-        if [[ ! `mkdir ${outputJAR}'/dependencies/assets'` -eq 0 ]]; then
+        if [[ ! `mkdir ${outputJAR}'/assets'` -eq 0 ]]; then
             errors=$(( $errors + 1 ))
         fi
-        assetsFolder=${buildDir}''${outputJAR}'/dependencies/assets'
+        assetsFolder=${buildDir}''${outputJAR}'/assets'
         # copy to an asset folder
         cp -r $assets $assetsFolder
-        cd ${buildDir}''${outputJAR}'/dependencies'
+        cd ${buildDir}''${outputJAR}
         # zip the assets into a jar file
         if [[ ! `zip -r assets.jar . -i 'assets/*'` -eq 0 ]]; then
             errors=$(( $errors + 1 ))

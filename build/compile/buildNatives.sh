@@ -72,10 +72,10 @@ function compile() {
 ##
 function linux_x86_x64() {
     local nativeSources=$1
-    if [[ ! -d ${workDir}'/shared/linux-x86-x64' ]]; then
-        mkdir ${workDir}'/shared/linux-x86-x64'
+    if [[ ! -d ${workDir}'/shared/native/Linux/linux-x86-x64' ]]; then
+        mkdir -p ${workDir}'/shared/native/Linux/linux-x86-x64'
     fi
-    g++ -fPIC $nativeSources -shared -o ${workDir}'/shared/linux-x86-x64/'${clibName} \
+    g++ -fPIC $nativeSources -shared -o ${workDir}'/shared/native/Linux/linux-x86-x64/'${clibName} \
         -I${JAVA__HOME%/*}'/include' \
         -I${JAVA__HOME%/*}'/include/linux' \
         -I$nativessrc_directory'/includes' 
