@@ -51,15 +51,6 @@ fi
 
 echo -e $RESET_Cs
 
-makeDependencyDir=`makeDependencyDir`
-if (( makeDependencyDir > 0 )); then
-    echo -e "$RED_C Task@MakeDependenciesDirectory : Failed"
-else 
-    echo -e "$WHITE_C Task@MakeDependenciesDirectory : Completed"
-fi
-
-echo -e $RESET_Cs
-
 addDependencies=`addDependencies`
 if (( addDependencies > 0 )); then
     echo -e "$RED_C Task@AddJavaDependencies : Failed"
