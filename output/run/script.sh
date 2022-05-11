@@ -10,5 +10,5 @@ source variables.sh
 
 function run() {
     cd ${workingDir}'/output/Arithmos'
-    $runCommand -jar -Djava.library.path=linux-x86-x64 'Arithmos.jar'
+    $runCommand -jar 'Arithmos.jar'
 }

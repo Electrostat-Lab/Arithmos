@@ -255,69 +255,107 @@
  } 
  Compiled 
  from 
- "LibraryPath.java" 
- public 
+ "NativeImageLoader.java" 
  final 
  class 
- utils.natives.LibraryPath$ProvisionalPath 
+ utils.natives.NativeImageLoader$OS 
  extends 
- java.lang.Enum<utils.natives.LibraryPath$ProvisionalPath> 
+ java.lang.Enum<utils.natives.NativeImageLoader$OS> 
  { 
  public 
  static 
  final 
- utils.natives.LibraryPath$ProvisionalPath 
- CUSTOM; 
+ utils.natives.NativeImageLoader$OS 
+ NAME; 
  descriptor: 
- Lutils/natives/LibraryPath$ProvisionalPath; 
+ Lutils/natives/NativeImageLoader$OS; 
  public 
  static 
  final 
- utils.natives.LibraryPath$ProvisionalPath 
- LIBS_FOLDER; 
+ utils.natives.NativeImageLoader$OS 
+ ARCH; 
  descriptor: 
- Lutils/natives/LibraryPath$ProvisionalPath; 
+ Lutils/natives/NativeImageLoader$OS; 
  public 
  static 
  final 
- utils.natives.LibraryPath$ProvisionalPath 
- ROOT_FOLDER; 
- descriptor: 
- Lutils/natives/LibraryPath$ProvisionalPath; 
- public 
  java.lang.String 
- path; 
+ Linux; 
+ descriptor: 
+ Ljava/lang/String; 
+ public 
+ static 
+ final 
+ java.lang.String 
+ Windows; 
+ descriptor: 
+ Ljava/lang/String; 
+ public 
+ static 
+ final 
+ java.lang.String 
+ Mac; 
+ descriptor: 
+ Ljava/lang/String; 
+ public 
+ static 
+ final 
+ java.lang.String 
+ Android; 
+ descriptor: 
+ Ljava/lang/String; 
+ private 
+ final 
+ java.lang.String 
+ data; 
  descriptor: 
  Ljava/lang/String; 
  private 
  static 
  final 
- utils.natives.LibraryPath$ProvisionalPath[] 
+ utils.natives.NativeImageLoader$OS[] 
  $VALUES; 
  descriptor: 
- [Lutils/natives/LibraryPath$ProvisionalPath; 
+ [Lutils/natives/NativeImageLoader$OS; 
  public 
  static 
- utils.natives.LibraryPath$ProvisionalPath[] 
+ utils.natives.NativeImageLoader$OS[] 
  values(); 
  descriptor: 
- ()[Lutils/natives/LibraryPath$ProvisionalPath; 
+ ()[Lutils/natives/NativeImageLoader$OS; 
  public 
  static 
- utils.natives.LibraryPath$ProvisionalPath 
+ utils.natives.NativeImageLoader$OS 
  valueOf(java.lang.String); 
  descriptor: 
- (Ljava/lang/String;)Lutils/natives/LibraryPath$ProvisionalPath; 
+ (Ljava/lang/String;)Lutils/natives/NativeImageLoader$OS; 
  private 
- utils.natives.LibraryPath$ProvisionalPath(java.lang.String); 
+ utils.natives.NativeImageLoader$OS(java.lang.String); 
  descriptor: 
  (Ljava/lang/String;ILjava/lang/String;)V 
  public 
- final 
- void 
- setCustomPath(java.lang.String); 
+ java.lang.String 
+ getData(); 
  descriptor: 
- (Ljava/lang/String;)V 
+ ()Ljava/lang/String; 
+ public 
+ static 
+ boolean 
+ is_x86_x64(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Z 
+ public 
+ static 
+ boolean 
+ is_x86_x86(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Z 
+ public 
+ static 
+ boolean 
+ is_arrm32(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Z 
  static 
  {}; 
  descriptor: 
@@ -325,31 +363,204 @@
  } 
  Compiled 
  from 
- "LibraryPath.java" 
+ "NativeImageLoader.java" 
  public 
  final 
  class 
- utils.natives.LibraryPath 
+ utils.natives.NativeImageLoader$State 
+ extends 
+ java.lang.Enum<utils.natives.NativeImageLoader$State> 
  { 
+ public 
+ static 
+ final 
+ utils.natives.NativeImageLoader$State 
+ TOGGLED; 
+ descriptor: 
+ Lutils/natives/NativeImageLoader$State; 
  private 
- utils.natives.LibraryPath(); 
+ static 
+ final 
+ utils.natives.NativeImageLoader$State[] 
+ $VALUES; 
+ descriptor: 
+ [Lutils/natives/NativeImageLoader$State; 
+ public 
+ static 
+ utils.natives.NativeImageLoader$State[] 
+ values(); 
+ descriptor: 
+ ()[Lutils/natives/NativeImageLoader$State; 
+ public 
+ static 
+ utils.natives.NativeImageLoader$State 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lutils/natives/NativeImageLoader$State; 
+ private 
+ utils.natives.NativeImageLoader$State(); 
+ descriptor: 
+ (Ljava/lang/String;I)V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "NativeImageLoader.java" 
+ public 
+ final 
+ class 
+ utils.natives.NativeImageLoader 
+ { 
+ protected 
+ static 
+ final 
+ utils.process.Semaphore$Mutex 
+ MUTEX; 
+ descriptor: 
+ Lutils/process/Semaphore$Mutex; 
+ protected 
+ static 
+ final 
+ utils.process.Semaphore 
+ SEMAPHORE; 
+ descriptor: 
+ Lutils/process/Semaphore; 
+ private 
+ static 
+ boolean 
+ isLoaded; 
+ descriptor: 
+ Z 
+ private 
+ utils.natives.NativeImageLoader(); 
  descriptor: 
  ()V 
  public 
  static 
  void 
- setLibraryRelativePath(utils.natives.LibraryPath$ProvisionalPath) 
- throws 
- java.lang.NoSuchFieldException, 
- java.lang.IllegalAccessException; 
+ loadLibrary(); 
  descriptor: 
- (Lutils/natives/LibraryPath$ProvisionalPath;)V 
+ ()V 
  private 
  static 
+ void 
+ loadLinux(); 
+ descriptor: 
+ ()V 
+ private 
+ static 
+ void 
+ loadWindows(); 
+ descriptor: 
+ ()V 
+ private 
+ static 
+ void 
+ loadMac(); 
+ descriptor: 
+ ()V 
+ private 
+ static 
+ void 
+ loadAndroid(); 
+ descriptor: 
+ ()V 
+ private 
+ static 
+ void 
+ extractImage(utils.natives.NativeImageLoader$NativeImage); 
+ descriptor: 
+ (Lutils/natives/NativeImageLoader$NativeImage;)V 
+ private 
+ static 
+ void 
+ initMutexWithLockData(); 
+ descriptor: 
+ ()V 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
+ } 
+ Compiled 
+ from 
+ "NativeImageLoader.java" 
+ public 
+ final 
+ class 
+ utils.natives.NativeImageLoader$NativeImage 
+ extends 
+ java.lang.Enum<utils.natives.NativeImageLoader$NativeImage> 
+ { 
+ public 
+ static 
+ final 
+ utils.natives.NativeImageLoader$NativeImage 
+ LINUX_x86_x64; 
+ descriptor: 
+ Lutils/natives/NativeImageLoader$NativeImage; 
+ public 
+ static 
+ final 
+ utils.natives.NativeImageLoader$NativeImage 
+ LINUX_x86_x86; 
+ descriptor: 
+ Lutils/natives/NativeImageLoader$NativeImage; 
+ public 
+ static 
+ final 
+ utils.natives.NativeImageLoader$NativeImage 
+ MAC_x86_x64; 
+ descriptor: 
+ Lutils/natives/NativeImageLoader$NativeImage; 
+ public 
+ static 
+ final 
+ utils.natives.NativeImageLoader$NativeImage 
+ WIN_x86_x64; 
+ descriptor: 
+ Lutils/natives/NativeImageLoader$NativeImage; 
+ private 
+ final 
  java.lang.String 
- getProjectRelativePath(); 
+ image; 
+ descriptor: 
+ Ljava/lang/String; 
+ private 
+ static 
+ final 
+ utils.natives.NativeImageLoader$NativeImage[] 
+ $VALUES; 
+ descriptor: 
+ [Lutils/natives/NativeImageLoader$NativeImage; 
+ public 
+ static 
+ utils.natives.NativeImageLoader$NativeImage[] 
+ values(); 
+ descriptor: 
+ ()[Lutils/natives/NativeImageLoader$NativeImage; 
+ public 
+ static 
+ utils.natives.NativeImageLoader$NativeImage 
+ valueOf(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;)Lutils/natives/NativeImageLoader$NativeImage; 
+ private 
+ utils.natives.NativeImageLoader$NativeImage(java.lang.String); 
+ descriptor: 
+ (Ljava/lang/String;ILjava/lang/String;)V 
+ public 
+ java.lang.String 
+ getImage(); 
  descriptor: 
  ()Ljava/lang/String; 
+ static 
+ {}; 
+ descriptor: 
+ ()V 
  } 
  Compiled 
  from 

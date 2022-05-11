@@ -1,4 +1,5 @@
-source './build/compile/variables.sh'
+pwd=`pwd`
+source ${pwd}"/build/compile/variables.sh"
 
 function deploy() {
 	local artifactId=$1
@@ -15,7 +16,6 @@ function deploy() {
 }
 
 deploy "arithmos" "Arithmos.jar"
-deploy "arithmos-natives" "native.jar"
 deploy "arithmos-natives-android" "android-natives-${min_android_sdk}.jar"
 deploy "arithmos-groovy" "groovy.jar"
 deploy "arithmos-kotlin" "kotlin.jar"
