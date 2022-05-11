@@ -1,6 +1,7 @@
 package pthread;
 
 import pthread.model.ThreadModel;
+import utils.natives.NativeImageLoader;
 
 /**
  * A thread utility used for disptaching native threads against jvm.
@@ -24,8 +25,8 @@ public class ThreadDispatcher {
     }
 
     static {
-        System.loadLibrary("ArithmosNatives");
-    }
+        NativeImageLoader.loadLibrary();
+    }   
 
     /**
      * Private modifier to inhibit instantiation.

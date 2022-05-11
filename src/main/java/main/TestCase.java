@@ -18,11 +18,11 @@ public class TestCase {
         // TestPhysics.execute();
 
         // test algos
-        // TestPatternMatching.execute();
-        // TestSortingAlgorithms.execute();
+        TestPatternMatching.execute();
+        TestSortingAlgorithms.execute();
 
         // test threadings
-        // TestNativeThreading.execute();
-        TestJavaSemaphore.execute();
+        TestNativeThreading.execute();
+        // TestJavaSemaphore.execute();
     }
 }

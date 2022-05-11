@@ -93,18 +93,16 @@ function addAndroidNativeDependencies() {
 #**
 function addLinuxNativeDependencies() {
     local errors=0
-    cd ${workingDir}'/shared'
-    if [[ ! `zip -r "native.jar" . -i "native/*"` -eq 0 ]]; then
-        errors=$(( $errors + 1 ))
-    fi
-    
-    nativeLibs=${workingDir}"/shared/native.jar"
-    if [[ $nativeLibs ]]; then
+	shared=${workingDir}"/shared"
+    cd $shared
+	
+    if [[ $shared ]]; then
         # copy the object file to the build dir
-        if [[ ! `mv $nativeLibs $buildDir''${outputJAR}'/'` -eq 0 ]]; then
+        if [[ ! `cp -r $shared'/' $buildDir''${outputJAR}'/'` -eq 0 ]]; then
             errors=$(( $errors + 1 ))
         else
-		    printf ' %s \n' "./native.jar" >> ${buildDir}''${outputJAR}'/Manifest.mf'
+			libs=`find -name '*.so' -o -name '*.dylb' -o -name '*.a' -o -name '*.dll' -o -name '*.DLL'`
+		    printf ' %s \n' $libs >> ${buildDir}''${outputJAR}'/Manifest.mf'
 		fi    
     fi   
     return $errors
@@ -143,6 +141,8 @@ function createJar() {
     if [[ ! `$command cmf ${manifestFile} ${outputJAR}'.jar' ${javaClasses}` -eq 0 ]]; then 
         errors=$(( $errors + 1 ))
     fi
+	${JAVA__HOME}'/jar' uf ${outputJAR}'.jar' -C $buildDir''${outputJAR}'/shared/' .
+	rm -r $buildDir''${outputJAR}'/shared/'
     # move the jar to its respective output folder
     mv ${outputJAR}'.jar' $buildDir''${outputJAR}
     # move the jar directory containing the jar and the assets to the output directory
