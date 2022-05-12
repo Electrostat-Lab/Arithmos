@@ -10,19 +10,18 @@ source variables.sh
 # @return Compilation result, 0 for success.
 ##
 function compileKotlin() {
-   local compileResult=-1
-   ktFiles=`find $kotlinsrc_directory -name '*.kt'`
-   if [[ -f ${ktFiles} ]]; then
-        dependencies=$java_resources'/dependencies'
-
+   local result=-1
+   kt_sources=`find $kotlinsrc_directory -name '*.kt'`
+   if [[ -f $kt_sources ]]; then
+        cd $dependencies
         if [[ $enable_android_build == true ]]; then
             # Compile java and kotlin sources together
-            kotlinc-jvm -cp $dependencies $ktFiles $javasrc_directory $scalasrc_directory $groovysrc_directory -d $java_resources'/dependencies/kotlin.jar'
+            kotlinc-jvm -cp $dependencies $kt_sources $javasrc_directory $scalasrc_directory $groovysrc_directory -d $kotlin_jar
         else
-            kotlinc-jvm -cp $dependencies $ktFiles $javasrc_directory $scalasrc_directory $groovysrc_directory -include-runtime -d $java_resources'/dependencies/kotlin.jar'
+            kotlinc-jvm -cp $dependencies $kt_sources $javasrc_directory $scalasrc_directory $groovysrc_directory -include-runtime -d $kotlin_jar
         fi
-        compileResult=$?
+        result=$?
    fi
-   return $compileResult
+   return $result
 }
 

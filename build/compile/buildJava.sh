@@ -4,9 +4,10 @@
 #* @author pavl_g.
 #*#
 source variables.sh
+
 # make a dir for java byte code
-if [[ ! -d ${workDir}'/build/.buildJava' ]]; then
-    mkdir ${workDir}'/build/.buildJava'
+if [[ ! -d $javabuild_directory ]]; then
+    mkdir $javabuild_directory
 fi
 
 ##
@@ -14,8 +15,8 @@ fi
 ##
 function copyJavaSources() {
     #copy code to buildDir to compile java files
-	javaFiles=($javasrc_directory'/*')
-    cp -r $javaFiles ${workDir}'/build/.buildJava'
+    java_packages=($javasrc_directory'/*')
+    cp -r $java_packages $javabuild_directory
 }
 
 ##
@@ -23,18 +24,17 @@ function copyJavaSources() {
 ##
 function generateHeaders() {
     local result=-1
-    buildDir=${workDir}'/build/.buildJava'
-    cd ${buildDir}
-    javaFiles=`find -name "*.java"`
+    cd $javabuild_directory
+    java_sources=`find -name "*.java"`
     # creates C headers file for java natives.
-    $command -cp '.:'$java_resources'dependencies/*' -h . $javaFiles -Xlint:unchecked
+    $javac -cp '.:'$dependencies -h . $java_sources -Xlint:unchecked
     result=$?
     # generate a methods signature file to help in invocation api
-    classFiles=`find -name "*.class"`
-    sigs=`${JAVA__HOME}'/javap' -s -p ${classFiles}`
-    printf ' %s \n' ${sigs} > 'sig.signature'
+    bytecode=`find -name "*.class"`
+    sigs=`$JAVA__HOME'/javap' -s -p $bytecode`
+    printf ' %s \n' $sigs > 'sig.signature'
     # remove the source code
-    rm $javaFiles
+    rm $java_sources
     return $result
 }
 
@@ -42,11 +42,11 @@ function generateHeaders() {
 # Moves all the generated header files from the build dir to the include dir of the natives.
 ##
 function moveHeaders() {
-    cd ${workDir}'/build/.buildJava'
+    cd $javabuild_directory
     headers=`find -name "*.h"`
     # check if the headers exist then move them
     if [[ $headers ]]; then
-        mv ${headers} $nativessrc_directory'/includes/'
+        mv $headers $nativessrc_directory'/includes/'
     fi
 }
 

@@ -9,8 +9,8 @@
 source variables.sh
 
 function clean() {
-    if [[ -d ${workingDir}'/output/'${outputJAR} ]]; then
-        rm -rf ${workingDir}'/output/'${outputJAR}
+    if [[ -d $project_root'/output/'$jar_folder ]]; then
+        rm -rf ${project_root}'/output/'$jar_folder
     fi
     return $?
 } 
