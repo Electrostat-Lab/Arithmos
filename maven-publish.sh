@@ -1,5 +1,5 @@
-pwd=`pwd`
-source ${pwd}"/build/compile/variables.sh"
+project_root=`pwd`
+source $project_root"/build/compile/variables.sh"
 
 function deploy() {
 	local artifactId=$1

@@ -4,22 +4,22 @@
 #* @author pavl_g.
 #*#
 
-# print the current working directory to a string value
-pwd=`pwd`
-# cut the working directory from its end by a one '/' delimiter
-cut="${pwd%/*}"
-# cut the working directory from its end by a one '/' delimiter again
-cut2="${cut%/*}"
-# pass the value of the dire
-workingDir=$cut2
-# include the Ccoffee JAVAHOME file
-source ${workingDir}'/JAVAHOME.sh'
-source ${cut}'/compile/variables.sh'
-outputJAR='Arithmos'
+# Manifest constants
+jar_folder='arithmos'
 manifest='Manifest-Version: 1.0'
 mainclass='Main-Class: main.TestCase'
-command=${JAVA__HOME}'/jar'
 classpath='Class-Path: dependencies'
 
-# CommonVariables script contains colors 
-source ${workDir}'/CommonVariables.sh'
+assemble_dir=`pwd`
+# cut the working directory from its end by a one '/' delimiter
+build_dir="${assemble_dir%/*}"
+# cut the working directory from its end by a one '/' delimiter again
+project_root="${build_dir%/*}"
+
+source ${project_root}'/JAVAHOME.sh'
+source ${build_dir}'/compile/variables.sh'
+source ${project_root}'/CommonVariables.sh'
+
+java_jar=${JAVA__HOME}'/jar'
+jar_tmp=$javabuild_directory"/$jar_folder"
+
