@@ -1,0 +1,17 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+.vscode
+.idea
+
+*.iml
+/local.properties
+.DS_Store
+
+/arithmos/build 
+/arithmos/bin
+
+/arithmos-examples/build
+/arithmos-example/bin
+
+/apache-maven-3.9.1
+/apache-maven-3.9.1-bin.tar.gz
