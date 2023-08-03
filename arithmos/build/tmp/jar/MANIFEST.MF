@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Project: Arithmos-Algorithms
+Version: SNAPSHOT
+Automatic-Module-Name: arithmos
+Compiled-by: 17
+

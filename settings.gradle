@@ -1,0 +1,3 @@
+rootProject.name = 'Arithmos'
+include('arithmos')
+include('arithmos-examples')

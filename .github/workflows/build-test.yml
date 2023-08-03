@@ -1,0 +1,94 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build and Test Arithmos
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+    build-arithmos:
+      # runner images with architectures (variants)
+      runs-on: ${{ matrix.os }}
+      strategy:
+        matrix:
+          os: [ 'ubuntu-latest' ]
+      name: Build arithmos
+
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+        - name: Checkout Job
+          uses: actions/checkout@v3
+
+        - name: Setup Temurin-JDK-19
+          uses: actions/setup-java@v3
+          with:
+            distribution: 'temurin' 
+            java-version: '19'
+
+        - name: Compiling arithmos
+          run: ./gradlew --console="verbose" :arithmos:build
+
+        - name: Archive arithmos
+          uses: actions/upload-artifact@v3
+          with:
+            name: arithmos-snapshot
+            path: arithmos/build/libs/
+
+    test-doc-generation:
+        # a linux runner image with the ndk installed and llvm ready to compile android native binaries
+        runs-on: ${{ matrix.os }}
+        strategy:
+          matrix:
+            os: [ 'ubuntu-latest' ]
+        name: Generating documentation
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+          - name: Checkout Job
+            uses: actions/checkout@v3
+          
+          - name: Setup Oracle-JDK-19
+            uses: actions/setup-java@v3
+            with:
+              distribution: 'temurin' 
+              java-version: '19'
+
+          - name: Generate javadoc for arithmos
+            run: chmod +rwx ./gradlew && ./gradlew :arithmos:generateJavadocJar
+
+    test:
+        # runner images with architectures (variants)
+        runs-on: ${{ matrix.os }}
+        needs: build-arithmos
+        strategy:
+          matrix:
+            os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest' ]
+        name: Testing arithmos on ${{ matrix.os }} for x86-64
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+          - name: Checkout Job
+            uses: actions/checkout@v3
+          
+          - name: Setup Temurin-JDK-19
+            uses: actions/setup-java@v3
+            with:
+              distribution: 'temurin' 
+              java-version: '19'
+          
+          - name: Download arithmos-SNAPSHOT.jar library
+            uses: actions/download-artifact@v3
+            with:
+              name: arithmos-snapshot
+              path: arithmos/build/libs/
+
+          - name: Run arithmos example
+            run: ./gradlew :arithmos-examples:run
