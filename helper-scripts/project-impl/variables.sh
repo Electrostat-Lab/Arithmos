@@ -4,7 +4,7 @@
 # ---------------------
 sonatype_url="https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
 repository="ossrh"
-groupId="io.github.software-hardware-codesign"
+groupId="io.github.arithmos-algorithms"
 maven_version="3.9.3"
 maven_bin="./apache-maven-$maven_version/bin/mvn"
 
