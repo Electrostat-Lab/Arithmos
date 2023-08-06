@@ -1,4 +1,5 @@
-# Arithmos
+# <img src="https://github.com/Arithmos-Algorithms/Arithmos/assets/60224159/7de3af64-28eb-41d6-b9b0-28df8f61071b" width=60 height=60/> Arithmos
+[![](https://github.com/Arithmos-Algorithms/Arithmos/actions/workflows/build-test.yml/badge.svg)]() [![](https://github.com/Arithmos-Algorithms/Arithmos/actions/workflows/build-deploy.yml/badge.svg)]()
 
 An algorithmic library for JVM and Android applications powered by Java.
 
